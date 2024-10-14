@@ -29,7 +29,7 @@ export const fetchData=async ()=>{
         if(response.ok){
             const data=await response.json();
             console.log('Fetched Data:', data);
-            displayedData.set(data.movies);
+            displayedData.set(data.Movies);
             totalPages.set(data.totalPages);
         }
         else{
