@@ -1,28 +1,28 @@
 const { DataTypes } = require('sequelize'); // importing the datatype from sequelize
 const sequelize = require('../database/db');// importing the db.js 
 
-const Movie = sequelize.define('movie', { // providing the details of the columns of table
+const Movie = sequelize.define('Movie', { // providing the details of the columns of table
     // Define attributes
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull:false
     },
-    Name: {
+    name: {
         type: DataTypes.STRING,
         
     },
-    Director_Name:{
+    director_name:{
         type:DataTypes.STRING,
 
     },
-    Writer:{
+    writers:{
         type:DataTypes.STRING,
     },
     img:{
         type:DataTypes.STRING,
     },
-    Rating:{
+    rating:{
         type:DataTypes.INTEGER,
 
     },

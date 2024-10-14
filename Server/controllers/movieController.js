@@ -24,31 +24,41 @@ exports.getAllMovies = async (req, res) => { // exporting the getAllBooks functi
     }
 };
 
-exports.postAllMovies = async (req, res) => { // exporting the postAllbooks function for usage in other file
+exports.postAllMovies = async (req, res) => {
     try {
-        const { id, name , img , director_name, writers, rating, genre } = req.body;// accepting the data send by the user(tittle,subjects,bookshelves,..)
-        
-        if (!id|| !name || !img|| !director_name|| !writers ||! rating ||! genre) {// checking whether all required are not empty
-            return res.status(400).json({ message: 'All fields are required' });//if empty then send message to user
+        const { id, name, director_name, writers, img, rating, genre } = req.body;
+
+        // Check for required fields
+        if (!id || !name || !director_name || !writers || !img || !rating || !genre) {
+            return res.status(400).json({ message: 'All fields are required' });
         }
 
-        // Create a new book record
-        const newMovie = await Movie.create({// saving the record send by the user in newBook variable 
+        // Ensure rating is an integer
+        const ratingValue = parseInt(rating, 10);
+        if (isNaN(ratingValue)) {
+            return res.status(400).json({ message: 'Rating must be a number' });
+        }
+
+        // Create a new movie record
+        const newMovie = await Movie.create({
             id,
             name,
-            img,
             director_name,
             writers,
-            rating,
+            img,
+            rating: ratingValue, // Use the converted rating
             genre
         });
 
-        return res.status(201).json({// send the response of succesfull addition of book
+        return res.status(201).json({
             message: 'Movie added successfully',
-            book: newBook
+            movie: newMovie // Changed 'book' to 'movie' for consistency
         });
     } catch (error) {
-        console.error('Error adding Movie:', error.message);  
-        return res.status(500).json({ error: 'Internal Server Error' });
+        console.error('Error adding Movie:', error); // Log the full error object
+        return res.status(500).json({ 
+            error: 'Internal Server Error',
+            details: error.errors // Include details of the validation error
+        });
     }
 };

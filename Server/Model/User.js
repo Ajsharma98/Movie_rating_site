@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../database/db'); // Connection to the database
 
 // Define the User model
-const User = sequelize.define('user', {
+const User = sequelize.define('User', {
     // Email column as primary key
     email: {
         type: DataTypes.STRING,   // Email is stored as a string
@@ -14,7 +14,7 @@ const User = sequelize.define('user', {
         type: DataTypes.STRING,   // Password is stored as a string (hashed)
         allowNull: false          // Password cannot be null
     },
-    Name: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false,
     }
