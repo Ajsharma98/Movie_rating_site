@@ -1,9 +1,9 @@
-const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize('Movie_Review', 'postgres', 'anuj1234', {
+const { Sequelize } = require('sequelize');// importing the sequelize download 
+const sequelize = new Sequelize('Movie_Review', 'postgres', 'anuj1234', {//  establishing connection with postgres databse 
     host: 'localhost',
     dialect:  'postgres'
   });
-  async function testconnection(){
+  async function testconnection(){ // running the connection for checking 
   try {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
@@ -12,4 +12,4 @@ const sequelize = new Sequelize('Movie_Review', 'postgres', 'anuj1234', {
   }
 }
 testconnection();
-module.exports=sequelize;
+module.exports=sequelize; // exportring the module 

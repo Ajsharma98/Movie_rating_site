@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../database/db');
+const { DataTypes } = require('sequelize'); // importing the datatype from sequelize
+const sequelize = require('../database/db');// importing the db.js 
 
-const Movie = sequelize.define('movie', {
+const Movie = sequelize.define('movie', { // providing the details of the columns of table
     // Define attributes
     id: {
         type: DataTypes.INTEGER,
@@ -37,4 +37,4 @@ const Movie = sequelize.define('movie', {
     tableName: 'movie'
 });
 // console.log(Book === sequelize.models.Book)
-module.exports = Movie;
+module.exports = Movie; // exporting the Movie model

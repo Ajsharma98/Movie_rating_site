@@ -19,7 +19,7 @@ schema
 exports.signupUsers = async (req, res) => {
     try {
         const { email, password, confirmPassword, name } = req.body;
-        // console.log(req.body);
+        console.log(req.body);
 
         // Validate input fields
         if (!email || !password || !confirmPassword || !name) {
