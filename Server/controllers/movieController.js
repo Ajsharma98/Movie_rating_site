@@ -1,6 +1,6 @@
 const Movie=require('../Model/Movie');
 
-exports.getAllMovies = async (req, res) => { // exporting the getAllBooks function for usage in other file
+exports.getAllMovies = async (req, res) => { // exporting the getAllMovies function for usage in other file
     try {
     
         const limit = parseInt(req.query.limit, 6) || 6;// requesting the limit of records per page 

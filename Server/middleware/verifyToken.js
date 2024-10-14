@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken');// importing the jwt from jsonwebtoken library 
+require('dotenv').config();
+
 
     const verifyToken = (req, res, next) => { // middleware function for verification of token 
         // Get the token from the request headers
