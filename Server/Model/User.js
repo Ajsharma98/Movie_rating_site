@@ -1,4 +1,4 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes, INTEGER } from 'sequelize';
 // const sequelize=require('../database/db.js')
 import sequelize from '../database/db.js'; // Connection to the database
 
@@ -7,7 +7,6 @@ const User = sequelize.define('User', {
     // Email column as primary key
     email: {
         type: DataTypes.STRING,   // Email is stored as a string
-        primaryKey: true,         // Primary key (must be unique for each user)
         allowNull: false, 
 // Email cannot be null
     },
@@ -19,7 +18,15 @@ const User = sequelize.define('User', {
     name: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    user_id:{
+        type:DataTypes.INTEGER,
+        primaryKey: true,
+        allowNull:false,
+        autoIncrement:true
     }
+
+
 }, {
     // Model options
     timestamps: false,           // Disable automatic creation of createdAt and updatedAt

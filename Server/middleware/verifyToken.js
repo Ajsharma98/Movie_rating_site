@@ -1,9 +1,10 @@
 import jwt from 'jsonwebtoken';// importing the jwt from jsonwebtoken library 
+import User from '../Model/User.js';
 import dotenv  from "dotenv"
 dotenv.config()
 
 
-    const verifyToken = (req, res, next) => { // middleware function for verification of token 
+    const verifyToken = async (req, res, next) => { // middleware function for verification of token 
         // Get the token from the request headers
     const authHeader = req.headers['authorization'];// taking the authorization from header part 
 
@@ -20,8 +21,13 @@ dotenv.config()
 
     try {
         // Verify the token
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);// verifying the token that wheter it is valid or not 
-        req.user = decoded; // Save user data in request object
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user= await User.findByPk(decoded.id)// 
+        
+    if (!user){
+        return res.status(404).json({message: 'User not found'})
+    }
+        req.user = user; // Save user data in request object
         next(); // Proceed to the next middleware or route handler
     } catch (error) {
         return res.status(401).json({ message: 'Invalid token' });

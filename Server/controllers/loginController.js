@@ -56,9 +56,9 @@ export const signupUsers = async (req, res) => {
 
         // Hash the password and create a new user
         const hashedPassword = await bcrypt.hash(password, 10);
-        await User.create({ email, password: hashedPassword, name });
+        const newUser=await User.create({ email, password: hashedPassword, name });
 
-        return res.status(201).json({ message: 'SignUp successful' });
+        return res.status(201).json({ message: 'SignUp successful', user_id:newUser.user_id });
     } catch (error) {
         console.error('Error during signup:', error.message);
         return res.status(500).json({ error: 'Internal Server Error' });
@@ -83,7 +83,7 @@ export const loginUsers = async (req, res) => {
         }
 
         const token = jwt.sign(
-            { id: user.id, email: user.email}, // Payload (user data)
+            { id: user.user_id, email: user.email}, // Payload (user data)
             process.env.JWT_SECRET, // Secret key (should be stored in environment variables)
             { expiresIn: '1hr' } // Token expiration time
         );

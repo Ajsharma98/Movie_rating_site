@@ -26,10 +26,11 @@ export const getAllMovies = async (req, res) => { // exporting the getAllMovies 
 
 export const postAllMovies = async (req, res) => {
     try {
-        const { id, name, director_name, writers, img, genre } = req.body;
+        const { name, director_name, writers, img, genre } = req.body;
+        const userId=req.userId;
 
         // Check for required fields
-        if (!id || !name || !director_name || !writers || !img ||  !genre) {
+        if ( !name || !director_name || !writers || !img ||!genre) {
             return res.status(400).json({ message: 'All fields are required' });
         }
         const existingMovie = await User.findOne({ where: { name } });
@@ -40,12 +41,12 @@ export const postAllMovies = async (req, res) => {
 
         // Create a new movie record
         const newMovie = await Movie.create({
-            id,
             name,
             director_name,
             writers,
             img, // Use the converted rating
-            genre
+            genre,
+            posted_by: userId
         });
 
         return res.status(201).json({
