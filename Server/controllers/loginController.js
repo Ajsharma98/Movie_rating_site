@@ -1,12 +1,11 @@
-const User=require('../Model/User');
-const bcrypt=require('bcryptjs');
-var passwordValidator = require('password-validator');
-const jwt = require('jsonwebtoken');
-
+import User from '../Model/User';
+import bcrypt from 'bcryptjs';
+import PasswordValidator from 'password-validator';
+import jwt from 'jsonwebtoken';
 
 // for valditing the password entered 
 // Create a schema
-var schema = new passwordValidator();
+var schema = new PasswordValidator();
 // Add properties to it
 schema
 .is().min(8)                                    // Minimum length 8
@@ -82,7 +81,7 @@ exports.loginUsers = async (req, res) => {
         const token = jwt.sign(
             { id: user.id, email: user.email}, // Payload (user data)
             process.env.JWT_SECRET, // Secret key (should be stored in environment variables)
-            { expiresIn: '1m' } // Token expiration time
+            { expiresIn: '1hr' } // Token expiration time
         );
        
         return res.status(200).json({ message: 'Login successful', token });
@@ -93,7 +92,6 @@ exports.loginUsers = async (req, res) => {
 };
 
 exports.logoutUsers = (req, res) => {
-    // No session management needed with JWT
     // Client should handle token deletion (e.g., from localStorage)
     return res.status(200).json({ message: 'Logout successful' });
 };

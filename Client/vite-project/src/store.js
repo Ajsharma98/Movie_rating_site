@@ -33,7 +33,7 @@ export const fetchData=async ()=>{
             totalPages.set(data.totalPages);
         }
         else{
-            console.error('Failed to fetch data:', response.status, response.status)
+            console.error('Failed to fetch data:', response.status, response.statusText)
         }
 
     }

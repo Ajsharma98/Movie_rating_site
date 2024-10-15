@@ -1,5 +1,6 @@
-const router = require('express').Router();// creating the instance of route 
-const loginController = require('../controllers/loginController');// importing the loginController
+import express from 'express'
+const router = express.Router();// creating the instance of route 
+import loginController from '../controllers/loginController';// importing the loginController
 // Route for user login
 router.post('/login', loginController.loginUsers);// post route for the login and implementing loginUser function 
 

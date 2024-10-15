@@ -1,6 +1,8 @@
-const router = require('express').Router();// creating the instance of route from express
-const movieController = require('../controllers/movieController'); // importing the moviecontroller module file here 
-const { verifyToken } = require('../middleware/verifyToken');
+import express from 'express';
+const router = express.Router();// creating the instance of route from express
+import movieController from '../controllers/movieController'// importing the moviecontroller module file here 
+import { verifyToken } from '../middleware/verifyToken';
+
 
 
 // Route to get all books with optional pagination

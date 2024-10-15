@@ -1,4 +1,4 @@
-const Movie=require('../Model/Movie');
+import Movie from '../Model/Movie';
 
 exports.getAllMovies = async (req, res) => { // exporting the getAllMovies function for usage in other file
     try {

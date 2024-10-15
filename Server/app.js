@@ -1,9 +1,9 @@
-const express = require('express');
-require('dotenv').config();
-
-const cors = require('cors');
-const movieRoutes = require('./routes/movieRoutes');// importing the routes file for book
-const userRoutes = require('./routes/loginRoutes');
+import express from 'express'
+import dotenv  from "dotenv"
+dotenv.config()
+import cors from 'cors';
+import movieRoutes from './routes/movieRoutes'// importing the routes file for book
+import userRoutes from './routes/loginRoutes'
 const app = express();
 
 

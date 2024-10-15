@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize'); // importing the datatype from sequelize
-const sequelize = require('../database/db');// importing the db.js 
+import { DataTypes} from 'sequelize'; // importing the datatype from sequelize
+import sequelize from '../database/db';// importing the db.js 
 
 const Movie = sequelize.define('Movie', { // providing the details of the columns of table
     // Define attributes
