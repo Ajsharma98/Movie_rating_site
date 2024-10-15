@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../database/db'; // Connection to the database
+// const sequelize=require('../database/db.js')
+import sequelize from '../database/db.js'; // Connection to the database
 
 // Define the User model
 const User = sequelize.define('User', {
@@ -7,7 +8,8 @@ const User = sequelize.define('User', {
     email: {
         type: DataTypes.STRING,   // Email is stored as a string
         primaryKey: true,         // Primary key (must be unique for each user)
-        allowNull: false          // Email cannot be null
+        allowNull: false, 
+// Email cannot be null
     },
     // Password column
     password: {
@@ -25,4 +27,4 @@ const User = sequelize.define('User', {
 });
 
 // Export the model
-module.exports = User;
+export default User;

@@ -12,4 +12,4 @@ async function testconnection() { // running the connection for checking
     }
 }
 testconnection();
-module.exports = sequelize; // exportring the module 
+export default sequelize; // exportring the module 

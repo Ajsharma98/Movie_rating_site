@@ -2,8 +2,8 @@ import express from 'express'
 import dotenv  from "dotenv"
 dotenv.config()
 import cors from 'cors';
-import movieRoutes from './routes/movieRoutes'// importing the routes file for book
-import userRoutes from './routes/loginRoutes'
+import movieRoutes from './routes/movieRoutes.js'// importing the routes file for book
+import userRoutes from './routes/loginRoutes.js'
 const app = express();
 
 

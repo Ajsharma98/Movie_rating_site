@@ -1,5 +1,6 @@
-const jwt = require('jsonwebtoken');// importing the jwt from jsonwebtoken library 
-require('dotenv').config();
+import jwt from 'jsonwebtoken';// importing the jwt from jsonwebtoken library 
+import dotenv  from "dotenv"
+dotenv.config()
 
 
     const verifyToken = (req, res, next) => { // middleware function for verification of token 
@@ -27,4 +28,4 @@ require('dotenv').config();
     }
 };
 
-module.exports = {verifyToken};
+export default verifyToken;

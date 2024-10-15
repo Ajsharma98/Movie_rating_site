@@ -1,11 +1,11 @@
-import Movie from '../Model/Movie';
+import Movie from '../Model/Movie.js';
 
-exports.getAllMovies = async (req, res) => { // exporting the getAllMovies function for usage in other file
+export const getAllMovies = async (req, res) => { // exporting the getAllMovies function for usage in other file
     try {
     
-        const limit = parseInt(req.query.limit, 6) || 6;// requesting the limit of records per page 
-        const page = parseInt(req.query.page, 10) || 1;// requesting for current page of book should show 
-        const offset = (page - 1) * limit;// finding the how many record should skip before fetching the data 
+        const limit = parseInt(req.query.limit, 10) || 6;// requesting the limit of records per page 
+        const offset = parseInt(req.query.page, 10) || 1;// requesting for current page of book should show 
+        // const offset = (page - 1) * limit;// finding the how many record should skip before fetching the data 
         
         // Fetch movie with pagination and count total records
         const { count, rows } = await Movie.findAndCountAll({ // finding the number of (rows),array of fetched records
@@ -24,20 +24,19 @@ exports.getAllMovies = async (req, res) => { // exporting the getAllMovies funct
     }
 };
 
-exports.postAllMovies = async (req, res) => {
+export const postAllMovies = async (req, res) => {
     try {
-        const { id, name, director_name, writers, img, rating, genre } = req.body;
+        const { id, name, director_name, writers, img, genre } = req.body;
 
         // Check for required fields
-        if (!id || !name || !director_name || !writers || !img || !rating || !genre) {
+        if (!id || !name || !director_name || !writers || !img ||  !genre) {
             return res.status(400).json({ message: 'All fields are required' });
         }
-
-        // Ensure rating is an integer
-        const ratingValue = parseInt(rating, 10);
-        if (isNaN(ratingValue)) {
-            return res.status(400).json({ message: 'Rating must be a number' });
+        const existingMovie = await User.findOne({ where: { name } });
+        if (existingMovie) {
+            return res.status(400).json({ message: 'User already exists' });
         }
+
 
         // Create a new movie record
         const newMovie = await Movie.create({
@@ -45,8 +44,7 @@ exports.postAllMovies = async (req, res) => {
             name,
             director_name,
             writers,
-            img,
-            rating: ratingValue, // Use the converted rating
+            img, // Use the converted rating
             genre
         });
 

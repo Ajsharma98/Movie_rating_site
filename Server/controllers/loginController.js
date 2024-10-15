@@ -1,4 +1,4 @@
-import User from '../Model/User';
+import User from '../Model/User.js';
 import bcrypt from 'bcryptjs';
 import PasswordValidator from 'password-validator';
 import jwt from 'jsonwebtoken';
@@ -16,7 +16,7 @@ schema
 .has().not().spaces()                           // Should not have spaces
 .is().not().oneOf(['Passw0rd', 'Password123']); // Blacklist these values
 
-exports.signupUsers = async (req, res) => {
+export const signupUsers = async (req, res) => {
     try {
         const { email, password, confirmPassword, name } = req.body;
         console.log(req.body);
@@ -30,6 +30,10 @@ exports.signupUsers = async (req, res) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             return res.status(400).json({ message: 'Invalid email format' });
+        }
+         // Validate email for lowercase 
+        if (email !== email.toLowerCase()) {
+            return res.status(400).json({ message: 'Email should be in lowercase' });
         }
 
         // Validate password strength
@@ -62,7 +66,7 @@ exports.signupUsers = async (req, res) => {
 };
 
 
-exports.loginUsers = async (req, res) => {
+export const loginUsers = async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -91,7 +95,9 @@ exports.loginUsers = async (req, res) => {
     }
 };
 
-exports.logoutUsers = (req, res) => {
+export const logoutUsers = (req, res) => {
     // Client should handle token deletion (e.g., from localStorage)
     return res.status(200).json({ message: 'Logout successful' });
 };
+ 
+

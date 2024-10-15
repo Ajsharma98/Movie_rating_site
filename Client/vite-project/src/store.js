@@ -2,7 +2,7 @@ import {writable, get} from 'svelte/store';
 import {jwtDecode} from 'jwt-decode';
 import {navigate} from 'svelte-routing';
 
-export const page=writable(1);
+export const offset=writable(1);
 export const limit=writable(6);
 export const totalPages=writable(1);
 export const displayedData=writable([]);
@@ -11,7 +11,7 @@ export const page_num=writable('');
 
 export const fetchData=async ()=>{
     try{
-        const page_num=get(page);
+        const page_num=get(offset);
         const limit_val=get(limit);
         const token=localStorage.getItem('jwtToken');
         
