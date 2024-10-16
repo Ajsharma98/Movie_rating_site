@@ -1,6 +1,6 @@
-import { DataTypes, INTEGER } from 'sequelize';
-// const sequelize=require('../database/db.js')
+import { DataTypes } from 'sequelize';
 import sequelize from '../database/db.js'; // Connection to the database
+
 
 // Define the User model
 const User = sequelize.define('User', {
@@ -32,6 +32,8 @@ const User = sequelize.define('User', {
     timestamps: false,           // Disable automatic creation of createdAt and updatedAt
     tableName: 'users'           // Specify the table name explicitly
 });
+
+User.sync({force: true})
 
 // Export the model
 export default User;

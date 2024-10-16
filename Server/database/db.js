@@ -11,5 +11,8 @@ async function testconnection() { // running the connection for checking
         console.error('Unable to connect to the database:', error);
     }
 }
+
+
+
 testconnection();
 export default sequelize; // exportring the module 

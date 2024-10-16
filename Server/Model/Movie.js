@@ -1,5 +1,4 @@
 import { DataTypes} from 'sequelize'; // importing the datatype from sequelize
-// const sequelize=require('../database/db.js')
 import sequelize from '../database/db.js';// importing the db.js 
 import User from '../Model/User.js';
 
@@ -27,13 +26,14 @@ const Movie = sequelize.define('Movie', { // providing the details of the column
     },
     genre:{
         type:DataTypes.STRING,
-
+    
     posted_by:{
         type:DataTypes.INTEGER,
+        allowNull:false,
         references: {
             model: User,
             key: 'user_id',
-        },
+        }
 
     }
     }
@@ -44,5 +44,9 @@ const Movie = sequelize.define('Movie', { // providing the details of the column
     timestamps: false,
     tableName: 'movie'
 });
+
+Movie.sync({force: true})
+
+
 // console.log(Book === sequelize.models.Book)
 export default Movie; // exporting the Movie model

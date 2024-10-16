@@ -1,5 +1,4 @@
 import Movie from '../Model/Movie.js';
-
 export const getAllMovies = async (req, res) => { // exporting the getAllMovies function for usage in other file
     try {
     
@@ -27,31 +26,38 @@ export const getAllMovies = async (req, res) => { // exporting the getAllMovies 
 export const postAllMovies = async (req, res) => {
     try {
         const { name, director_name, writers, img, genre } = req.body;
-        const userId=req.userId;
-
+       
+        const userId=req.user;
+        console.log(userId.user_id, "log from movies")
+        // Check for userID
+        if(!userId)
+            return res.status(400).json({message: "User_id is null "})
         // Check for required fields
         if ( !name || !director_name || !writers || !img ||!genre) {
             return res.status(400).json({ message: 'All fields are required' });
         }
-        const existingMovie = await User.findOne({ where: { name } });
+        const existingMovie = await Movie.findOne({ where: { name } });
         if (existingMovie) {
-            return res.status(400).json({ message: 'User already exists' });
+            return res.status(400).json({ message: 'Movie already exists' });
         }
 
-
+        const USERID = userId.user_id
+        console.log("USERID", USERID)
         // Create a new movie record
         const newMovie = await Movie.create({
             name,
             director_name,
             writers,
-            img, // Use the converted rating
+            img, 
+            posted_by: USERID,
             genre,
-            posted_by: userId
+            
         });
-
+        console.log(userId)
         return res.status(201).json({
             message: 'Movie added successfully',
-            movie: newMovie // Changed 'book' to 'movie' for consistency
+            movie: newMovie // Changed 'book' to 'movie' 
+            
         });
     } catch (error) {
         console.error('Error adding Movie:', error); // Log the full error object
