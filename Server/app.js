@@ -5,7 +5,7 @@ import cors from 'cors';
 import sequelize from './database/db.js'; // Import the Sequelize instance
 import movieRoutes from './routes/movieRoutes.js'; // Import movie routes
 import userRoutes from './routes/loginRoutes.js'; // Import user routes
-import './Model/association.js'; // Import the associations to set up relationships between models
+import './Model/index.js'; // Import the associations to set up relationships between models
 
 const app = express();
 

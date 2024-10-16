@@ -1,4 +1,4 @@
-import Movie from '../Model/Movie.js';
+import {Movie} from '../Model/index.js';
 export const getAllMovies = async (req, res) => { // exporting the getAllMovies function for usage in other file
     try {
     
@@ -28,7 +28,6 @@ export const postAllMovies = async (req, res) => {
         const { name, director_name, writers, img, genre } = req.body;
        
         const userId=req.user;
-        console.log(userId.user_id, "log from movies")
         // Check for userID
         if(!userId)
             return res.status(400).json({message: "User_id is null "})
@@ -41,15 +40,13 @@ export const postAllMovies = async (req, res) => {
             return res.status(400).json({ message: 'Movie already exists' });
         }
 
-        const USERID = userId.user_id
-        console.log("USERID", USERID)
         // Create a new movie record
         const newMovie = await Movie.create({
             name,
             director_name,
             writers,
             img, 
-            posted_by: USERID,
+            posted_by: userId.user_id,
             genre,
             
         });

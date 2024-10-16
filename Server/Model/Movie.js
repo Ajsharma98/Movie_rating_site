@@ -1,6 +1,5 @@
 import { DataTypes} from 'sequelize'; // importing the datatype from sequelize
 import sequelize from '../database/db.js';// importing the db.js 
-import User from '../Model/User.js';
 
 const Movie = sequelize.define('Movie', { // providing the details of the columns of table
     // Define attributes
@@ -30,10 +29,7 @@ const Movie = sequelize.define('Movie', { // providing the details of the column
     posted_by:{
         type:DataTypes.INTEGER,
         allowNull:false,
-        references: {
-            model: User,
-            key: 'user_id',
-        }
+        
 
     }
     }
@@ -45,7 +41,6 @@ const Movie = sequelize.define('Movie', { // providing the details of the column
     tableName: 'movie'
 });
 
-Movie.sync({force: true})
 
 
 // console.log(Book === sequelize.models.Book)

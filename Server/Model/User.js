@@ -33,7 +33,6 @@ const User = sequelize.define('User', {
     tableName: 'users'           // Specify the table name explicitly
 });
 
-User.sync({force: true})
 
 // Export the model
 export default User;

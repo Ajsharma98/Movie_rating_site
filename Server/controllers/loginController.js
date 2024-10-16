@@ -1,4 +1,4 @@
-import User from '../Model/User.js';
+import {User} from '../Model/index.js';
 import bcrypt from 'bcryptjs';
 import PasswordValidator from 'password-validator';
 import jwt from 'jsonwebtoken';
@@ -68,6 +68,7 @@ export const signupUsers = async (req, res) => {
 
 export const loginUsers = async (req, res) => {
     try {
+    
         const { email, password } = req.body;
 
         // Check if user exists
