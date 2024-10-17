@@ -15,4 +15,4 @@ async function testconnection() { // running the connection for checking
 
 
 testconnection();
-export default sequelize; // exportring the module 
+export default sequelize; // exporting the module 

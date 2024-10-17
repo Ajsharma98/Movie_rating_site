@@ -1,13 +1,13 @@
-import {Rating} from '../Model/Rating.js';
-
+import Rating from '../Model/Rating.js';
+import Movie from '../Model/Movie.js';
 export const postAllRating=async(req, res)=>{
     try{
-     const {rating, review, movie_id}=req.body
+     const {rating, Review, movie_id}=req.body
      const userId=req.user;
      if(!userId)
         return res.status(400).json({message: "User_id is null "})
     // Check for required fields
-    if ( !rating || !review || !movie_id) {
+    if ( !rating || !Review || !movie_id) {
         return res.status(400).json({ message: 'All fields are required' });
     }
 
@@ -20,9 +20,9 @@ export const postAllRating=async(req, res)=>{
         }
         const newRating = await Rating.create({
             rating,
-            review,
+            Review,
             movie_id,
-            user_id: userId // Set the user ID from the token
+            user_id: userId.user_id // Set the user ID from the token
         });
         return res.status(201).json({
             message: 'Rating added successfully',

@@ -5,6 +5,7 @@ import cors from 'cors';
 import sequelize from './database/db.js'; // Import the Sequelize instance
 import movieRoutes from './routes/movieRoutes.js'; // Import movie routes
 import userRoutes from './routes/loginRoutes.js'; // Import user routes
+import ratingRoutes from './/routes/ratingRoutes.js';
 import './Model/index.js'; // Import the associations to set up relationships between models
 
 const app = express();
@@ -20,12 +21,13 @@ app.use(express.json()); // To parse incoming JSON requests
 
 // Routes
 app.use('/movies', movieRoutes); // Route for movies
-app.use('/users', userRoutes);   // Route for users
+app.use('/users', userRoutes); 
+app.use ('/movies',ratingRoutes);// Route for users
 
 // Sync the database and start the server
 const PORT = process.env.PORT || 4000;
 
-sequelize.sync({ force: true }) 
+sequelize.sync() 
     .then(() => {
         console.log('Database synced successfully.');
         app.listen(PORT, () => { // Start the server

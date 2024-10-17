@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/db.js'; // Connection to the database
-
+import User from '../Model/User.js';
+import Movie from '../Model/Movie.js';
 
 // Define the User model
 const Rating = sequelize.define('Rating', {
@@ -8,12 +9,20 @@ const Rating = sequelize.define('Rating', {
     user_id: {
         type: DataTypes.INTEGER,   // Email is stored as a string
         allowNull: false, 
+        references:{
+            model: User,
+            key:'user_id'
+        }
       
     },
     // Password column
     movie_id: {
         type: DataTypes.INTEGER,   // Password is stored as a string (hashed)
-        allowNull: false,  
+        allowNull: false, 
+        references:{
+            model: Movie,
+            key: 'id'
+        } 
     },
     Review_id:{
         type:DataTypes.INTEGER,
@@ -25,7 +34,7 @@ const Rating = sequelize.define('Rating', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    Rating:{
+    rating:{
         type:DataTypes.INTEGER,
         allowNull:false,
         validate:{
@@ -42,7 +51,6 @@ const Rating = sequelize.define('Rating', {
     tableName: 'rating'           // Specify the table name explicitly
 });
 
-Rating.sync()
 
 // Export the model
 export default Rating;

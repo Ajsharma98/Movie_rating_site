@@ -11,8 +11,8 @@ User.hasMany(Rating, { foreignKey: 'user_id' }); // user can give many ratings (
 Rating.belongsTo(User, { foreignKey: 'user_id' }); // rating belongs to a specific user (one to one relationship)
 
 // Defining the relationship between Movie and Rating
-Movie.hasMany(Rating, { foreignKey: 'id' }); //  movie can have many ratings (one to many relationship)
-Rating.belongsTo(Movie, { foreignKey: 'id' }); // rating belongs to a specific movie ( one to one relationship)
+Movie.hasMany(Rating, { foreignKey: 'movie_id' }); //  movie can have many ratings (one to many relationship)
+Rating.belongsTo(Movie, { foreignKey: 'movie_id' }); // rating belongs to a specific movie ( one to one relationship)
 
 // Sync all models with the database
 await User.sync();

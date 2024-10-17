@@ -1,4 +1,4 @@
-import {User} from '../Model/index.js';
+import User from '../Model/User.js';
 import bcrypt from 'bcryptjs';
 import PasswordValidator from 'password-validator';
 import jwt from 'jsonwebtoken';

@@ -1,4 +1,4 @@
-import {Movie} from '../Model/index.js';
+import Movie from '../Model/Movie.js';
 export const getAllMovies = async (req, res) => { // exporting the getAllMovies function for usage in other file
     try {
     
