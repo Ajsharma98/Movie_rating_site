@@ -27,7 +27,7 @@ app.use ('/movies',ratingRoutes);// Route for users
 // Sync the database and start the server
 const PORT = process.env.PORT || 4000;
 
-sequelize.sync() 
+sequelize.sync({ alter: true }) 
     .then(() => {
         console.log('Database synced successfully.');
         app.listen(PORT, () => { // Start the server

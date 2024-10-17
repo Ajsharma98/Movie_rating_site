@@ -1,47 +1,42 @@
-import { DataTypes} from 'sequelize'; // importing the datatype from sequelize
-import sequelize from '../database/db.js';// importing the db.js 
+import { DataTypes } from 'sequelize'; // Ensure you import DataTypes if it's not already imported
+import sequelize from '../database/db.js'; // Adjust the import as per your project structure
 
-const Movie = sequelize.define('Movie', { // providing the details of the columns of table
+const Movie = sequelize.define('Movie', { // Defining the Movie model
     // Define attributes
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        allowNull:false,
-        autoIncrement:true
+        allowNull: false,
+        autoIncrement: true
     },
     name: {
         type: DataTypes.STRING,
-        
     },
-    director_name:{
-        type:DataTypes.STRING,
-
+    director_name: {
+        type: DataTypes.STRING,
     },
-    writers:{
-        type:DataTypes.STRING,
+    writers: {
+        type: DataTypes.STRING,
     },
-    img:{
-        type:DataTypes.STRING,
+    img: {
+        type: DataTypes.STRING,
     },
-    genre:{
-        type:DataTypes.STRING,
-    
-    posted_by:{
-        type:DataTypes.INTEGER,
-        allowNull:false,
-        
-
+    genre: {
+        type: DataTypes.STRING,
+    },
+    posted_by: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    avg_rating: {
+        type: DataTypes.FLOAT,
+        allowNull: true,
+        defaultValue: 0 // Corrected from 'defaultvalue' to 'defaultValue'
     }
-    }
-    
-    
 }, {
     // Model options
     timestamps: false,
-    tableName: 'movie'
+    tableName: 'movie' // Ensure table name is correct (conventionally should be plural like 'movies')
 });
 
-
-
-// console.log(Book === sequelize.models.Book)
-export default Movie; // exporting the Movie model
+export default Movie; // Exporting the Movie model
