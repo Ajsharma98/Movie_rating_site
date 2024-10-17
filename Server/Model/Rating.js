@@ -42,7 +42,7 @@ const Rating = sequelize.define('Rating', {
     tableName: 'rating'           // Specify the table name explicitly
 });
 
-Rating.sync({force: true})
+Rating.sync()
 
 // Export the model
 export default Rating;
