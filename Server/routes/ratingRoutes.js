@@ -1,8 +1,8 @@
 import express from 'express';
 const router=express.Router();
 import { verifyToken} from '../middleware/verifyToken.js';
-import { postAllRating } from '../controllers/ratingController.js';
+import { postAllRating,deleteRatingById } from '../controllers/ratingController.js';
 
-router.post('/rating',verifyToken, postAllRating)
-
+router.post('/add',verifyToken, postAllRating)
+router.delete('/:Review_id', verifyToken, deleteRatingById);
 export default router;

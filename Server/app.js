@@ -22,7 +22,7 @@ app.use(express.json()); // To parse incoming JSON requests
 // Routes
 app.use('/movies', movieRoutes); // Route for movies
 app.use('/users', userRoutes); 
-app.use ('/movies',ratingRoutes);// Route for users
+app.use ('/rating',ratingRoutes);// Route for users
 
 // Sync the database and start the server
 const PORT = process.env.PORT || 4000;

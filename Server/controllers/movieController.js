@@ -65,3 +65,22 @@ export const postAllMovies = async (req, res) => {
         });
     }
 };
+
+export const deleteMovieById= async (req, res)=>{
+    const {id}=req.params;
+try{
+
+    const movie=await Movie.findByPk(id);
+    if(!movie){
+        return res.status(404).json({message:"Movie not found"});
+    }
+    await Movie.destroy({where:{id}});
+       return res.status(200).json({message:"Movie deleted successfully"});
+
+}
+catch (error) {
+    console.error(error);
+    return res.status(500).json({message:"An error occured while deleting the book", error:error.message});
+
+}
+};
