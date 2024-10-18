@@ -3,14 +3,15 @@ export const getAllMovies = async (req, res) => { // exporting the getAllMovies 
     try {
     
         const limit = parseInt(req.query.limit, 10) || 6;// requesting the limit of records per page 
-        const offset = parseInt(req.query.page, 10) || 1;// requesting for current page of book should show 
-        // const offset = (page - 1) * limit;// finding the how many record should skip before fetching the data 
+        const page = parseInt(req.query.page, 10) || 1;// requesting for current page of book should show 
+        const offset = (page - 1) * limit;// finding the how many record should skip before fetching the data 
         
         // Fetch movie with pagination and count total records
         const { count, rows } = await Movie.findAndCountAll({ // finding the number of (rows),array of fetched records
             limit: limit, // limit taken from user
             offset: offset// skips calculated from current page
         });
+
 
         return res.status(200).json({ // sending the response of total (rows) page and limit
             Movies: rows,
@@ -53,7 +54,7 @@ export const postAllMovies = async (req, res) => {
         console.log(userId)
         return res.status(201).json({
             message: 'Movie added successfully',
-            movie: newMovie // Changed 'book' to 'movie' 
+            movie: newMovie
             
         });
     } catch (error) {
