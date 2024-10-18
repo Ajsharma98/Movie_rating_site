@@ -1,7 +1,7 @@
 import express from 'express'
 const router = express.Router();// creating the instance of route 
 // import loginController from '../controllers/loginController.js';
-import {signupUsers, loginUsers, logoutUsers} from '../controllers/loginController.js'// importing the loginController
+import {signupUsers, loginUsers, logoutUsers, deleleteUserByid} from '../controllers/loginController.js'// importing the loginController
 // Route for user login
 router.post('/login', loginUsers);// post route for the login and implementing loginUser function 
 
@@ -10,5 +10,7 @@ router.post('/signup', signupUsers);// post route for the signup and implementin
 
 // Route for user logout
 router.post('/logout',  logoutUsers);// post route for the logout and implementing the logout function
+
+router.delete('/:user_id', deleleteUserByid);
 
 export default router;// exporting the router instance for usage in app.js

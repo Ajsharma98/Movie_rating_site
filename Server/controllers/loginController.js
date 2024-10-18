@@ -101,4 +101,19 @@ export const logoutUsers = (req, res) => {
     return res.status(200).json({ message: 'Logout successful' });
 };
  
+export const deleleteUserByid = async (req, res)=>{
+    const {user_id}=req.params
+try{
+  const user= await User.findByPk(user_id)
+  if(!user){
+    return res.status(400).json({message:"User not found"});
+  }
+  await User.destroy({where:{user_id}});
+  return res.status(200).json({message:"User successfully deleted"});
+}
+catch(error) {
+ console.error(error);
+ return res.status(500).json({message:"An error occured while deleting the review", error:error.message})
+}
+}
 
