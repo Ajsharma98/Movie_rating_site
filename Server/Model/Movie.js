@@ -31,10 +31,17 @@ const Movie = sequelize.define('Movie', { // Defining the Movie model
     avg_rating: {
         type: DataTypes.FLOAT,
         allowNull: true,
-        defaultValue: 0 // Corrected from 'defaultvalue' to 'defaultValue'
-    }
+        defaultValue: 0,// Corrected from 'defaultvalue' to 'defaultValue'
+    
+    },
+   movie_deleted:{
+    type:DataTypes.INTEGER,
+    allowNull:false,
+    defaultValue:0
+   }
 }, {
     // Model options
+   
     timestamps: false,
     tableName: 'movie' // Ensure table name is correct (conventionally should be plural like 'movies')
 });

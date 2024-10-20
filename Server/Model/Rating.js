@@ -2,6 +2,7 @@ import { DataTypes } from 'sequelize';
 import sequelize from '../database/db.js'; // Connection to the database
 import User from '../Model/User.js';
 import Movie from '../Model/Movie.js';
+import { INTEGER } from 'sequelize/lib/data-types';
 
 // Define the User model
 const Rating = sequelize.define('Rating', {
@@ -42,11 +43,16 @@ const Rating = sequelize.define('Rating', {
             max:10
         }
       
-    }
+    },
+   rating_deleted:{
+    type:DataTypes.INTEGER,
+    allowNull:false,
+    defaultValue:0
+   }
 
 
 }, {
-    // Model options
+
     timestamps: false,           // Disable automatic creation of createdAt and updatedAt
     tableName: 'rating'           // Specify the table name explicitly
 });

@@ -86,7 +86,7 @@ try{
      if(!rating){
         return res.status(400).json({message:"Rating not found"})
      }
-     await Rating.destroy({where:{Review_id}});
+     await Rating.update({rating_deleted:1},{where:{user_id:user_id}});;
      return res.status(200).json({message:"Rating successfully deleted"});
 }
 catch(error) {

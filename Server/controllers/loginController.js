@@ -1,4 +1,6 @@
 import User from '../Model/User.js';
+import Movie from '../Model/Movie.js'
+import Rating from '../Model/Rating.js'
 import bcrypt from 'bcryptjs';
 import PasswordValidator from 'password-validator';
 import jwt from 'jsonwebtoken';
@@ -108,7 +110,9 @@ try{
   if(!user){
     return res.status(400).json({message:"User not found"});
   }
-  await User.destroy({where:{user_id}});
+  await Movie.update({movie_deleted:1},{where:{posted_by:user_id}});
+  await Rating.update({rating_deleted:1},{where:{user_id:user_id}});
+  await User.update({user_deleted:1}, {where:{user_id:user_id}});
   return res.status(200).json({message:"User successfully deleted"});
 }
 catch(error) {

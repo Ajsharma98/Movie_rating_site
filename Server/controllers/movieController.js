@@ -1,4 +1,5 @@
 import Movie from '../Model/Movie.js';
+import Rating from '../Model/Rating.js';
 export const getAllMovies = async (req, res) => { // exporting the getAllMovies function for usage in other file
     try {
     
@@ -7,9 +8,10 @@ export const getAllMovies = async (req, res) => { // exporting the getAllMovies 
         const offset = (page - 1) * limit;// finding the how many record should skip before fetching the data 
         
         // Fetch movie with pagination and count total records
-        const { count, rows } = await Movie.findAndCountAll({ // finding the number of (rows),array of fetched records
-            limit: limit, // limit taken from user
-            offset: offset// skips calculated from current page
+        const { count, rows } = await Movie.findAndCountAll({ 
+            where: { movie_deleted: 0 }, // Fetch records where movie_deleted is 0
+            limit: limit, // Limit of records taken from the user input
+            offset: offset // Skips records, calculated from current page
         });
 
 
@@ -74,7 +76,8 @@ try{
     if(!movie){
         return res.status(404).json({message:"Movie not found"});
     }
-    await Movie.destroy({where:{id}});
+    await Rating.update({rating_deleted:1},{where:{user_id:user_id}});
+    await Movie.update({movie_deleted:1},{where:{posted_by:user_id}});;
        return res.status(200).json({message:"Movie deleted successfully"});
 
 }

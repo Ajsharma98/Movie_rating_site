@@ -24,11 +24,16 @@ const User = sequelize.define('User', {
         primaryKey: true,
         allowNull:false,
         autoIncrement:true
+    },
+    user_deleted:{
+        type:DataTypes.INTEGER,
+        allowNull:false,
+        defaultValue:0
     }
-
 
 }, {
     // Model options
+   
     timestamps: false,           // Disable automatic creation of createdAt and updatedAt
     tableName: 'users'           // Specify the table name explicitly
 });

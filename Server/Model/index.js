@@ -15,9 +15,9 @@ Movie.hasMany(Rating, { foreignKey: 'movie_id' }); //  movie can have many ratin
 Rating.belongsTo(Movie, { foreignKey: 'movie_id' }); // rating belongs to a specific movie ( one to one relationship)
 
 // Sync all models with the database
-await User.sync();
-await Movie.sync();
-await Rating.sync();
+await User.sync({alter:true});
+await Movie.sync({alter:true});
+await Rating.sync({alter:true});
 
 // Export models to be used elsewhere in your application
 export { User, Movie, Rating };
