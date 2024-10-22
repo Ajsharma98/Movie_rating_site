@@ -2,17 +2,24 @@ import Movie from '../Model/Movie.js';
 import Rating from '../Model/Rating.js';
 export const getAllMovies = async (req, res) => { // exporting the getAllMovies function for usage in other file
     try {
-    
+        let rows, count
         const limit = parseInt(req.query.limit, 10) || 6;// requesting the limit of records per page 
         const page = parseInt(req.query.page, 10) || 1;// requesting for current page of book should show 
         const offset = (page - 1) * limit;// finding the how many record should skip before fetching the data 
-        
+        const user_role=req.user_role;
+        if(user_role==='admin'){
+        ({count, rows }= await Movie.findAndCountAll({  // Fetch records where movie_deleted is 0
+            limit: limit, // Limit of records taken from the user input
+            offset: offset // Skips records, calculated from current page
+        }));
+       }
+       else{
         // Fetch movie with pagination and count total records
-        const { count, rows } = await Movie.findAndCountAll({ 
+         ({ count, rows } = await Movie.findAndCountAll({ 
             where: { movie_deleted: 0 }, // Fetch records where movie_deleted is 0
             limit: limit, // Limit of records taken from the user input
             offset: offset // Skips records, calculated from current page
-        });
+        }))};
 
 
         return res.status(200).json({ // sending the response of total (rows) page and limit
@@ -70,6 +77,7 @@ export const postAllMovies = async (req, res) => {
 
 export const deleteMovieById= async (req, res)=>{
     const {id}=req.params;
+    const {user_id} = req.user
 try{
 
     const movie=await Movie.findByPk(id);
@@ -77,13 +85,13 @@ try{
         return res.status(404).json({message:"Movie not found"});
     }
     await Rating.update({rating_deleted:1},{where:{user_id:user_id}});
-    await Movie.update({movie_deleted:1},{where:{posted_by:user_id}});;
-       return res.status(200).json({message:"Movie deleted successfully"});
+    await Movie.update({movie_deleted:1},{where:{posted_by:user_id}});
+    return res.status(200).json({message:"Movie deleted successfully"});
 
 }
 catch (error) {
     console.error(error);
-    return res.status(500).json({message:"An error occured while deleting the book", error:error.message});
+    return res.status(500).json({message:"An error occured while deleting the movie", error:error.message});
 
 }
 };

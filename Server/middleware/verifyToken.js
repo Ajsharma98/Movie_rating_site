@@ -23,13 +23,13 @@ export const verifyToken = async (req, res, next) => { // middleware function fo
         // Verify the token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         console.log(decoded, "decoded token")
+        const user_role=decoded.role;
         const user_id=decoded.id;
-        // console.log(decoded);
-        const user = await User.findByPk(user_id)// 
-
+        const user = await User.findByPk(user_id)
         if (!user) {
             return res.status(404).json({ message: 'User not found' })
         }
+        req.user_role=user_role;
         req.user = user; 
         console.log("User Id in middleware", req.user);
         next(); 

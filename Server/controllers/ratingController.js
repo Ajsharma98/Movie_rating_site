@@ -109,6 +109,7 @@ export const postAllRating = async (req, res) => {
 
 export const deleteRatingById = async (req, res) =>{
     const{Review_id}=req.params
+    const{user_id}=req.user
 try{
      const rating=await Rating.findByPk(Review_id);
      if(!rating){
