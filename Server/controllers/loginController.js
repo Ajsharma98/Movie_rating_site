@@ -148,3 +148,22 @@ export const getAllUser= async (req, res) => { // exporting the getAllMovies fun
     }
 };
 
+export const getUserById=async (req, res) =>{
+    const{user_id}=req.params;
+try {
+ 
+    const movie=await User.findOne({where: {
+        user_id:user_id,
+        user_deleted:0
+    }});
+    if(!movie){
+        return res.status(404).json({message:"user not found"});
+    }
+     return res.status(200).json(movie)
+    }
+catch (error){
+        console.error('Error fetching movie by id:', error.message);  
+        return res.status(500).json({ error: 'Internal Server Error' });
+}
+};
+

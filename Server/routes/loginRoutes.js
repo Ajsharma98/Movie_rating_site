@@ -2,7 +2,7 @@ import express from 'express'
 const router = express.Router();// creating the instance of route 
 // import loginController from '../controllers/loginController.js';
 import { verifyToken } from '../middleware/verifyToken.js';
-import {signupUsers, loginUsers, logoutUsers, deleleteUserByid, getAllUser} from '../controllers/loginController.js'// importing the loginController
+import {signupUsers, loginUsers, logoutUsers, deleleteUserByid, getAllUser, getUserById} from '../controllers/loginController.js'// importing the loginController
 // Route for user login
 router.post('/login', loginUsers);// post route for the login and implementing loginUser function 
 
@@ -13,5 +13,6 @@ router.post('/signup', signupUsers);// post route for the signup and implementin
 router.post('/logout',  logoutUsers);// post route for the logout and implementing the logout function
 
 router.delete('/:user_id', verifyToken, deleleteUserByid);
-router.get('/', verifyToken, getAllUser);2
+router.get('/', verifyToken, getAllUser);
+router.get('/:user_id', verifyToken, getUserById);
 export default router;// exporting the router instance for usage in app.js
