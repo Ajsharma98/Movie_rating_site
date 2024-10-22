@@ -1,5 +1,33 @@
 import Rating from '../Model/Rating.js';
 import Movie from '../Model/Movie.js';
+export const getAllRating = async (req, res) => { // exporting the getAllMovies function for usage in other file
+    try {
+    
+        const limit = parseInt(req.query.limit, 10) || 6;// requesting the limit of records per page 
+        const page = parseInt(req.query.page, 10) || 1;// requesting for current page of book should show 
+        const offset = (page - 1) * limit;// finding the how many record should skip before fetching the data 
+        
+        // Fetch movie with pagination and count total records
+        const { count, rows } = await Rating.findAndCountAll({ 
+            where: { rating_deleted: 0 }, // Fetch records where movie_deleted is 0
+            limit: limit, // Limit of records taken from the user input
+            offset: offset // Skips records, calculated from current page
+        });
+
+
+        return res.status(200).json({ // sending the response of total (rows) page and limit
+            Ratings: rows,
+            total: count,
+            totalPages:Math.ceil(count/limit)
+        });
+    } catch (error) {
+        console.error('Error fetching books:', error.message);  
+        return res.status(500).json({ error: 'Internal Server Error' });// HTTP method of 500 which happen when server does not able to repond for response
+    }
+};
+
+
+
 const updateAvgRating = async (movie_id) => {
     const ratings = await Rating.findAll({
         where: { movie_id },
