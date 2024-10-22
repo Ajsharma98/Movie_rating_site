@@ -2,7 +2,7 @@ import Rating from '../Model/Rating.js';
 import Movie from '../Model/Movie.js';
 export const getAllRating = async (req, res) => { // exporting the getAllMovies function for usage in other file
     try {
-    
+  
         const limit = parseInt(req.query.limit, 10) || 6;// requesting the limit of records per page 
         const page = parseInt(req.query.page, 10) || 1;// requesting for current page of book should show 
         const offset = (page - 1) * limit;// finding the how many record should skip before fetching the data 
