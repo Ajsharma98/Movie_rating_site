@@ -6,6 +6,7 @@ import sequelize from './database/db.js'; // Import the Sequelize instance
 import movieRoutes from './routes/movieRoutes.js'; // Import movie routes
 import userRoutes from './routes/loginRoutes.js'; // Import user routes
 import ratingRoutes from './/routes/ratingRoutes.js';
+import ratingforMovie from './routes/ratingforMovie.js';
 import './Model/index.js'; // Import the associations to set up relationships between models
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(express.json()); // To parse incoming JSON requests
 app.use('/movies', movieRoutes); // Route for movies
 app.use('/users', userRoutes); 
 app.use ('/rating',ratingRoutes);// Route for users
+app.use('/movierating',ratingforMovie);
 
 // Sync the database and start the server
 const PORT = process.env.PORT || 4000;
