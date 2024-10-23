@@ -4,6 +4,7 @@ import Rating from '../Model/Rating.js'
 import bcrypt from 'bcryptjs';
 import PasswordValidator from 'password-validator';
 import jwt from 'jsonwebtoken';
+import { STRING } from 'sequelize';
 
 // for valditing the password entered 
 // Create a schema
@@ -195,3 +196,47 @@ catch (error){
 }
 };
 
+export const getMovieandRatingByUserId=async(req, res)=>{
+
+    const{user_id}=req.params;
+    // let movie=[], ratings=[];
+    let include=STRING(req.query.user)
+    let movie=STRING(req.query.movie);
+    let ratings=STRING(req.query.ratings);
+    let array=[movie, ratings]
+    try{
+      if(array.includes(movie)){
+         movie=await Movie.findAll({where: {
+         posted_by:user_id,
+    //    movie_deleted:0
+    }})}
+    else if(array.includes(ratings)){
+    ratings =await Rating.findAll({where:{
+           user_id:user_id,
+        //    rating_deleted:0
+      }})}
+      
+    else{
+        movie=await Movie.findAll({where: {
+            posted_by:user_id,
+       //    movie_deleted:0
+       }})
+       ratings =await Rating.findAll({where:{
+        user_id:user_id,
+     //    rating_deleted:0
+   }}) 
+    };
+    //   if(!movie){
+    //     return res.status(404).json({message:"movie not found"});
+    // }
+    //   if(!ratings){
+    //     return res.status(404).json({message:"rating not found"});
+    //   }
+
+     return res.status(200).json({movie, ratings})
+    }
+    catch (error){
+        console.error('Error fetching movie by id:', error.message);  
+        return res.status(500).json({ error: 'Internal Server Error' });
+}
+};

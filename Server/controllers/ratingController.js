@@ -2,18 +2,45 @@ import Rating from '../Model/Rating.js';
 import Movie from '../Model/Movie.js';
 export const getAllRating = async (req, res) => { // exporting the getAllMovies function for usage in other file
     try {
-  
+        let count, rows;
         const limit = parseInt(req.query.limit, 10) || 6;// requesting the limit of records per page 
         const page = parseInt(req.query.page, 10) || 1;// requesting for current page of book should show 
         const offset = (page - 1) * limit;// finding the how many record should skip before fetching the data 
-        
+        const rating_filter=Number(req.query.filter);
+        const user_role=req.user_role;
         // Fetch movie with pagination and count total records
-        const { count, rows } = await Rating.findAndCountAll({ 
-            where: { rating_deleted: 0 }, // Fetch records where movie_deleted is 0
-            limit: limit, // Limit of records taken from the user input
-            offset: offset // Skips records, calculated from current page
-        });
+        if (user_role === 'admin') {
+            if (rating_filter === 0) {
+               ({ count ,  rows } = await Rating.findAndCountAll({
+                    where: { rating_deleted: 0 },  // Fetch records where movie_deleted is 0
+                    limit: limit, // Limit of records taken from the user input
+                    offset: offset, // Skips records, calculated from current page
+                }));
+            }
+            else if (rating_filter === 1) {
+                ({count, rows}= await Rating.findAndCountAll({
+                    where: { rating_deleted: 1 },  // Fetch records where movie_deleted is 0
+                    limit: limit, // Limit of records taken from the user input
+                    offset: offset // Skips records, calculated from current page
+                }));
+            }
+            else if (rating_filter === 2) {
+                ({count, rows} = await Rating.findAndCountAll({
+                    limit: limit, // Limit of records taken from the user input
+                    offset: offset // Skips records, calculated from current page
+                }));
+            }
 
+        }
+        else {
+            // Fetch movie with pagination and count total records
+            ({count, rows}= await Rating.findAndCountAll({
+                where: { Rating_deleted: 0 }, // Fetch records where movie_deleted is 0
+                limit: limit, // Limit of records taken from the user input
+                offset: offset // Skips records, calculated from current page
+            }))
+        };
+       
 
         return res.status(200).json({ // sending the response of total (rows) page and limit
             Ratings: rows,
@@ -53,17 +80,22 @@ export const postAllRating = async (req, res) => {
         if (!userId)
             return res.status(400).json({ message: "User_id is null " })
         // Check for required fields
-
+        // const ratings=await Rating.findByPk(Review_id);
         if (!rating || !Review || !movie_id) {
             return res.status(400).json({ message: 'All fields are required' });
         }
-
+        // if (ratings.rating_deleted === 1) {
+        //     return res.status(403).json({ message: 'This is movie is deleted . Please contact support.' });
+        // }
         if (rating < 1 || rating > 10) {
             return res.status(400).json({ message: 'Rating must be between 1 and 10' });
         }
         const movie = await Movie.findByPk(movie_id);
         if (!movie) {
             return res.status(404).json({ message: 'Movie not found' });
+        }
+        if (movie.movie_deleted === 1) {
+            return res.status(403).json({ message: 'This is movie is deleted . Please contact support.' });
         }
 
         const existingRating = await Rating.findOne({
