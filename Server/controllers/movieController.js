@@ -2,7 +2,8 @@ import Movie from '../Model/Movie.js';
 import Rating from '../Model/Rating.js';
 export const getAllMovies = async (req, res) => { // exporting the getAllMovies function for usage in other file
     try {
-        let result;
+        // let result;
+        let count, rows ;
         const limit = parseInt(req.query.limit, 10) || 6;// requesting the limit of records per page 
         const page = parseInt(req.query.page, 10) || 1;// requesting for current page of book should show 
         const offset = (page - 1) * limit;// finding the how many record should skip before fetching the data 
@@ -10,39 +11,39 @@ export const getAllMovies = async (req, res) => { // exporting the getAllMovies 
         const user_role = req.user_role;
         if (user_role === 'admin') {
             if (movie_filter === 0) {
-                result = await Movie.findAndCountAll({
+               ({ count ,  rows } = await Movie.findAndCountAll({
                     where: { movie_deleted: 0 },  // Fetch records where movie_deleted is 0
                     limit: limit, // Limit of records taken from the user input
                     offset: offset, // Skips records, calculated from current page
-                });
+                }));
             }
             else if (movie_filter === 1) {
-                result = await Movie.findAndCountAll({
+                ({count, rows}= await Movie.findAndCountAll({
                     where: { movie_deleted: 1 },  // Fetch records where movie_deleted is 0
                     limit: limit, // Limit of records taken from the user input
                     offset: offset // Skips records, calculated from current page
-                });
+                }));
             }
             else if (movie_filter === 2) {
-                result = await Movie.findAndCountAll({
+                ({count, rows} = await Movie.findAndCountAll({
                     limit: limit, // Limit of records taken from the user input
                     offset: offset // Skips records, calculated from current page
-                });
+                }));
             }
 
         }
         else {
             // Fetch movie with pagination and count total records
-            result = await Movie.findAndCountAll({
+            ({count, rows}= await Movie.findAndCountAll({
                 where: { movie_deleted: 0 }, // Fetch records where movie_deleted is 0
                 limit: limit, // Limit of records taken from the user input
                 offset: offset // Skips records, calculated from current page
-            })
+            }))
         };
        
        
-
-     const {count, rows}= result;
+       
+    //  const {count, rows}= result;
         return res.status(200).json({ // sending the response of total (rows) page and limit
             Movies: rows,
             total: count,
