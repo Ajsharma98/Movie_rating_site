@@ -7,28 +7,29 @@ import jwt from "jsonwebtoken";
 
 // for valditing the password entered
 // Create a schema
-var schema = new PasswordValidator();
-// Add properties to it
-schema
-  .is()
-  .min(8) // Minimum length 8
-  .is()
-  .max(100) // Maximum length 100
-  .has()
-  .uppercase() // Must have uppercase letters
-  .has()
-  .lowercase() // Must have lowercase letters
-  .has()
-  .digits(2) // Must have at least 2 digits
-  .has()
-  .not()
-  .spaces() // Should not have spaces
-  .is()
-  .not()
-  .oneOf(["Passw0rd", "Password123"]); // Blacklist these values
 
 export const signupUsers = async (req, res) => {
   try {
+    var schema = new PasswordValidator();
+    // Add properties to it
+    schema
+      .is()
+      .min(12) // Minimum length 8
+      .is()
+      .max(100) // Maximum length 100
+      .has()
+      .uppercase() // Must have uppercase letters
+      .has()
+      .lowercase() // Must have lowercase letters
+      .has()
+      .digits(2) // Must have at least 2 digits
+      .has()
+      .not()
+      .spaces() // Should not have spaces
+      .is()
+      .not()
+      .oneOf(["Passw0rd", "Password123"]); // Blacklist these values
+    console.log(schema.validate("validPASS123"));
     const { email, password, confirmPassword, name } = req.body;
     console.log(req.body);
 
@@ -48,18 +49,21 @@ export const signupUsers = async (req, res) => {
     if (email !== email.toLowerCase()) {
       return res.status(400).json({ message: "Email should be in lowercase" });
     }
-
-    // Validate password strength
-    const passwordError = schema.validate(password, { details: true });
-    if (passwordError) {
-      return res.status(400).json({ message: passwordError });
-    }
-
     // Check if password and confirmPassword match
     if (password !== confirmPassword) {
       return res.status(400).json({ message: "Passwords do not match" });
     }
-
+    // Validate password strength
+    console.log(
+      schema.validate(password, { details: true }),
+      "error from schema"
+    );
+    const passwordValid = schema.validate(password);
+    if (!passwordValid) {
+      return res
+        .status(400)
+        .json({ message: "Password is not strong enough!" });
+    }
     // Check if the user already exists
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
@@ -125,14 +129,27 @@ export const logoutUsers = (req, res) => {
 export const deleleteUserByid = async (req, res) => {
   const { user_id } = req.params;
   try {
-    const user = await User.findByPk(user_id);
-    if (!user) {
-      return res.status(400).json({ message: "User not found" });
+    const user_role = req.user_role;
+    if (user_role === "admin") {
+      const user = await User.findByPk(user_id);
+      if (!user) {
+        return res.status(400).json({ message: "User not found" });
+      }
+      await Movie.update(
+        { movie_deleted: 1 },
+        { where: { posted_by: user_id } }
+      );
+      await Rating.update(
+        { rating_deleted: 1 },
+        { where: { user_id: user_id } }
+      );
+      await User.update({ user_deleted: 1 }, { where: { user_id: user_id } });
+      return res.status(200).json({ message: "User successfully deleted" });
+    } else {
+      return res
+        .status(401)
+        .json({ message: "You do not have access for deleting the user" });
     }
-    await Movie.update({ movie_deleted: 1 }, { where: { posted_by: user_id } });
-    await Rating.update({ rating_deleted: 1 }, { where: { user_id: user_id } });
-    await User.update({ user_deleted: 1 }, { where: { user_id: user_id } });
-    return res.status(200).json({ message: "User successfully deleted" });
   } catch (error) {
     console.error(error);
     return res.status(500).json({
