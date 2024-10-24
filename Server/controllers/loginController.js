@@ -5,7 +5,6 @@ import bcrypt from "bcryptjs";
 import PasswordValidator from "password-validator";
 import jwt from "jsonwebtoken";
 
-
 // for valditing the password entered
 // Create a schema
 var schema = new PasswordValidator();
@@ -51,7 +50,7 @@ export const signupUsers = async (req, res) => {
     }
 
     // Validate password strength
-    const passwordError = schema.validate(password);
+    const passwordError = schema.validate(password, { details: true });
     if (passwordError) {
       return res.status(400).json({ message: passwordError });
     }
@@ -86,8 +85,8 @@ export const signupUsers = async (req, res) => {
 
 export const loginUsers = async (req, res) => {
   try {
-    const { email, password } = req.body;
-
+    let { email, password } = req.body;
+    email = email.toLowerCase();
     // Check if user exists
 
     const user = await User.findOne({ where: { email } });
@@ -120,7 +119,6 @@ export const loginUsers = async (req, res) => {
 };
 
 export const logoutUsers = (req, res) => {
-  // Client should handle token deletion (e.g., from localStorage)
   return res.status(200).json({ message: "Logout successful" });
 };
 
@@ -192,8 +190,6 @@ export const getAllUser = async (req, res) => {
   }
 };
 
-
-
 export const getMovieandRatingByUserId = async (req, res) => {
   const { user_id } = req.params;
   let include = req.query.include.split(",");
@@ -238,4 +234,3 @@ export const getMovieandRatingByUserId = async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
-

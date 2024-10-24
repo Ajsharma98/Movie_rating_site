@@ -31,7 +31,7 @@ export const verifyToken = async (req, res, next) => { // middleware function fo
         }
         req.user_role=user_role;
         req.user = user; 
-        console.log("User Id in middleware", req.user);
+        // console.log("User Id in middleware", req.user);
         next(); 
     } catch (error) {
         console.log(error)
