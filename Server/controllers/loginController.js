@@ -97,7 +97,7 @@ export const loginUsers = async (req, res) => {
     if (user.user_deleted === 1) {
       return res
         .status(403)
-        .json({ message: "Account is deactivated. Please contact support." });
+        .json({ message: "Account is deactivated. Please contact admin." });
     }
 
     // Compare password
@@ -126,12 +126,16 @@ export const logoutUsers = (req, res) => {
 export const deleleteUserByid = async (req, res) => {
   const { user_id } = req.params;
   let user_role = req.user_role;
-
+  let admin_id = req.user_id;
+  // console.log(admin_id);
   try {
     if (user_role === "admin") {
       const user = await User.findByPk(user_id);
       if (!user) {
         return res.status(400).json({ message: "User not found" });
+      }
+      if (user.user_id === admin_id) {
+        return res.status(400).json({ message: "This user can't be deleted" });
       }
       if (user.user_deleted === 1) {
         return res.status(400).json({ message: "User is already deleted" });
@@ -287,4 +291,5 @@ export const RestoreUserbyid = async (req, res) => {
   } catch (error) {}
 };
 
+// admin email:anujsharma199812@gmail.com
 //  admin password Aa@Aa1@
