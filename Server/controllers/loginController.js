@@ -14,7 +14,7 @@ export const signupUsers = async (req, res) => {
     // Add properties to it
     schema
       .is()
-      .min(12) // Minimum length 8
+      .min(8) // Minimum length 8
       .is()
       .max(100) // Maximum length 100
       .has()
@@ -29,7 +29,7 @@ export const signupUsers = async (req, res) => {
       .is()
       .not()
       .oneOf(["Passw0rd", "Password123"]); // Blacklist these values
-    console.log(schema.validate("validPASS123"));
+    // console.log(schema.validate("validPASS123"));
     const { email, password, confirmPassword, name } = req.body;
     console.log(req.body);
 
@@ -54,10 +54,7 @@ export const signupUsers = async (req, res) => {
       return res.status(400).json({ message: "Passwords do not match" });
     }
     // Validate password strength
-    console.log(
-      schema.validate(password, { details: true }),
-      "error from schema"
-    );
+    console.log(schema.validate(password), "error from schema");
     const passwordValid = schema.validate(password);
     if (!passwordValid) {
       return res
@@ -134,6 +131,9 @@ export const deleleteUserByid = async (req, res) => {
       const user = await User.findByPk(user_id);
       if (!user) {
         return res.status(400).json({ message: "User not found" });
+      }
+      if (user.user_deleted === 1) {
+        return res.status(400).json({ message: "User is already deleted" });
       }
       await Movie.update(
         { movie_deleted: 1 },
@@ -251,3 +251,5 @@ export const getMovieandRatingByUserId = async (req, res) => {
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+//  admin password Aa@Aa1@
