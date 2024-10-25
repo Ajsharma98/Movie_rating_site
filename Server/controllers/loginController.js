@@ -125,8 +125,9 @@ export const logoutUsers = (req, res) => {
 
 export const deleleteUserByid = async (req, res) => {
   const { user_id } = req.params;
+  let user_role = req.user_role;
+
   try {
-    const user_role = req.user_role;
     if (user_role === "admin") {
       const user = await User.findByPk(user_id);
       if (!user) {
@@ -250,6 +251,40 @@ export const getMovieandRatingByUserId = async (req, res) => {
     console.error("Error fetching data:", error.message);
     return res.status(500).json({ error: "Internal Server Error" });
   }
+};
+
+export const RestoreUserbyid = async (req, res) => {
+  const { user_id } = req.params;
+  let user_role = req.user_role;
+  try {
+    console.log(user_role);
+    console.log(user_id);
+    if (user_role === "admin") {
+      const user = await User.findByPk(user_id);
+      if (user.user_deleted === 0) {
+        return res
+          .status(400)
+          .json({ message: "User is not deleted, pls check again" });
+      }
+
+      if (user.user_deleted === 1) {
+        await Movie.update(
+          { movie_deleted: 0 },
+          { where: { posted_by: user_id } }
+        );
+        await Rating.update(
+          { rating_deleted: 0 },
+          { where: { user_id: user_id } }
+        );
+        await User.update({ user_deleted: 0 }, { where: { user_id: user_id } });
+        return res.status(200).json({ message: "User successfully restored" });
+      }
+    } else {
+      return res
+        .status(401)
+        .json({ message: "You do not have access for restoring the user" });
+    }
+  } catch (error) {}
 };
 
 //  admin password Aa@Aa1@

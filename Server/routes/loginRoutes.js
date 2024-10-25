@@ -9,6 +9,7 @@ import {
   deleleteUserByid,
   getAllUser,
   getMovieandRatingByUserId,
+  RestoreUserbyid
 } from "../controllers/loginController.js"; // importing the loginController
 // Route for user login
 router.post("/login", loginUsers); // post route for the login and implementing loginUser function
@@ -22,5 +23,6 @@ router.post("/logout", logoutUsers); // post route for the logout and implementi
 router.delete("/:user_id", verifyToken, deleleteUserByid);
 router.get("/", verifyToken, getAllUser);
 router.get("/:user_id", verifyToken, getMovieandRatingByUserId);
+router.put("/:user_id", verifyToken, RestoreUserbyid)
 
 export default router; // exporting the router instance for usage in app.js
