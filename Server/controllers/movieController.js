@@ -103,10 +103,10 @@ export const deleteMovieById = async (req, res) => {
         return res.status(404).json({ message: "Movie not found" });
       }
 
-      if(movie.movie_deleted===1){
-        return res.status(404).json({message:"Movie is already deleted "})
+      if (movie.movie_deleted === 1) {
+        return res.status(404).json({ message: "Movie is already deleted " });
       }
-      
+
       await Rating.update({ rating_deleted: 1 }, { where: { movie_id: id } });
       await Movie.update(
         { movie_deleted: 1 },
