@@ -3,6 +3,7 @@
   let email = "";
   let password = "";
   let confirmPassword = "";
+  let name = "";
   let errorMessage = "";
   let successMessage = "";
   let isAuthenticated = false;
@@ -20,6 +21,7 @@
           email,
           password,
           confirmPassword,
+          name,
         }),
       });
       const result = await response.json();
@@ -70,18 +72,47 @@
     bind:value={confirmPassword}
     required
   />
-
-  <!-- Submit button -->
+  <input type="name" placeholder="name" bind:value={name} required />
   <button class="button1" type="submit">Sign Up</button>
-</form>
+  <div class="password-requirements">
+    <h4>Password Requirements:</h4>
+    <ul>
+      <li>Minimum length: <strong>8 characters</strong></li>
+      <li>Maximum length: <strong>100 characters</strong></li>
+      <li>Must contain at least <strong>1 uppercase letter</strong></li>
+      <li>Must contain at least <strong>1 lowercase letter</strong></li>
+      <li>Must have at least <strong> 2 digits</strong></li>
+      <li>
+        Should not have <strong>spaces</strong>
+      </li>
+      <li>
+        Cannot be one of the following:
+        <strong>Passw0rd</strong>
 
-<!-- Redirect to sign-in -->
+        <strong>Password123</strong>
+      </li>
+    </ul>
+  </div>
+</form>
 <div class="redirect">
   <button class="button2" on:click={signIn}>Already have an account?</button>
 </div>
 
 <style>
+  :global(html),
+  :global(body) {
+    height: 115%;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(11, 11, 13);
+  }
+  .password-requirements {
+    margin: auto;
+    font-size: small;
+    margin-bottom: 0.5rem;
+  }
   .container {
+    max-height: 90vh;
     max-width: 400px;
     margin: auto;
     padding: 2rem;
@@ -94,14 +125,14 @@
   h2 {
     text-align: center;
     color: #0e0d0d;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     font-size: 1.5rem;
   }
 
   input {
     width: 100%;
     padding: 12px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 16px;
@@ -117,9 +148,6 @@
     border-radius: 6px;
     font-size: 16px;
     cursor: pointer;
-    transition:
-      background 0.3s,
-      transform 0.3s;
   }
 
   .button1:hover {
@@ -133,7 +161,7 @@
 
   .redirect {
     text-align: center;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
   }
 
   .button2 {
