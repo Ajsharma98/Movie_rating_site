@@ -2,11 +2,13 @@
   import { Router, Route, navigate } from "svelte-routing";
   import Login from "./lib/Components/Login.svelte";
   import Register from "./lib/Components/Register.svelte";
+  import Logout from "./lib/Components/Logout.svelte";
 </script>
 
 <Router>
   <div>
     <Route path="/" component={Login} />
     <Route path="/register" component={Register} />
+    <Route path="/logout" component={Logout} />
   </div>
 </Router>
