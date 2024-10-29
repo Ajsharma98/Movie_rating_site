@@ -45,67 +45,63 @@
   };
 </script>
 
-<form class="container" on:submit={signUp}>
-  <h2>Sign Up</h2>
+<body>
+  <form class="container" on:submit={signUp}>
+    <h2>Sign Up</h2>
 
-  <!-- Display error messages -->
-  {#if errorMessage}
-    <div class="error-message">{errorMessage}</div>
-  {/if}
+    <!-- Display error messages -->
+    {#if errorMessage}
+      <div class="error-message">{errorMessage}</div>
+    {/if}
 
-  <!-- Display success messages -->
-  {#if successMessage}
-    <div class="success-message">{successMessage}</div>
-  {/if}
+    <!-- Display success messages -->
+    {#if successMessage}
+      <div class="success-message">{successMessage}</div>
+    {/if}
 
-  <!-- Input fields -->
-  <input type="email" placeholder="Email" bind:value={email} required />
-  <input
-    type="password"
-    placeholder="Password"
-    bind:value={password}
-    required
-  />
-  <input
-    type="confirm password"
-    placeholder="Confirm Password"
-    bind:value={confirmPassword}
-    required
-  />
-  <input type="name" placeholder="name" bind:value={name} required />
-  <button class="button1" type="submit">Sign Up</button>
-  <div class="password-requirements">
-    <h4>Password Requirements:</h4>
-    <ul>
-      <li>Minimum length: <strong>8 characters</strong></li>
-      <li>Maximum length: <strong>100 characters</strong></li>
-      <li>Must contain at least <strong>1 uppercase letter</strong></li>
-      <li>Must contain at least <strong>1 lowercase letter</strong></li>
-      <li>Must have at least <strong> 2 digits</strong></li>
-      <li>
-        Should not have <strong>spaces</strong>
-      </li>
-      <li>
-        Cannot be one of the following:
-        <strong>Passw0rd</strong>
+    <!-- Input fields -->
+    <input type="email" placeholder="Email" bind:value={email} required />
+    <input
+      type="password"
+      placeholder="Password"
+      bind:value={password}
+      required
+    />
+    <input
+      type="confirm password"
+      placeholder="Confirm Password"
+      bind:value={confirmPassword}
+      required
+    />
+    <input type="name" placeholder="name" bind:value={name} required />
+    <button class="button1" type="submit">Sign Up</button>
+    <div class="password-requirements">
+      <h4>Password Requirements:</h4>
+      <ul>
+        <li>Minimum length: <strong>8 characters</strong></li>
+        <li>Maximum length: <strong>100 characters</strong></li>
+        <li>Must contain at least <strong>1 uppercase letter</strong></li>
+        <li>Must contain at least <strong>1 lowercase letter</strong></li>
+        <li>Must have at least <strong> 2 digits</strong></li>
+        <li>
+          Should not have <strong>spaces</strong>
+        </li>
+        <li>
+          Cannot be one of the following:
+          <strong>Passw0rd</strong>
 
-        <strong>Password123</strong>
-      </li>
-    </ul>
-  </div>
-</form>
-<div class="redirect">
-  <button class="button2" on:click={signIn}>Already have an account?</button>
-</div>
+          <strong>Password123</strong>
+        </li>
+      </ul>
+    </div>
+    <div class="redirect">
+        <button class="button2" on:click={signIn}>Already have an account?</button>
+      </div>
+  </form>
+  
+</body>
 
 <style>
-  :global(html),
-  :global(body) {
-    height: 115%;
-    margin: 0;
-    padding: 0;
-    background-color: rgb(11, 11, 13);
-  }
   .password-requirements {
     margin: auto;
     font-size: small;

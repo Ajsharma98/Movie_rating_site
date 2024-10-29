@@ -46,40 +46,34 @@
   };
 </script>
 
-<div class="container">
-  <h2>Login</h2>
-  <input type="email" placeholder="Email" bind:value={email} />
-  <input type="password" placeholder="Password" bind:value={password} />
-  <div class="btn1Container">
-    <button class="btn1" on:click={login}>Sign in</button>
+<div class="wrapper">
+  <div class="container">
+    <h2>Login</h2>
+    <input type="email" placeholder="Email" bind:value={email} />
+    <input type="password" placeholder="Password" bind:value={password} />
+    <div class="btn1Container">
+      <button class="btn1" on:click={login}>Sign in</button>
+    </div>
+    <div class="btn2">
+      <button class="btn2" on:click={handleSignup}>Create a New account</button>
+    </div>
+    {#if successMessage}
+      <p class="success">{successMessage}</p>
+    {/if}
+    {#if errorMessage}
+      <p class="error">{errorMessage}</p>
+    {/if}
   </div>
-  <div class="btn2">
-    <button class="btn2" on:click={handleSignup}>Create a New account</button>
-  </div>
-  {#if successMessage}
-    <p class="success">{successMessage}</p>
-  {/if}
-  {#if errorMessage}
-    <p class="error">{errorMessage}</p>
-  {/if}
 </div>
 
 <style>
-  :global(html),
-  :global(body) {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: rgb(11, 11, 13);
-  }
   .container {
     max-width: 400px;
-    margin: auto;
     padding: 2rem;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    background-color: #f3ebeb;
+    background-color: #ffffff; /* White background for the form */
   }
 
   h2 {

@@ -3,6 +3,7 @@
   import Login from "./lib/Components/Login.svelte";
   import Register from "./lib/Components/Register.svelte";
   import Logout from "./lib/Components/Logout.svelte";
+  import Movies from "./lib/Components/Movies.svelte";
 </script>
 
 <Router>
@@ -10,5 +11,6 @@
     <Route path="/" component={Login} />
     <Route path="/register" component={Register} />
     <Route path="/logout" component={Logout} />
+    <Route path="/movies" component={Movies} />
   </div>
 </Router>
