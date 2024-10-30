@@ -21,13 +21,13 @@
     <div class="movie-list">
       {#each $displayedData as movie}
         <div class="movie-card">
-          <img src={movie.image} alt={movie.title} />
+          <img src={movie.img} alt={movie.title} />
           <h3>{movie.name}</h3>
           <p>Director: {movie.director_name}</p>
           <p>Writer: {movie.writers}</p>
           <p>{movie.genre}</p>
           <p>Posted_by: {movie.posted_by}</p>
-          <p>{movie.avg_rating}</p>
+          <p class="rating">{movie.avg_rating}</p>
         </div>
       {/each}
     </div>
@@ -37,21 +37,23 @@
 <Logout />
 <Pagination />
 
-<style>
-  .movie-list {
-    display: flex;
-    overflow-x: auto;
-    gap: 20px;
-    padding: 20px;
-  }
+<style> 
   h3,
   p {
     color: white;
   }
+  .rating::before {
+    content: " ★";
+    color: gold; /* You can change the star color */
+  }
+  .movie-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates three equal columns */
+    gap: 15px;
+    padding: 20px;
+  }
 
   .movie-card {
-    flex: 0 0 auto;
-    width: 200px;
     background-color: #0a0606;
     padding: 15px;
     border-radius: 10px;
