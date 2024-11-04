@@ -3,6 +3,7 @@
   import { onMount } from "svelte";
   import Logout from "../Components/Logout.svelte";
   import Pagination from "./Pagination.svelte";
+  import Addmovies from "./Addmovies.svelte";
 
   let errorMessage = "";
 
@@ -33,11 +34,11 @@
     </div>
   {/if}
 </body>
-
+<Addmovies />
 <Logout />
 <Pagination />
 
-<style> 
+<style>
   h3,
   p {
     color: white;

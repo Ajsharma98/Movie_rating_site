@@ -1,5 +1,6 @@
 <script>
   import { page, totalPages, fetchAllMovies } from "../../store";
+
   let inputPage = "";
   const handlePageInput = (e) => {
     e.preventDefault();
