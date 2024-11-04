@@ -4,6 +4,7 @@
   import Logout from "../Components/Logout.svelte";
   import Pagination from "./Pagination.svelte";
   import Addmovies from "./Addmovies.svelte";
+  import AddRating from "./AddRating.svelte";
 
   let errorMessage = "";
 
@@ -34,6 +35,7 @@
     </div>
   {/if}
 </body>
+<AddRating />
 <Addmovies />
 <Logout />
 <Pagination />

@@ -5,6 +5,7 @@
   import Logout from "./lib/Components/Logout.svelte";
   import Movies from "./lib/Components/Movies.svelte";
   import MoviesModal from "./lib/Components/moviesModal.svelte";
+  import RatingModel from "./lib/Components/RatingModel.svelte";
 </script>
 
 <Router>
@@ -14,5 +15,6 @@
     <Route path="/logout" component={Logout} />
     <Route path="/movies" component={Movies} />
     <Route path="/addmovies" component={MoviesModal} />
+    <Route path="/addrating" component={RatingModel} />
   </div>
 </Router>
