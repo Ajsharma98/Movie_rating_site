@@ -25,6 +25,7 @@
         <div class="movie-card">
           <img src={movie.img} alt={movie.title} />
           <h3>{movie.name}</h3>
+          <p>Movie_id:{movie.id}</p>
           <p>Director: {movie.director_name}</p>
           <p>Writer: {movie.writers}</p>
           <p>{movie.genre}</p>
