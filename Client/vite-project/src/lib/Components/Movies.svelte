@@ -5,6 +5,7 @@
   import Pagination from "./Pagination.svelte";
   import Addmovies from "./Addmovies.svelte";
   import AddRating from "./AddRating.svelte";
+  import Profile from "./Profile.svelte";
 
   let errorMessage = "";
 
@@ -16,6 +17,7 @@
   });
 </script>
 
+<Profile />
 <body>
   {#if errorMessage}
     <p class="error">{errorMessage}</p>

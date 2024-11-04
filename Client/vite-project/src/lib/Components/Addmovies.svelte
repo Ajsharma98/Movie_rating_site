@@ -1,5 +1,5 @@
 <script>
-  import MovieModal from "../Components/moviesModal.svelte"; // Import the modal component
+  import MovieModal from "./MoviesModal.svelte"; // Import the modal component
   let showModal = false;
 
   function openModal() {
