@@ -6,7 +6,6 @@
   import Addmovies from "./Addmovies.svelte";
   import AddRating from "./AddRating.svelte";
   import MainProfile from "./MainProfile.svelte";
-
   let errorMessage = "";
 
   onMount(() => {

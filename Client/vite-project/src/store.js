@@ -7,7 +7,7 @@ export const totalPages = writable(1);
 export const displayedData = writable([]);
 // export const page_num=writable('');
 
-export const fetchAllMovies = async () => {
+export const fetchAllMovies = async (filter) => {
   try {
     const page_num = get(page);
     const limit_val = get(limit);
