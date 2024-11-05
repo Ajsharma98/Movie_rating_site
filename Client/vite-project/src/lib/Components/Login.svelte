@@ -28,9 +28,15 @@
       const result = await response.json();
       if (response.ok) {
         localStorage.setItem("jwtToken", result.token);
+        const decodedToken = jwtDecode(result.token);
         successMessage = "Login Successful";
         isAuthenticated = true;
-        navigate("/movies");
+        if (decodedToken.role === "admin") {
+          navigate("/movie_filter");
+        } else {
+          navigate("/movies");
+        }
+
         page.set(1);
       } else {
         errorMessage =
