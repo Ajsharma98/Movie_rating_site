@@ -6,7 +6,7 @@
   import Movies from "./lib/Components/Movies.svelte";
   import MoviesModal from "./lib/Components/MoviesModal.svelte";
   import RatingModel from "./lib/Components/RatingModel.svelte";
-  import Profile from "./lib/Components/Profile.svelte";
+  import MainProfile from "./lib/Components/MainProfile.svelte";
 </script>
 
 <Router>
@@ -17,6 +17,6 @@
     <Route path="/movies" component={Movies} />
     <Route path="/addmovies" component={MoviesModal} />
     <Route path="/addrating" component={RatingModel} />
-    <Route path="/Profile" component={Profile} />
+    <Route path="/Profile" component={MainProfile} />
   </div>
 </Router>

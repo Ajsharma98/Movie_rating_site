@@ -5,7 +5,7 @@
   import Pagination from "./Pagination.svelte";
   import Addmovies from "./Addmovies.svelte";
   import AddRating from "./AddRating.svelte";
-  import Profile from "./Profile.svelte";
+  import MainProfile from "./MainProfile.svelte";
 
   let errorMessage = "";
 
@@ -17,7 +17,7 @@
   });
 </script>
 
-<Profile />
+<MainProfile />
 <body>
   {#if errorMessage}
     <p class="error">{errorMessage}</p>
@@ -54,7 +54,9 @@
   }
   .movie-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Creates three equal columns */
+
+    grid-template-columns: repeat(3, 1fr);
+    /* create three equal columns  */
     gap: 15px;
     padding: 20px;
   }
