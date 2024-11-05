@@ -1,19 +1,26 @@
 <script>
   import { onMount } from "svelte";
   import { getIdFromToken } from "../../store";
-  let user_id = "";
+
   let user = null;
   let movies = [];
   let ratings = [];
   let errorMessage = "";
 
-  // Fetch user data, movies, and ratings by user_id
   const token = localStorage.getItem("jwtToken");
 
+  //   async function getIdFromToken() {
+  //     if (!token) return null;
+  //     const payload = JSON.parse(atob(token.split(".")[1]));
+  //     return payload.user_id;
+  //   }
+
   onMount(async () => {
-    const user_id = getIdFromToken(); // Extract the user_id from JWT
+    const user_id = await getIdFromToken();
+    console.log(user_id);
+
     if (!user_id) {
-      errorMessage = "User ID not found in token.";
+      errorMessage = "Unable to retrieve user details.";
       return;
     }
 
@@ -22,19 +29,20 @@
         `http://localhost:4000/users/${user_id}?include=user,movies,ratings`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Attach the token in the Authorization header
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
-
       const result = await response.json();
+      console.log(result); // Log the result to check the API response structure
 
       if (response.ok) {
-        user = result.user;
-        movies = result.movies;
-        ratings = result.ratings;
+        user = result.user || null;
+        movies = result.movies || [];
+        ratings = result.ratings || [];
       } else {
-        errorMessage = result.error || "Error fetching profile data.";
+        errorMessage = result.error || "Failed to fetch profile data.";
       }
     } catch (error) {
       console.error("Error fetching profile:", error);
@@ -43,75 +51,75 @@
   });
 </script>
 
-<div class="profile-container">
+<div class="profile">
   {#if errorMessage}
     <p class="error">{errorMessage}</p>
   {/if}
 
   {#if user}
-    <div>
-      <h3 class="profile-title">User ID: {user.user_id}</h3>
-      <p>Name: {user.name}</p>
-    </div>
+    <h2>User Profile</h2>
+    <p><strong>User ID:</strong> {user.user_id}</p>
+    <p><strong>Name:</strong> {user.name}</p>
+    <p><strong>Email:</strong> {user.email}</p>
+  {/if}
 
-    <div class="movies">
-      <h4>Movies Posted:</h4>
-      {#if movies.length > 0}
-        {#each movies as movie}
-          <div class="movie-item">
-            <p>{movie.name}</p>
-          </div>
-        {/each}
-      {:else}
-        <p>No movies posted yet.</p>
-      {/if}
-    </div>
+  {#if movies.length > 0}
+    <h3>Movies Posted by You</h3>
+    <ul>
+      {#each movies as movie}
+        <li>
+          <strong>{movie.name}</strong> (Rating: {movie.avg_rating})
+        </li>
+      {/each}
+    </ul>
+  {/if}
 
-    <div class="ratings">
-      <h4>Ratings Added:</h4>
-      {#if ratings.length > 0}
-        {#each ratings as rating}
-          <div class="rating-item">
-            <p>Movie ID: {rating.movie_id}, Rating: {rating.rating}</p>
-          </div>
-        {/each}
-      {:else}
-        <p>No ratings added yet.</p>
-      {/if}
-    </div>
+  {#if ratings.length > 0}
+    <h3>Your Ratings</h3>
+    <ul>
+      {#each ratings as rating}
+        <li>
+          Rated movie_id: <strong>{rating.movie_id}</strong> with rating: {rating.rating}
+        </li>
+      {/each}
+    </ul>
   {/if}
 </div>
 
 <style>
-  .profile-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #e6d6d6;
-    padding: 15px;
-    border-radius: 10px;
-    color: white;
-    max-width: 300px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  .profile {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: auto;
   }
 
-  .profile-title {
-    font-size: 1.2rem;
-    font-weight: bold;
+  h2,
+  h3 {
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  p {
     margin-bottom: 10px;
+    font-size: 16px;
+    color: #555;
   }
 
-  .movies,
-  .ratings {
-    margin-top: 10px;
+  ul {
+    list-style-type: none;
+    padding-left: 0;
   }
 
-  .movie-item,
-  .rating-item {
+  li {
     margin-bottom: 8px;
+    font-size: 14px;
+    color: #444;
   }
 
   .error {
     color: red;
+    text-align: center;
   }
 </style>

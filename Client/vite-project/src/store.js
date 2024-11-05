@@ -125,6 +125,7 @@ export const getIdFromToken = async () => {
       // Extract the role from the decoded token
       const user_id = decodedToken.id;
       console.log("User_id:", user_id); // Log role
+      return user_id;
     } catch (error) {
       console.error("Error decoding token:", error);
     }
