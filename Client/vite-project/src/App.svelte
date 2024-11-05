@@ -8,6 +8,7 @@
   import RatingModel from "./lib/Components/RatingModel.svelte";
   import MainProfile from "./lib/Components/MainProfile.svelte";
   import UserDetails from "./lib/Components/UserDetails.svelte";
+  import MovieDetails from "./lib/Components/MovieDetails.svelte";
 </script>
 
 <Router>
@@ -20,5 +21,6 @@
     <Route path="/addrating" component={RatingModel} />
     <Route path="/Profile" component={MainProfile} />
     <Route path="/profile/user-details" component={UserDetails} />
+    <Route path="/profile/movie-details" component={MovieDetails} />
   </div>
 </Router>
