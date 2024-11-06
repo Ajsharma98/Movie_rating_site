@@ -6,7 +6,10 @@
   import Addmovies from "./Addmovies.svelte";
   import AddRating from "./AddRating.svelte";
   import MainProfile from "./MainProfile.svelte";
+  import AdminProfile from "./Admin/AdminProfile.svelte";
+  import { getIdFromToken } from "../../store";
   let errorMessage = "";
+  let user_id = "";
 
   onMount(() => {
     fetchAllMovies().catch((err) => {
@@ -14,9 +17,14 @@
       console.error("Error:", err);
     });
   });
+  getIdFromToken();
 </script>
 
-<MainProfile />
+{#if user_id === "admin"}
+  <AdminProfile />
+{:else}
+  <MainProfile />
+{/if}
 <body>
   {#if errorMessage}
     <p class="error">{errorMessage}</p>

@@ -32,7 +32,6 @@
         successMessage = "Login Successful";
         isAuthenticated = true;
         navigate("/movies");
-
         page.set(1);
       } else {
         errorMessage =

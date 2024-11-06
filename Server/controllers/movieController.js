@@ -28,7 +28,12 @@ export const getAllMovies = async (req, res) => {
           limit: limit, // Limit of records taken from the user input
           offset: offset, // Skips records, calculated from current page
         }));
-      }
+      } else
+        ({ count, rows } = await Movie.findAndCountAll({
+          where: { movie_deleted: 0 }, // Fetch records where movie_deleted is 0
+          limit: limit, // Limit of records taken from the user input
+          offset: offset, // Skips records, calculated from current page
+        }));
     } else {
       // Fetch movie with pagination and count total records
       ({ count, rows } = await Movie.findAndCountAll({
