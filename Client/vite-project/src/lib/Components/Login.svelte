@@ -31,11 +31,7 @@
         const decodedToken = jwtDecode(result.token);
         successMessage = "Login Successful";
         isAuthenticated = true;
-        if (decodedToken.role === "admin") {
-          navigate("/movie_filter");
-        } else {
-          navigate("/movies");
-        }
+        navigate("/movies");
 
         page.set(1);
       } else {
