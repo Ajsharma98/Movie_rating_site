@@ -26,7 +26,7 @@
 
   function NonDeletedMovies() {
     isOpen = false;
-    navigate("/Profile/Non-deletedmovies");
+    navigate("/profile/Non-deletedmovies");
   }
 
   function DeletedMovies() {

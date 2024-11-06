@@ -9,18 +9,19 @@
   import AdminProfile from "./Admin/AdminProfile.svelte";
   import { getIdFromToken } from "../../store";
   let errorMessage = "";
-  let user_id = "";
+  let Token = "";
 
-  onMount(() => {
+  onMount(async () => {
     fetchAllMovies().catch((err) => {
       errorMessage = "Failed to fetch movies";
       console.error("Error:", err);
     });
+    Token = await getIdFromToken();
+    console.log(Token.Role);
   });
-  getIdFromToken();
 </script>
 
-{#if user_id === "admin"}
+{#if Token.Role === "admin"}
   <AdminProfile />
 {:else}
   <MainProfile />
