@@ -14,6 +14,7 @@
   import AdminProfile from "./lib/Components/Admin/AdminProfile.svelte";
   import AdminDetails from "./lib/Components/Admin/AdminDetails.svelte";
   import AdminMovieDetails from "./lib/Components/Admin/AdminMovieDetails.svelte";
+  import AdminRatingDetails from "./lib/Components/Admin/AdminRatingDetails.svelte";
 </script>
 
 <Router>
@@ -32,5 +33,6 @@
     <Route path="/profile/Non-deletedmovies" component={AdminProfile} />
     <Route path="/adminprofile/user-details" component={AdminDetails} />
     <Route path="/adminprofile/movie-details" component={AdminMovieDetails} />
+    <Route path="/adminprofile/Rating-details" component={AdminRatingDetails} />
   </div>
 </Router>
