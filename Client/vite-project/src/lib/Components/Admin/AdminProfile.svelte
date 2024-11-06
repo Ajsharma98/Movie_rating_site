@@ -11,17 +11,17 @@
   // Navigate to different routes based on user choice
   function goToUserDetails() {
     isOpen = false; // Close dropdown
-    navigate("/profile/user-details"); // Navigate to the selected route
+    navigate("/adminprofile/user-details"); // Navigate to the selected route
   }
 
   function goToMoviesDetails() {
     isOpen = false;
-    navigate("/profile/movie-details");
+    navigate("/adminprofile/movie-details");
   }
 
   function goToRatingDetails() {
     isOpen = false;
-    navigate("/profile/Rating-details");
+    navigate("/adminprofile/Rating-details");
   }
 
   function NonDeletedMovies() {
