@@ -2,24 +2,26 @@ import { writable, get } from "svelte/store";
 import { jwtDecode } from "jwt-decode";
 export const page = writable(1);
 export const limit = writable(6);
-export const filter = writable(0);
+export const filter = writable("");
 export const totalPages = writable(1);
 export const displayedData = writable([]);
 // export const page_num=writable('');
 
 export const fetchAllMovies = async (filter) => {
   try {
-    const page_num = get(page);
-    const limit_val = get(limit);
-    const movie_filter = get(filter);
-    const token = localStorage.getItem("jwtToken");
+    const page_num = get(page); // Get current page value from the store
+    const limit_val = get(limit); // Get limit value from the store
+    // const movie_filter = filter; // Use passed filter value
+    const token = localStorage.getItem("jwtToken"); // Get token from localStorage
 
     if (!token) {
-      console.error("No token found, unauthorized accesss");
+      console.error("No token found, unauthorized access");
       return;
     }
+
+    // Correct the query parameter structure by replacing `$` with `&`
     const response = await fetch(
-      `http://localhost:4000/movies?page=${page_num}&limit=${limit_val}$filter=${movie_filter}`,
+      `http://localhost:4000/movies?page=${page_num}&limit=${limit_val}&filter=${filter}`,
       {
         method: "GET",
         headers: {
@@ -30,9 +32,14 @@ export const fetchAllMovies = async (filter) => {
 
     if (response.ok) {
       const data = await response.json();
-      console.log("Fetched Data:", data);
-      displayedData.set(data.Movies);
-      totalPages.set(data.totalPages);
+      displayedData.set(data.Movies); // Set fetched movies in a Svelte store
+      totalPages.set(data.totalPages); // Set total pages in a Svelte store for pagination
+      return {
+        movies: data.Movies, // Movies array
+        totalPages: data.totalPages, // Total pages for pagination
+        total: data.total, // Total number of movies
+      };
+      //   console.log("Fetched Data:", data);
     } else {
       console.error(
         "Failed to fetch data:",

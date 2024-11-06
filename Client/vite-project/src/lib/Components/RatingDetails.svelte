@@ -8,17 +8,17 @@
   const token = localStorage.getItem("jwtToken");
 
   onMount(async () => {
-    const user_id = await getIdFromToken();
-    console.log(user_id);
+    const Token = await getIdFromToken();
+    console.log(Token.user_id);
 
-    if (!user_id) {
+    if (!Token.user_id) {
       errorMessage = "Unable to retrieve user details.";
       return;
     }
 
     try {
       const response = await fetch(
-        `http://localhost:4000/users/${user_id}?include=ratings`,
+        `http://localhost:4000/users/${Token.user_id}?include=ratings`,
         {
           headers: {
             "Content-Type": "application/json",
