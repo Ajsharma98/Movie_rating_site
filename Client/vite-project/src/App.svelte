@@ -17,6 +17,7 @@
   import AdminRatingDetails from "./lib/Components/Admin/AdminRatingDetails.svelte";
   import NonDeleted from "./lib/Components/Admin/NonDeleted.svelte";
   import DeletedMovie from "./lib/Components/Admin/DeletedMovie.svelte";
+  import AllMovies from "./lib/Components/Admin/AllMovies.svelte";
 </script>
 
 <Router>
@@ -32,11 +33,11 @@
     <Route path="/movie-details" component={MovieDetails} />
     <Route path="/Rating-details" component={RatingDetails} />
     <Route path="/movie_filter" component={MovieFilter} />
-    <!-- <Route path="/profile/Non-deletedmovies" component={AdminProfile} /> -->
     <Route path="/adminprofile/user-details" component={AdminDetails} />
     <Route path="/adminprofile/movie-details" component={AdminMovieDetails} />
     <Route path="/adminprofile/Rating-details" component={AdminRatingDetails} />
     <Route path="/profile/Non-deletedmovies" component={NonDeleted} />
     <Route path="/profile/deleted-movies" component={DeletedMovie} />
+    <Route path="/profile/Allmovies-posted" component={AllMovies} />
   </div>
 </Router>
