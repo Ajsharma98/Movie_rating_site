@@ -47,6 +47,8 @@
   };
 </script>
 
+<!-- <html>
+  <body> -->
 <div class="wrapper">
   <div class="container">
     <h2>Login</h2>
@@ -67,21 +69,33 @@
   </div>
 </div>
 
+<!-- </body>
+</html> -->
+
 <style>
+  /* html,
+  global:(body) {
+    background-color: rgb(12, 1, 1);
+    margin: 0;
+  } */
+  :global(*) {
+    background-color: black;
+  }
   .container {
     max-width: 400px;
     padding: 2rem;
     border: 1px solid #ddd;
     border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(243, 235, 235, 0.1);
     background-color: #ffffff; /* White background for the form */
   }
 
   h2 {
     text-align: center;
-    color: #0e0d0d;
+    color: hsl(0, 85%, 3%);
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
+    background-color: white;
   }
 
   input {
@@ -102,6 +116,7 @@
 
   .btn1Container {
     margin-top: 1rem;
+    background-color: white;
   }
 
   .btn1 {
@@ -128,6 +143,7 @@
   .btn2 {
     text-align: center;
     margin-top: 1rem;
+    background-color: white;
   }
 
   .btn2 button {
