@@ -1,9 +1,15 @@
 <script>
   import { navigate } from "svelte-routing"; // For route navigation
   import profile from "../../../../profile.png";
+  import AlltypeofMovies from "./AlltypeofMovies.svelte";
   let isOpen = false;
+  let anotherisOpen = false;
 
   // Toggle dropdown
+
+  function anothertoggleDropdown() {
+    anotherisOpen = !anotherisOpen;
+  }
   function toggleDropdown() {
     isOpen = !isOpen;
   }
@@ -38,6 +44,10 @@
     isOpen = false;
     navigate("/profile/Allmovies-posted");
   }
+  function AlltypeMovies() {
+    isOpen = false;
+    navigate("/movies/all-movies");
+  }
 </script>
 
 <!-- Profile Icon and Dropdown -->
@@ -50,9 +60,13 @@
       <button on:click={goToUserDetails}>User Details</button>
       <button on:click={goToMoviesDetails}>Movies Posted</button>
       <button on:click={goToRatingDetails}>Ratings Posted</button>
-      <button on:click={NonDeletedMovies}>All Non deleted movies</button>
-      <button on:click={DeletedMovies}>All Deleted Movies</button>
-      <button on:click={AllMovies}>All Posted Movies</button>
+      <!-- <button on:click={AlltypeMovies}>All type of movies</button> -->
+      <button on:click={anothertoggleDropdown}>AllMovies</button>
+      {#if anotherisOpen}
+        <button on:click={NonDeletedMovies}>All Non deleted movies</button>
+        <button on:click={DeletedMovies}>All Deleted Movies</button>
+        <button on:click={AllMovies}>All Posted Movies</button>
+      {/if}
     </div>
   {/if}
 </div>

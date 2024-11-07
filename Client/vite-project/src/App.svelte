@@ -18,6 +18,7 @@
   import NonDeleted from "./lib/Components/Admin/NonDeleted.svelte";
   import DeletedMovie from "./lib/Components/Admin/DeletedMovie.svelte";
   import AllMovies from "./lib/Components/Admin/AllMovies.svelte";
+  import AlltypeofMovies from "./lib/Components/Admin/AlltypeofMovies.svelte";
 </script>
 
 <Router>
