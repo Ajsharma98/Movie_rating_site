@@ -76,7 +76,7 @@ export const fetchAllUsers = async (filter) => {
       displayedData.set(data.Users);
       totalPages.set(data.totalPages);
       return {
-        users: data.users, // Movies array
+        users: data.Users, // Movies array
         totalPages: data.totalPages, // Total pages for pagination
         total: data.total, // Total number of movies
       };

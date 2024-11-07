@@ -27,7 +27,9 @@
     <ul>
       {#each users as user}
         <li>
-          <strong>{user.name}</strong>
+          <strong
+            >Email: {user.email} Name: {user.name} with Id:{user.user_id}</strong
+          >
         </li>
       {/each}
     </ul>
