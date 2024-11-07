@@ -1,12 +1,14 @@
 <script>
   import { navigate } from "svelte-routing"; // For route navigation
   import profile from "../../../../profile.png";
-  import AlltypeofMovies from "./AlltypeofMovies.svelte";
   let isOpen = false;
   let anotherisOpen = false;
+  let DropdownIs = false;
 
   // Toggle dropdown
-
+  function Dropdown() {
+    DropdownIs = !DropdownIs;
+  }
   function anothertoggleDropdown() {
     anotherisOpen = !anotherisOpen;
   }
@@ -44,9 +46,19 @@
     isOpen = false;
     navigate("/profile/Allmovies-posted");
   }
-  function AlltypeMovies() {
-    isOpen = false;
-    navigate("/movies/all-movies");
+  function NonDeletedUsers() {
+    DropdownIs = false;
+    navigate("/users/nondeleted-users");
+  }
+
+  function DeletedUser() {
+    DropdownIs = false;
+    navigate("/users/deleted-users");
+  }
+
+  function AllUsers() {
+    DropdownIs = false;
+    navigate("/users/all-users");
   }
 </script>
 
@@ -66,6 +78,12 @@
         <button on:click={NonDeletedMovies}>All Non deleted movies</button>
         <button on:click={DeletedMovies}>All Deleted Movies</button>
         <button on:click={AllMovies}>All Posted Movies</button>
+      {/if}
+      <button on:click={Dropdown}>AllUsers</button>
+      {#if DropdownIs}
+        <button on:click={NonDeletedUsers}>All Non deleted users</button>
+        <button on:click={DeletedUser}>All Deleted users</button>
+        <button on:click={AllUsers}>All Users</button>
       {/if}
     </div>
   {/if}
