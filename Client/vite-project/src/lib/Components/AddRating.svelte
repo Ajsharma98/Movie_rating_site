@@ -1,7 +1,7 @@
 <script>
   import RatingModel from "../Components/RatingModel.svelte"; // Import the modal component
   let showModal = false;
-
+  export let movieId;
   function openModal() {
     showModal = true;
   }
@@ -20,7 +20,7 @@
 
 {#if showModal}
   <div class="modal-overlay">
-    <RatingModel on:success={handleSuccess} on:close={closeModal} />
+    <RatingModel {movieId} on:success={handleSuccess} on:close={closeModal} />
   </div>
 {/if}
 
@@ -32,6 +32,10 @@
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    /* position: absolute; */
+    /* bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%); */
   }
 
   .button:hover {

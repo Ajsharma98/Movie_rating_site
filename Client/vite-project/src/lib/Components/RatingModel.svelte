@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  export let movieId;
 
   let Rating = {
     rating: "",
@@ -16,11 +17,10 @@
     event.preventDefault();
     successMessage = "";
     errorMessage = "";
-
-    // Logging the form data before submission
+    Rating.movie_id = movieId;
     console.log("Submitting review:", Rating);
     const token = localStorage.getItem("jwtToken");
-
+    console.log(movieId);
     try {
       const response = await fetch("http://localhost:4000/rating/add", {
         method: "POST",
@@ -33,14 +33,12 @@
 
       const result = await response.json();
 
-      // Logging the response from the server
       console.log("Server Response:", result);
 
       if (response.ok) {
         successMessage = "Rating added successfully";
         dispatch("success", { detail: "Rating added successfully" });
 
-        // Clear form data after submission
         Rating = {
           rating: "",
           Review: "",
@@ -68,12 +66,12 @@
   <h2>Add Rating for movie</h2>
   <input type="text" placeholder="rating" bind:value={Rating.rating} required />
   <input type="text" placeholder="Review" bind:value={Rating.Review} required />
-  <input
+  <!-- <input
     type="Number"
     placeholder="movie_id"
     bind:value={Rating.movie_id}
     required
-  />
+  /> -->
 
   {#if successMessage}
     <p class="success-message">{successMessage}</p>
