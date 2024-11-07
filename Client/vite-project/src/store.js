@@ -62,7 +62,7 @@ export const fetchAllUsers = async (filter) => {
       return;
     }
     const response = await fetch(
-      `http://localhost:4000/users?page=${page_num}&limit=${limit_val}$filter=${filter}`,
+      `http://localhost:4000/users?page=${page_num}&limit=${limit_val}&filter=${filter}`,
       {
         method: "GET",
         headers: {

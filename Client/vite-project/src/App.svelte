@@ -19,6 +19,7 @@
   import DeletedMovie from "./lib/Components/Admin/DeletedMovie.svelte";
   import AllMovies from "./lib/Components/Admin/AllMovies.svelte";
   import NonDeletedUsers from "./lib/Components/Admin/NonDeletedUsers.svelte";
+  import DeletedUser from "./lib/Components/Admin/DeletedUser.svelte";
 </script>
 
 <Router>
@@ -41,5 +42,6 @@
     <Route path="/profile/deleted-movies" component={DeletedMovie} />
     <Route path="/profile/Allmovies-posted" component={AllMovies} />
     <Route path="/users/nondeleted-users" component={NonDeletedUsers} />
+    <Route path="/users/deleted-users" component={DeletedUser} />
   </div>
 </Router>
