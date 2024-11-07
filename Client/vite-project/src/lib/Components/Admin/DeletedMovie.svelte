@@ -1,14 +1,13 @@
 <script>
+  import { fetchAllMovies } from "../../../store";
   import { onMount } from "svelte";
-  import { fetchAllMovies } from "../../../store"; // Assume this function is correct
 
   let movies = [];
   let errorMessage = "";
   let filter;
-
   onMount(async () => {
     try {
-      const result = await fetchAllMovies((filter = 0));
+      const result = await fetchAllMovies((filter = 1));
       //   console.log(result);
       movies = result.movies;
     } catch (err) {
