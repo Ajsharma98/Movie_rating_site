@@ -107,9 +107,9 @@ export const loginUsers = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user.user_id, email: user.email, role: user.role }, 
-      process.env.JWT_SECRET, 
-      { expiresIn: "1hr" } 
+      { id: user.user_id, email: user.email, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "1hr" }
     );
 
     return res.status(200).json({ message: "Login successful", token });
@@ -187,6 +187,11 @@ export const getAllUser = async (req, res) => {
           offset: offset, // Skips records, calculated from current page
         }));
       } else if (user_filter === 2) {
+        ({ count, rows } = await User.findAndCountAll({
+          limit: limit, // Limit of records taken from the user input
+          offset: offset, // Skips records, calculated from current page
+        }));
+      } else {
         ({ count, rows } = await User.findAndCountAll({
           limit: limit, // Limit of records taken from the user input
           offset: offset, // Skips records, calculated from current page

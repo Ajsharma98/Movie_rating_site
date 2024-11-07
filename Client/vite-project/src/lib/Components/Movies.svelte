@@ -50,7 +50,6 @@
     </div>
   {/if}
 </body>
-
 <Addmovies />
 <Logout />
 <Pagination />

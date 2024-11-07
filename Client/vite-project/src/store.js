@@ -52,17 +52,17 @@ export const fetchAllMovies = async (filter) => {
   }
 };
 
-export const fetchAllUsers = async () => {
+export const fetchAllUsers = async (filter) => {
   try {
     const page_num = get(page);
     const limit_val = get(limit);
-    const token = localStorage.getItem("jwttoken");
+    const token = localStorage.getItem("jwtToken");
     if (!token) {
       console.error("No token found, unauthorized accesss");
       return;
     }
     const response = await fetch(
-      `http://localhost:4000/users?page=${page_num}&limit=${limit_val}`,
+      `http://localhost:4000/users?page=${page_num}&limit=${limit_val}$filter=${filter}`,
       {
         method: "GET",
         headers: {
@@ -75,6 +75,11 @@ export const fetchAllUsers = async () => {
       console.log("Fetched Data:", data);
       displayedData.set(data.Users);
       totalPages.set(data.totalPages);
+      return {
+        users: data.users, // Movies array
+        totalPages: data.totalPages, // Total pages for pagination
+        total: data.total, // Total number of movies
+      };
     } else {
       console.error(
         "Failed to fetch data:",
