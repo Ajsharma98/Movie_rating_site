@@ -50,6 +50,10 @@
 </div>
 
 <style>
+  input {
+    color: black;
+    background-color: white;
+  }
   .pagination-controls {
     display: flex;
     justify-content: center;
@@ -87,6 +91,7 @@
     margin: 0 12px;
     font-weight: bold;
     font-size: 1.1rem;
-    background-color: hsl(0, 12%, 89%);
+    color: white;
+    /* background-color: hsl(0, 12%, 89%); */
   }
 </style>

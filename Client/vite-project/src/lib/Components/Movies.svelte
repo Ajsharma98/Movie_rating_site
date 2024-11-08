@@ -51,8 +51,7 @@
   {/if}
 </body>
 <Addmovies />
-<Logout />
-<Pagination />
+<Pagination /><Logout />
 
 <style>
   h3,

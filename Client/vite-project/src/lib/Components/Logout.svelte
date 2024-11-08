@@ -26,8 +26,9 @@
 
 <style>
   .buttonContainer {
-    text-align: center;
-    margin-top: 20px;
+    text-align: right;
+    margin-top: 5px;
+    margin-right: 2%;
   }
 
   .btn1 {
