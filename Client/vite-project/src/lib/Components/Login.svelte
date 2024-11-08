@@ -96,7 +96,7 @@
     background-color: black;
     color: #04bb75;
     font-family: "Times New Roman", Times, serif;
-    font-style: oblique;
+    font-style: inherit;
     animation: colorchange 5s infinite;
   }
   @keyframes colorchange {
