@@ -75,7 +75,7 @@
     />
     <input type="name" placeholder="name" bind:value={name} required />
     <button class="button1" type="submit">Sign Up</button>
-    <div class="password-requirements">
+    <!-- <div class="password-requirements">
       <h4>Password Requirements:</h4>
       <ul>
         <li>Minimum length: <strong>8 characters</strong></li>
@@ -93,20 +93,25 @@
           <strong>Password123</strong>
         </li>
       </ul>
-    </div>
+    </div> -->
     <div class="redirect">
-        <button class="button2" on:click={signIn}>Already have an account?</button>
-      </div>
+      <button class="button2" on:click={signIn}>Already have an account?</button
+      >
+    </div>
   </form>
-  
 </body>
 
 <style>
-  .password-requirements {
+  div {
+    background-color: white;
+  }
+  /* .password-requirements {
     margin: auto;
     font-size: small;
     margin-bottom: 0.5rem;
-  }
+    background-color: white;
+    color: white;
+  } */
   .container {
     max-height: 90vh;
     max-width: 400px;
@@ -115,12 +120,13 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    background-color: #f3ebeb;
+    background-color: white;
   }
 
   h2 {
     text-align: center;
-    color: #0e0d0d;
+    color: #130505;
+    background-color: white;
     margin-bottom: 0.5rem;
     font-size: 1.5rem;
   }
@@ -133,6 +139,8 @@
     border-radius: 6px;
     font-size: 16px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    color: black;
   }
 
   .button1 {
@@ -144,6 +152,7 @@
     border-radius: 6px;
     font-size: 16px;
     cursor: pointer;
+    background-color: white;
   }
 
   .button1:hover {
