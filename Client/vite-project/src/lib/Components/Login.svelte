@@ -49,6 +49,9 @@
 
 <!-- <html>
   <body> -->
+<div class="heading">
+  <h1>AJ Movies Rating</h1>
+</div>
 <div class="wrapper">
   <div class="container">
     <h2>Login</h2>
@@ -89,7 +92,24 @@
     box-shadow: 0 6px 12px rgba(243, 235, 235, 0.1);
     background-color: #ffffff; /* White background for the form */
   }
-
+  .heading {
+    background-color: black;
+    color: #04bb75;
+    font-family: "Times New Roman", Times, serif;
+    font-style: oblique;
+    animation: colorchange 5s infinite;
+  }
+  @keyframes colorchange {
+    0% {
+      color: rgb(255, 0, 119);
+    }
+    50% {
+      color: rgb(183, 255, 0);
+    }
+    100% {
+      color: green;
+    }
+  }
   h2 {
     text-align: center;
     color: hsl(0, 85%, 3%);

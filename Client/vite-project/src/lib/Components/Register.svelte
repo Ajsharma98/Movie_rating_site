@@ -45,37 +45,40 @@
   };
 </script>
 
-<body>
-  <form class="container" on:submit={signUp}>
-    <h2>Sign Up</h2>
+<div class="heading">
+  <h1>AJ Movies Rating</h1>
+</div>
 
-    <!-- Display error messages -->
-    {#if errorMessage}
-      <div class="error-message">{errorMessage}</div>
-    {/if}
+<form class="container" on:submit={signUp}>
+  <h2>Sign Up</h2>
 
-    <!-- Display success messages -->
-    {#if successMessage}
-      <div class="success-message">{successMessage}</div>
-    {/if}
+  <!-- Display error messages -->
+  {#if errorMessage}
+    <div class="error-message">{errorMessage}</div>
+  {/if}
 
-    <!-- Input fields -->
-    <input type="email" placeholder="Email" bind:value={email} required />
-    <input
-      type="password"
-      placeholder="Password"
-      bind:value={password}
-      required
-    />
-    <input
-      type="confirm password"
-      placeholder="Confirm Password"
-      bind:value={confirmPassword}
-      required
-    />
-    <input type="name" placeholder="name" bind:value={name} required />
-    <button class="button1" type="submit">Sign Up</button>
-    <!-- <div class="password-requirements">
+  <!-- Display success messages -->
+  {#if successMessage}
+    <div class="success-message">{successMessage}</div>
+  {/if}
+
+  <!-- Input fields -->
+  <input type="email" placeholder="Email" bind:value={email} required />
+  <input
+    type="password"
+    placeholder="Password"
+    bind:value={password}
+    required
+  />
+  <input
+    type="confirm password"
+    placeholder="Confirm Password"
+    bind:value={confirmPassword}
+    required
+  />
+  <input type="name" placeholder="name" bind:value={name} required />
+  <button class="button1" type="submit">Sign Up</button>
+  <!-- <div class="password-requirements">
       <h4>Password Requirements:</h4>
       <ul>
         <li>Minimum length: <strong>8 characters</strong></li>
@@ -94,14 +97,30 @@
         </li>
       </ul>
     </div> -->
-    <div class="redirect">
-      <button class="button2" on:click={signIn}>Already have an account?</button
-      >
-    </div>
-  </form>
-</body>
+  <div class="redirect">
+    <button class="button2" on:click={signIn}>Already have an account?</button>
+  </div>
+</form>
 
 <style>
+  .heading {
+    background-color: black;
+    color: #04bb75;
+    font-family: "Times New Roman", Times, serif;
+    font-style: oblique;
+    animation: colorchange 5s infinite;
+  }
+  @keyframes colorchange {
+    0% {
+      color: rgb(255, 0, 119);
+    }
+    50% {
+      color: rgb(183, 255, 0);
+    }
+    100% {
+      color: green;
+    }
+  }
   div {
     background-color: white;
   }
