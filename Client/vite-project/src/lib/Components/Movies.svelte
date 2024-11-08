@@ -8,7 +8,7 @@
   import MainProfile from "./MainProfile.svelte";
   import AdminProfile from "./Admin/AdminProfile.svelte";
   import { getIdFromToken } from "../../store";
-  
+
   //   import RatingDetails from "./RatingDetails.svelte";
   let errorMessage = "";
   let Token = "";
@@ -71,6 +71,12 @@
     gap: 15px;
     padding: 20px;
   }
+  img {
+    max-width: 100%;
+    max-height: 200px; /* Adjust based on your design */
+    width: auto;
+    height: auto;
+  }
 
   .movie-card {
     background-color: #0a0606;
@@ -78,6 +84,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(239, 234, 234, 0.865);
     text-align: center;
+
     /* position: relative; */
   }
 
