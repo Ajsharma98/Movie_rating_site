@@ -37,7 +37,7 @@
         <div class="movie-card">
           <img src={movie.img} alt={movie.title} />
           <h3>{movie.name}</h3>
-          <p>Movie_id:{movie.id}</p>
+          <!-- <p>Movie_id:{movie.id}</p> -->
           <p>Director: {movie.director_name}</p>
           <p>Writer: {movie.writers}</p>
           <p>{movie.genre}</p>
@@ -58,6 +58,7 @@
   h3,
   p {
     color: white;
+    word-wrap: break-word; /* Ensures long words break and wrap */
   }
   .rating::before {
     content: " ★";
@@ -70,10 +71,12 @@
     /* create three equal columns  */
     gap: 15px;
     padding: 20px;
+    width: 1000px;
+    height: auto;
   }
   img {
     max-width: 100%;
-    max-height: 200px; /* Adjust based on your design */
+    max-height: 300px;
     width: auto;
     height: auto;
   }
@@ -115,15 +118,15 @@
     background-color: #218838;
   } */
 
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  /* .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } */
 </style>
