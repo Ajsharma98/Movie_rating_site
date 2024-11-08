@@ -97,15 +97,15 @@
     display: flex;
     align-items: center;
   }
-
   .profile-icon {
     cursor: pointer;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     overflow: hidden;
-    width: 55px;
-    height: 50px;
+    width: 65px;
+    height: auto;
+    background-color: black;
+    color: black;
   }
-
   .profile-icon img {
     width: 100%;
     height: 100%;
