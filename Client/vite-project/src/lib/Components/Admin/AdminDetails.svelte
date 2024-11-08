@@ -46,17 +46,18 @@
     <p class="error">{errorMessage}</p>
   {/if}
   {#if user}
-    <h2>User Profile</h2>
-    <p><strong>User ID:</strong> {user.user_id}</p>
-    <p><strong>Name:</strong> {user.name}</p>
-    <p><strong>Email:</strong> {user.email}</p>
+    <h2>Your Profile</h2>
+    <p><strong>User ID: </strong> {user.user_id}</p>
+    <p><strong>Name: </strong> {user.name}</p>
+    <p><strong>Email: </strong> {user.email}</p>
+    <p><strong>Role: </strong> {user.role}</p>
   {/if}
 </div>
 
 <style>
   .profile {
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: black;
     border-radius: 8px;
     max-width: 600px;
     margin: auto;
@@ -64,13 +65,15 @@
 
   h2 {
     margin-bottom: 15px;
-    color: #333;
+    color: white;
+    background-color: black;
   }
 
   p {
     margin-bottom: 10px;
     font-size: 16px;
-    color: #555;
+    color: white;
+    background-color: black;
   }
 
   .error {
