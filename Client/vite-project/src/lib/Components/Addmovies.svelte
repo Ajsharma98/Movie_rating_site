@@ -1,7 +1,7 @@
 <script>
   import MovieModal from "./MoviesModal.svelte"; // Import the modal component
   let showModal = false;
-export let movieId;
+  export let movieId;
   function openModal() {
     showModal = true;
   }

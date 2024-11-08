@@ -7,7 +7,7 @@
     writers: "",
     img: "",
     genre: "",
-    avg_rating: "",
+    // avg_rating: "",
   };
 
   let successMessage = "";
@@ -50,7 +50,7 @@
           writers: "",
           img: "",
           genre: "",
-          avg_rating: "",
+          //   avg_rating: "",
         };
       } else {
         errorMessage = result.message || "Error while submitting data";
@@ -67,11 +67,11 @@
 </script>
 
 <!-- Add button to trigger the form submission -->
-<button class="button" on:click={handleSubmit}>Add Movie</button>
+
 <button class="close-button" type="button" on:click={closeModal}>Close</button>
 
 <form class="modal" on:submit={handleSubmit}>
-  <h2>Add a New Movie</h2>
+  <h2>Add Movie</h2>
   <input
     type="text"
     placeholder="Movie Name"
@@ -102,14 +102,7 @@
     bind:value={newMovies.genre}
     required
   />
-  <input
-    type="number"
-    placeholder="Avg Rating"
-    bind:value={newMovies.avg_rating}
-    min="0"
-    max="10"
-    required
-  />
+  <button class="button" on:click={handleSubmit}>Add Movie</button>
 
   {#if successMessage}
     <p class="success-message">{successMessage}</p>
@@ -126,15 +119,21 @@
     border-radius: 10px;
     max-width: 500px;
     width: 100%;
+    align-items: center;
   }
 
   input {
     display: block;
-    width: 100%;
+    width: 90%;
     padding: 10px;
-    margin-bottom: 10px;
+    /* margin-top: 5px; */
+    margin-bottom: 20px;
+    margin-left: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    color: black;
+    background-color: white;
+    align-items: flex-end;
   }
 
   .button {
@@ -144,9 +143,9 @@
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    position: fixed;
+    position: relative;
     bottom: 10px;
-    right: 10px;
+    /* right: 10px;  */
   }
 
   .button:hover {
@@ -168,5 +167,11 @@
 
   .error-message {
     color: red;
+  }
+  h2 {
+    background-color: white;
+    font-family: "Times New Roman", Times, serif;
+    font-style: normal;
+    font-size: 30px;
   }
 </style>
