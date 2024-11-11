@@ -1,16 +1,17 @@
 <script>
   import { onMount } from "svelte";
   import { fetchAllMovies } from "../../../store"; // Assume this function is correct
-
+  import Pagination from "../Pagination.svelte";
+  import { displayedData } from "../../../store";
   let movies = [];
   let errorMessage = "";
   let filter;
 
   onMount(async () => {
     try {
-      const result = await fetchAllMovies((filter = 0));
+      await fetchAllMovies((filter = 0));
       //   console.log(result);
-      movies = result.movies;
+    //   movies = result.movies;
     } catch (err) {
       errorMessage = "Failed to fetch movies";
       console.error("Error:", err);
@@ -23,10 +24,10 @@
     <p class="error">{errorMessage}</p>
   {/if}
 
-  {#if movies.length > 0}
+  <!-- {#if movies.length > 0} -->
     <h2>All Non-Deleted Movies</h2>
     <div class="movie-list">
-      {#each movies as movie}
+      {#each $displayedData as movie}
         <div class="movie-card">
           <img src={movie.img} alt={movie.title} />
           <h3>{movie.name}</h3>
@@ -37,8 +38,9 @@
         </div>
       {/each}
     </div>
-  {/if}
+  <!-- {/if} -->
 </div>
+<Pagination />
 
 <style>
   .profile {

@@ -10,8 +10,9 @@ export const displayedData = writable([]);
 export const fetchAllMovies = async (filter) => {
   try {
     const page_num = get(page); // Get current page value from the store
-    const limit_val = get(limit); // Get limit value from the store
-    // const movie_filter = filter; // Use passed filter value
+    const limit_val = get(limit);
+    // const new_filter = get(filter); // Get limit value from the store
+    // const movie_filter = get(filter); // Use passed filter value
     const token = localStorage.getItem("jwtToken"); // Get token from localStorage
 
     if (!token) {
@@ -33,7 +34,8 @@ export const fetchAllMovies = async (filter) => {
     if (response.ok) {
       const data = await response.json();
       displayedData.set(data.Movies); // Set fetched movies in a Svelte store
-      totalPages.set(data.totalPages); // Set total pages in a Svelte store for pagination
+      totalPages.set(data.totalPages);
+      //   filter.set(data.movie_filter); // Set total pages in a Svelte store for pagination
       return {
         movies: data.Movies, // Movies array
         totalPages: data.totalPages, // Total pages for pagination

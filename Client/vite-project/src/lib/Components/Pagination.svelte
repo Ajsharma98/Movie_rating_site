@@ -13,6 +13,7 @@
   const goToPage = (newPage) => {
     if (newPage >= 1 && newPage <= $totalPages) {
       page.set(newPage);
+    //   $filter;
       fetchAllMovies();
     } else {
       console.warn("Page number out of range:", newPage);

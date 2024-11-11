@@ -1,10 +1,16 @@
 <script>
   import { navigate } from "svelte-routing"; // For route navigation
   import profile from "../../../../profile.png";
+  import { filter } from "../../../store";
+  import { fetchAllMovies } from "../../../store";
   let isOpen = false;
   let anotherisOpen = false;
   let DropdownIs = false;
 
+    // function change_filter(changefilter) {
+    //   filter.set(changefilter);
+    //   fetchAllMovies();
+    // }
   // Toggle dropdown
   function Dropdown() {
     DropdownIs = !DropdownIs;
@@ -75,9 +81,24 @@
       <!-- <button on:click={AlltypeMovies}>All type of movies</button> -->
       <button on:click={anothertoggleDropdown}>AllMovies</button>
       {#if anotherisOpen}
-        <button on:click={NonDeletedMovies}>All Non deleted movies</button>
-        <button on:click={DeletedMovies}>All Deleted Movies</button>
-        <button on:click={AllMovies}>All Posted Movies</button>
+        <button
+          on:click={() => {
+            // change_filter(0);
+            NonDeletedMovies();
+          }}>All Non deleted movies</button
+        >
+        <button
+          on:click={() => {
+            // change_filter(1);
+            DeletedMovies();
+          }}>All Deleted Movies</button
+        >
+        <button
+          on:click={() => {
+            // change_filter(2);
+            AllMovies();
+          }}>All Posted Movies</button
+        >
       {/if}
       <button on:click={Dropdown}>AllUsers</button>
       {#if DropdownIs}

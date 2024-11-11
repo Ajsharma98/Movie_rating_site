@@ -49,6 +49,7 @@ export const getAllMovies = async (req, res) => {
       Movies: rows,
       total: count,
       totalPages: Math.ceil(count / limit),
+    //   movie_filter,
     });
   } catch (error) {
     console.error("Error fetching movies:", error.message);

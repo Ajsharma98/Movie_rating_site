@@ -3,19 +3,19 @@
   let filter = "";
   const MovieFilterNonDeleted = () => {
     filter = "0";
-    fetchAllMovies(filter);
+    fetchAllMovies();
     console.log(fetchAllMovies);
   };
 
   const MovieFilterDeleted = () => {
     filter = "1";
-    fetchAllMovies(filter);
+    fetchAllMovies();
     console.log(fetchAllMovies);
   };
 
   const MovieFilterAllMovies = () => {
     filter = "2";
-    fetchAllMovies(filter);
+    fetchAllMovies();
     console.log(fetchAllMovies);
   };
 </script>
