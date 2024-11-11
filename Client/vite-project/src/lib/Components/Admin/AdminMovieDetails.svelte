@@ -55,6 +55,7 @@
           <p>Director: {movie.director_name}</p>
           <p>Writer: {movie.writers}</p>
           <p>{movie.genre}</p>
+          <p class="rating">{movie.avg_rating}</p>
         </div>
       {/each}
     </div>
@@ -68,6 +69,10 @@
     border-radius: 8px;
     max-width: auto;
     margin: auto;
+  }
+  .rating::before {
+    content: " ★";
+    color: gold; /* You can change the star color */
   }
 
   h3 {

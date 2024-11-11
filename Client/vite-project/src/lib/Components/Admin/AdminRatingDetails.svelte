@@ -46,7 +46,7 @@
     <p class="error">{errorMessage}</p>
   {/if}
   {#if ratings.length > 0}
-    <h3>Your Ratings</h3>
+    <h3>Your Rated Movie</h3>
     <ul>
       {#each ratings as rating}
         <li>
@@ -56,3 +56,12 @@
     </ul>
   {/if}
 </div>
+
+<style>
+  h3 {
+    color: white;
+  }
+  .profile {
+    color: white;
+  }
+</style>
