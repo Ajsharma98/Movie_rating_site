@@ -1,6 +1,8 @@
 <script>
   import { onMount } from "svelte";
   import { fetchAllUsers, displayedData } from "../../../store";
+  import { page, totalPages } from "../../../store";
+  import Pagination from "../Pagination.svelte";
   let users = [];
   let errorMessage = "";
   let filter;
@@ -15,6 +17,24 @@
       console.error("Error:", err);
     }
   });
+  let inputPage = "";
+  const handlePageInput = (e) => {
+    e.preventDefault();
+    const pageNum = Number(inputPage);
+    if (!isNaN(pageNum)) {
+      goToPage(pageNum);
+    }
+  };
+
+  const goToPage = (newPage) => {
+    if (newPage >= 1 && newPage <= $totalPages) {
+      page.set(newPage);
+      //   $filter;
+      fetchAllUsers((filter = 0));
+    } else {
+      console.warn("Page number out of range:", newPage);
+    }
+  };
 </script>
 
 <body>
@@ -29,6 +49,7 @@
     <table>
       <thead>
         <tr>
+          <th>id </th>
           <th>Email</th>
           <th>Name</th>
         </tr>
@@ -36,6 +57,7 @@
       <tbody>
         {#each $displayedData as user}
           <tr>
+            <td>{user.user_id}</td>
             <td>{user.email}</td>
             <td>{user.name}</td>
           </tr>
@@ -44,9 +66,38 @@
     </table>
   </div>
 </body>
+<div class="pagination-controls">
+  <button on:click={() => goToPage(1)} disabled={$page === 1}>&laquo </button>
+
+  <button on:click={() => goToPage($page - 1)} disabled={$page === 1}
+    >&lt</button
+  >
+  <span id="pageDisplay">Page {$page} of {$totalPages}</span>
+  <form on:input={handlePageInput}>
+    <input
+      type="number"
+      min="1"
+      max={$totalPages}
+      bind:value={inputPage}
+      placeholder="Go to Page"
+      aria-label="Go to Page "
+    />
+  </form>
+  <button on:click={() => goToPage($page + 1)} disabled={$page === $totalPages}>
+    &gt;
+  </button>
+
+  <button
+    on:click={() => goToPage($totalPages)}
+    disabled={$page === $totalPages}
+  >
+    &raquo;
+  </button>
+</div>
+
+<!-- <Pagination /> -->
 
 <style>
-  /* Make the table take up the whole page */
   body {
     margin: 0;
     padding: 0;
@@ -57,7 +108,7 @@
 
   table {
     width: 100%;
-    height: 100vh; /* 100% of the viewport height */
+    height: 100vh;
     border-collapse: collapse;
   }
 
@@ -82,7 +133,6 @@
     background-color: #eaeaea;
   }
 
-  /* Force each row to fill the remaining height evenly */
   tbody {
     height: 100%;
     display: block;
@@ -100,5 +150,50 @@
   }
   h3 {
     color: white;
+  }
+
+  input {
+    color: black;
+    background-color: white;
+  }
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .pagination-controls button {
+    margin: 0 8px;
+    padding: 8px 15px;
+    font-size: 1rem;
+    border: 2px solid transparent;
+    background-color: #007bff;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition:
+      background-color 0.3s,
+      border-color 0.3s;
+  }
+
+  .pagination-controls button:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+
+  .pagination-controls button:disabled {
+    background-color: #d6d6d6;
+    color: #a0a0a0;
+    cursor: not-allowed;
+    border-color: #d6d6d6;
+  }
+
+  #pageDisplay {
+    margin: 0 12px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: white;
+    /* background-color: hsl(0, 12%, 89%); */
   }
 </style>
