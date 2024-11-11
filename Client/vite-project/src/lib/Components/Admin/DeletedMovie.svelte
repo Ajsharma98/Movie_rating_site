@@ -23,36 +23,79 @@
   {/if}
 
   {#if movies.length > 0}
-    <h3>Movies Posted by You</h3>
-    <ul>
+    <h2>All Deleted Movies</h2>
+    <div class="movie-list">
       {#each movies as movie}
-        <li>
-          <strong>{movie.name}</strong> (Rating: {movie.avg_rating})
-        </li>
+        <div class="movie-card">
+          <img src={movie.img} alt={movie.title} />
+          <h3>{movie.name}</h3>
+          <p>Director: {movie.director_name}</p>
+          <p>Writer: {movie.writers}</p>
+          <p>{movie.genre}</p>
+          <p class="rating">{movie.avg_rating}</p>
+        </div>
       {/each}
-    </ul>
+    </div>
   {/if}
 </div>
 
 <style>
   .profile {
     padding: 20px;
+    background-color: black;
+    border-radius: 8px;
+    max-width: auto;
+    margin: auto;
+  }
+  .rating::before {
+    content: " ★";
+    color: gold; /* You can change the star color */
+  }
+
+  h3,
+  h2 {
+    margin-bottom: 15px;
+    color: white;
+  }
+
+  p {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: White;
   }
 
   .error {
     color: red;
   }
+  .movie-list {
+    display: grid;
 
-  ul {
-    list-style-type: none;
-    padding: 0;
+    grid-template-columns: repeat(3, 1fr);
+    /* create three equal columns  */
+    gap: 15px;
+    padding: 20px;
+    width: 1000px;
+    height: auto;
+  }
+  img {
+    max-width: 100%;
+    max-height: 300px;
+    width: auto;
+    height: auto;
   }
 
-  li {
-    margin-bottom: 10px;
+  .movie-card {
+    background-color: #0a0606;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(239, 234, 234, 0.865);
+    text-align: center;
+
+    /* position: relative; */
   }
 
-  strong {
-    font-weight: bold;
+  .movie-card img {
+    max-width: 100%;
+    border-radius: 8px;
   }
 </style>
