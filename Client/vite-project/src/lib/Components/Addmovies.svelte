@@ -14,6 +14,7 @@
     console.log(event.detail); // Handle success if needed
     closeModal();
   }
+  console.log(event);
 </script>
 
 <button class="button" on:click={openModal}>Add Movies</button>

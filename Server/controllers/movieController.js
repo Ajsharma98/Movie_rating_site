@@ -49,7 +49,7 @@ export const getAllMovies = async (req, res) => {
       Movies: rows,
       total: count,
       totalPages: Math.ceil(count / limit),
-    //   movie_filter,
+      //   movie_filter,
     });
   } catch (error) {
     console.error("Error fetching movies:", error.message);
@@ -116,7 +116,7 @@ export const deleteMovieById = async (req, res) => {
       await Rating.update({ rating_deleted: 1 }, { where: { movie_id: id } });
       await Movie.update(
         { movie_deleted: 1 },
-        { where: { posted_by: user_id } }
+        { where: { posted_by: user_id, id: id } }
       );
       return res.status(200).json({ message: "Movie deleted successfully" });
     }
