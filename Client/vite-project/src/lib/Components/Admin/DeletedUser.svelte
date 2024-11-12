@@ -42,7 +42,7 @@
       <p class="error">{errorMessage}</p>
     {/if}
 
-    <h3>Non-deleted Users</h3>
+    <h3>Deleted Users</h3>
 
     <table>
       <thead>
