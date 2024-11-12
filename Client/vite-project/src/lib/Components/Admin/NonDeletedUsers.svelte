@@ -2,7 +2,6 @@
   import { onMount } from "svelte";
   import { fetchAllUsers, displayedData } from "../../../store";
   import { page, totalPages } from "../../../store";
-  import Pagination from "../Pagination.svelte";
   let users = [];
   let errorMessage = "";
   let filter;
