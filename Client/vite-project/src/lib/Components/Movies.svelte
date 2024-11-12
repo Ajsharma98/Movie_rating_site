@@ -8,10 +8,28 @@
   import MainProfile from "./MainProfile.svelte";
   import AdminProfile from "./Admin/AdminProfile.svelte";
   import { getIdFromToken } from "../../store";
-
+  import { faTrash } from "@fortawesome/free-solid-svg-icons";
+  import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
   //   import RatingDetails from "./RatingDetails.svelte";
   let errorMessage = "";
   let Token = "";
+
+  async function deletedMovie(id) {
+    const token = localStorage.getItem("jwtToken");
+    const response = await fetch(`http://localhost:4000/movies/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Include Bearer prefix for JWT
+      },
+    });
+    if (response.ok) {
+      fetchAllMovies();
+    } else {
+      const error = await response.json();
+      console.error("Error deleting book:", error.message);
+    }
+  }
 
   onMount(async () => {
     fetchAllMovies().catch((err) => {
@@ -43,6 +61,14 @@
           <p>{movie.genre}</p>
           <p>Posted_by: {movie.posted_by}</p>
           <p class="rating">{movie.avg_rating}</p>
+          <button
+            on:click={() => deletedMovie(movie.id)}
+            class="delete"
+            aria-label="Delete"
+          >
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+
           <AddRating movieId={movie.id} />
           <!-- <button class="button" on:click={openModal}>Add Rating</button> -->
         </div>
@@ -86,6 +112,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(239, 234, 234, 0.865);
     text-align: center;
+    position: relative;
 
     /* position: relative; */
   }
@@ -99,7 +126,17 @@
     color: red;
     text-align: center;
   }
-
+  .delete {
+    position: absolute;
+    top: 10px;
+    right: 1px;
+    background-color: transparent;
+    border: none;
+    color: red;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
   /* .button {
     padding: 10px 20px;
     background-color: #28a745;

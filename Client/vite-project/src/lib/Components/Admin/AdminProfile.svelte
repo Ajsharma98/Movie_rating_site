@@ -7,10 +7,10 @@
   let anotherisOpen = false;
   let DropdownIs = false;
 
-    // function change_filter(changefilter) {
-    //   filter.set(changefilter);
-    //   fetchAllMovies();
-    // }
+  // function change_filter(changefilter) {
+  //   filter.set(changefilter);
+  //   fetchAllMovies();
+  // }
   // Toggle dropdown
   function Dropdown() {
     DropdownIs = !DropdownIs;
@@ -104,7 +104,7 @@
       {#if DropdownIs}
         <button on:click={NonDeletedUsers}>All Non deleted users</button>
         <button on:click={DeletedUser}>All Deleted users</button>
-        <button on:click={AllUsers}>All Users</button>
+        <button on:click={AllUsers}>All Type of Users</button>
       {/if}
     </div>
   {/if}
