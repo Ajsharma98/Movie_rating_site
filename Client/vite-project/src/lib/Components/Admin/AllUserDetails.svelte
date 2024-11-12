@@ -41,7 +41,7 @@
     {#if errorMessage}
       <p class="error">{errorMessage}</p>
     {/if}
-    <h3>Deleted Users</h3>
+    <h3>All Type of Users</h3>
 
     <table>
       <thead>
