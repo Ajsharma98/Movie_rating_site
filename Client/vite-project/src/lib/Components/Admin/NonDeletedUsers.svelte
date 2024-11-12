@@ -2,6 +2,8 @@
   import { onMount } from "svelte";
   import { fetchAllUsers, displayedData } from "../../../store";
   import { page, totalPages } from "../../../store";
+  import { faTrash } from "@fortawesome/free-solid-svg-icons";
+  import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
   let users = [];
   let errorMessage = "";
   let filter;
@@ -24,6 +26,23 @@
       goToPage(pageNum);
     }
   };
+
+  async function deletedUser(user_id) {
+    const token = localStorage.getItem("jwtToken");
+    const response = await fetch(`http://localhost:4000/users/${user_id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Include Bearer prefix for JWT
+      },
+    });
+    if (response.ok) {
+      fetchAllUsers();
+    } else {
+      const error = await response.json();
+      console.error("Error deleting book:", error.message);
+    }
+  }
 
   const goToPage = (newPage) => {
     if (newPage >= 1 && newPage <= $totalPages) {
@@ -51,6 +70,7 @@
           <th>id </th>
           <th>Email</th>
           <th>Name</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -59,6 +79,15 @@
             <td>{user.user_id}</td>
             <td>{user.email}</td>
             <td>{user.name}</td>
+            <td
+              ><button
+                on:click={() => deletedUser(user.user_id)}
+                class="delete"
+                aria-label="Delete"
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </button></td
+            >
           </tr>
         {/each}
       </tbody>
@@ -194,5 +223,14 @@
     font-size: 1.1rem;
     color: white;
     /* background-color: hsl(0, 12%, 89%); */
+  }
+
+  .delete {
+    background-color: transparent;
+    border: none;
+    color: red;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
   }
 </style>

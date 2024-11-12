@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { fetchAllUsers, displayedData } from "../../../store";
   import { page, totalPages } from "../../../store";
+
   let users = [];
   let errorMessage = "";
   let filter;
@@ -16,6 +17,9 @@
       console.error("Error:", err);
     }
   });
+
+
+
   let inputPage = "";
   const handlePageInput = (e) => {
     e.preventDefault();
@@ -57,6 +61,7 @@
             <td>{user.user_id}</td>
             <td>{user.email}</td>
             <td>{user.name}</td>
+           
           </tr>
         {/each}
       </tbody>
@@ -191,4 +196,5 @@
     color: white;
     /* background-color: hsl(0, 12%, 89%); */
   }
+ 
 </style>
