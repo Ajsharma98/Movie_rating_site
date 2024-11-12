@@ -16,6 +16,23 @@
       console.error("Error:", err);
     }
   });
+  async function restoreUser(user_id) {
+    const token = localStorage.getItem("jwtToken");
+    const response = await fetch(`http://localhost:4000/users/${user_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Include Bearer prefix for JWT
+      },
+    });
+    if (response.ok) {
+      fetchAllUsers();
+    } else {
+      const error = await response.json();
+      console.error("Error Restoring book:", error.message);
+    }
+  }
+
   let inputPage = "";
   const handlePageInput = (e) => {
     e.preventDefault();
@@ -50,6 +67,7 @@
           <th>id </th>
           <th>Email</th>
           <th>Name</th>
+          <th>Restore</th>
         </tr>
       </thead>
       <tbody>
@@ -58,6 +76,15 @@
             <td>{user.user_id}</td>
             <td>{user.email}</td>
             <td>{user.name}</td>
+            <td
+              ><button
+                on:click={() => restoreUser(user.user_id)}
+                class="Restore"
+                aria-label="Restore"
+              >
+                Restore User
+              </button></td
+            >
           </tr>
         {/each}
       </tbody>
@@ -191,5 +218,8 @@
     font-size: 1.1rem;
     color: white;
     /* background-color: hsl(0, 12%, 89%); */
+  }
+  .Restore {
+    background-color: green;
   }
 </style>
