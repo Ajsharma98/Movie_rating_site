@@ -26,7 +26,7 @@
       },
     });
     if (response.ok) {
-      fetchAllUsers();
+      fetchAllUsers((filter = 1));
     } else {
       const error = await response.json();
       console.error("Error Restoring book:", error.message);
