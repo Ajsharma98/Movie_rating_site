@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { fetchAllMovies } from "../../store";
 
   let newMovies = {
     name: "",
@@ -17,6 +18,7 @@
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     successMessage = "";
     errorMessage = "";
 
@@ -41,6 +43,7 @@
 
       if (response.ok) {
         successMessage = "Movie added successfully";
+        fetchAllMovies();
         dispatch("success", { detail: "Movie added successfully" });
 
         // Clear form data after submission

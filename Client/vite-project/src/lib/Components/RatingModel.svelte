@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { fetchAllMovies } from "../../store";
   export let movieId;
 
   let Rating = {
@@ -37,6 +38,7 @@
 
       if (response.ok) {
         successMessage = "Rating added successfully";
+        fetchAllMovies();
         dispatch("success", { detail: "Rating added successfully" });
 
         Rating = {
