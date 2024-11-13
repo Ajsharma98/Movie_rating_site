@@ -10,6 +10,7 @@
   import { getIdFromToken } from "../../store";
   import { faTrash } from "@fortawesome/free-solid-svg-icons";
   import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
+  import FilterMoviebyid from "./filterMoviebyid.svelte";
   //   import RatingDetails from "./RatingDetails.svelte";
   let errorMessage = "";
   let Token = "";
@@ -41,6 +42,7 @@
   });
 </script>
 
+<FilterMoviebyid />
 {#if Token.Role === "admin"}
   <AdminProfile />
 {:else}

@@ -89,8 +89,10 @@
     padding: 2rem;
     border: 1px solid #ddd;
     border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(243, 235, 235, 0.1);
-    background-color: #ffffff; /* White background for the form */
+    box-shadow: 0 6px 12px rgba(244, 240, 240, 0.1);
+    background-color: #ffffff;
+    color: white;
+    /* White background for the form */
   }
   .heading {
     background-color: black;
@@ -126,6 +128,7 @@
     border-radius: 6px;
     font-size: 16px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
   }
 
   input:focus {
@@ -192,5 +195,6 @@
     color: red;
     text-align: center;
     margin-top: 1rem;
+    background-color: white;
   }
 </style>
