@@ -104,6 +104,7 @@ export const deleteMovieById = async (req, res) => {
   try {
     const original_user = await Movie.findByPk(id);
     // console.log(original_user);
+    console.log(user_role);
     if (user_role === "admin" || user_id === original_user.posted_by) {
       const movie = await Movie.findByPk(id);
       if (!movie) {
@@ -115,10 +116,7 @@ export const deleteMovieById = async (req, res) => {
       }
 
       await Rating.update({ rating_deleted: 1 }, { where: { movie_id: id } });
-      await Movie.update(
-        { movie_deleted: 1 },
-        { where: { posted_by: user_id, id: id } }
-      );
+      await Movie.update({ movie_deleted: 1 }, { where: { id: id } });
       return res.status(200).json({ message: "Movie deleted successfully" });
     }
   } catch (error) {

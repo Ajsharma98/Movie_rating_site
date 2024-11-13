@@ -1,16 +1,15 @@
 <script>
-  import { getIdFromToken } from "../../store";
-  let movieId = "";
-  let filteredMovie = "";
+  let movieName = "";
+  let filteredMovie = {};
   let showMovie = false;
 
-  function showMoviefilter() {
+  async function showMoviefilter() {
     showMovie = false;
   }
-  async function filterMovieById(id) {
-    id = movieId;
+  async function filterMovieById() {
+    const name = movieName;
     const token = localStorage.getItem("jwtToken");
-    const response = await fetch(`http://localhost:4000/movies/${id}`, {
+    const response = await fetch(`http://localhost:4000/movies/${name}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -19,11 +18,13 @@
     });
     if (response.ok) {
       const movie = await response.json();
-      filteredMovie = movie;
+      console.log(movie);
+      filteredMovie = movie[0];
       showMovie = true;
+      //   console.log(filteredMovie);
     } else {
       const error = await response.json();
-      console.error("Error fetching movie by id:", error.message);
+      console.error("Error fetching movie by name:", error.message);
     }
   }
 </script>
@@ -31,9 +32,9 @@
 <div class="movie_filter">
   <input
     class="input"
-    type="number"
-    placeholder="movie_id"
-    bind:value={movieId}
+    type="text"
+    placeholder="movie_name"
+    bind:value={movieName}
   />
 
   <button class="button" on:click={filterMovieById}>search</button>
@@ -41,6 +42,7 @@
 
 {#if filteredMovie && showMovie}
   <div class="movie-card">
+    <p>{filteredMovie.id}</p>
     <img src={filteredMovie.img} alt={filteredMovie.title} />
     <h3>{filteredMovie.name}</h3>
     <!-- <p>Movie_id:{movie.id}</p> -->
