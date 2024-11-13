@@ -1,5 +1,6 @@
 import Movie from "../Model/Movie.js";
 import Rating from "../Model/Rating.js";
+import { Op } from "sequelize";
 export const getAllMovies = async (req, res) => {
   // exporting the getAllMovies function for usage in other file
   try {
@@ -130,11 +131,11 @@ export const deleteMovieById = async (req, res) => {
 };
 
 export const getMoviesById = async (req, res) => {
-  const { id } = req.params;
+  const { name } = req.params;
   try {
-    const movie = await Movie.findOne({
+    const movie = await Movie.findAll({
       where: {
-        id: id,
+        name: { [Op.iLike]: `%${name}%` },
         movie_deleted: 0,
       },
     });
@@ -143,7 +144,7 @@ export const getMoviesById = async (req, res) => {
     }
     return res.status(200).json(movie);
   } catch (error) {
-    console.error("Error fetching movie by id:", error.message);
+    console.error("Error fetching movie by name:", error.message);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 };
