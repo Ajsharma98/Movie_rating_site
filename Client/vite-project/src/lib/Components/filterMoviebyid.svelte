@@ -1,5 +1,5 @@
 <script>
-  let movieName = "";
+  let search = "";
   let filteredMovie = {};
   let showMovie = false;
 
@@ -7,9 +7,9 @@
     showMovie = false;
   }
   async function filterMovieById() {
-    const name = movieName;
+    const q = search;
     const token = localStorage.getItem("jwtToken");
-    const response = await fetch(`http://localhost:4000/movies/${name}`, {
+    const response = await fetch(`http://localhost:4000/movies/${q}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -17,9 +17,9 @@
       },
     });
     if (response.ok) {
-      const movie = await response.json();
-      console.log(movie);
-      filteredMovie = movie[0];
+      const movies = await response.json();
+      console.log(movies);
+      filteredMovie = movies[0];
       showMovie = true;
       //   console.log(filteredMovie);
     } else {
@@ -33,11 +33,12 @@
   <input
     class="input"
     type="text"
-    placeholder="movie_name"
-    bind:value={movieName}
+    placeholder="search "
+    on:input={filterMovieById}
+    bind:value={search}
   />
 
-  <button class="button" on:click={filterMovieById}>search</button>
+  <!-- <button class="button" on:click={filterMovieById}>search</button> -->
 </div>
 
 {#if filteredMovie && showMovie}
