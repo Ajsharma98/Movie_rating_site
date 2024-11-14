@@ -22,6 +22,7 @@
       filteredMovie = movies[0];
       showMovie = true;
       //   console.log(filteredMovie);
+    //   hgfhg
     } else {
       const error = await response.json();
       console.error("Error fetching movie by name:", error.message);
