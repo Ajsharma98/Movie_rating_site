@@ -11,9 +11,11 @@
   import { faTrash } from "@fortawesome/free-solid-svg-icons";
   import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
   import FilterMoviebyid from "./filterMoviebyid.svelte";
+  import { navigate } from "svelte-routing";
   //   import RatingDetails from "./RatingDetails.svelte";
   let errorMessage = "";
   let Token = "";
+  let search = "";
 
   async function deletedMovie(id) {
     const token = localStorage.getItem("jwtToken");
@@ -40,9 +42,19 @@
     Token = await getIdFromToken();
     console.log(Token.Role);
   });
+  function handleGlobalSearch() {
+    navigate("/filteredMovie");
+  }
 </script>
 
-<FilterMoviebyid />
+<!-- <FilterMoviebyid bind:this={filterMovieComponent} /> -->
+<FilterMoviebyid {search} />
+<div class="movie_filter">
+  <input class="input" type="text" placeholder="search " bind:value={search} />
+
+  <button class="button" on:click={handleGlobalSearch}>search</button>
+</div>
+
 {#if Token.Role === "admin"}
   <AdminProfile />
 {:else}
@@ -167,4 +179,28 @@
         justify-content: center;
         align-items: center;
     } */
+  .movie_filter {
+    color: white;
+  }
+  .input {
+    background-color: white;
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    border-radius: 5px;
+  }
+
+  .button {
+    color: black;
+    background-color: white;
+    position: absolute;
+    top: 10px;
+    left: 200px;
+    height: 15px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+  }
 </style>

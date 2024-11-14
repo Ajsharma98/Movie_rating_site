@@ -21,6 +21,7 @@
   import NonDeletedUsers from "./lib/Components/Admin/NonDeletedUsers.svelte";
   import DeletedUser from "./lib/Components/Admin/DeletedUser.svelte";
   import AllUserDetails from "./lib/Components/Admin/AllUserDetails.svelte";
+  import FilterMoviebyid from "./lib/Components/filterMoviebyid.svelte";
 </script>
 
 <Router>
@@ -45,5 +46,6 @@
     <Route path="/users/nondeleted-users" component={NonDeletedUsers} />
     <Route path="/users/deleted-users" component={DeletedUser} />
     <Route path="/users/all-users" component={AllUserDetails} />
+    <Route path="/filteredMovie" component={FilterMoviebyid} />
   </div>
 </Router>

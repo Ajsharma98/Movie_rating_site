@@ -1,12 +1,12 @@
 <script>
-  let search = "";
+  export let search = "";
   let filteredMovie = {};
   let showMovie = false;
 
   async function showMoviefilter() {
     showMovie = false;
   }
-  async function filterMovieById() {
+  export async function filterMovieById() {
     const q = search;
     const token = localStorage.getItem("jwtToken");
     const response = await fetch(`http://localhost:4000/movies/${q}`, {
@@ -29,7 +29,7 @@
   }
 </script>
 
-<div class="movie_filter">
+<!-- <div class="movie_filter">
   <input
     class="input"
     type="text"
@@ -39,7 +39,6 @@
   />
 
   <!-- <button class="button" on:click={filterMovieById}>search</button> -->
-</div>
 
 {#if filteredMovie && showMovie}
   <div class="movie-card">
