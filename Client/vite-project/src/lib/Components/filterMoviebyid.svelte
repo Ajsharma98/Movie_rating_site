@@ -1,12 +1,24 @@
 <script>
-  export let search = "";
-  let filteredMovie = {};
+  let search;
+  let filteredMovie = [];
   let showMovie = false;
-
+  let queryString;
+  import { onMount } from "svelte";
+  import { navigate } from "svelte-routing";
+  // $: console.log(filteredMovie, "filteredMovies");
   async function showMoviefilter() {
     showMovie = false;
+    navigate("/movies");
   }
-  export async function filterMovieById() {
+
+  // $: if (search) {
+  //   filterMovieById();
+  // }
+
+  onMount(async function () {
+    const params = new URLSearchParams(window.location.search);
+    search = params.get("query") || "";
+    console.log(search, "value of search");
     const q = search;
     const token = localStorage.getItem("jwtToken");
     const response = await fetch(`http://localhost:4000/movies/${q}`, {
@@ -19,15 +31,15 @@
     if (response.ok) {
       const movies = await response.json();
       console.log(movies);
-      filteredMovie = movies[0];
+      filteredMovie = movies;
       showMovie = true;
       //   console.log(filteredMovie);
-    //   hgfhg
+      //   asfas
     } else {
       const error = await response.json();
       console.error("Error fetching movie by name:", error.message);
     }
-  }
+  });
 </script>
 
 <!-- <div class="movie_filter">
@@ -43,18 +55,24 @@
 
 {#if filteredMovie && showMovie}
   <div class="movie-card">
-    <p>{filteredMovie.id}</p>
-    <img src={filteredMovie.img} alt={filteredMovie.title} />
-    <h3>{filteredMovie.name}</h3>
-    <!-- <p>Movie_id:{movie.id}</p> -->
-    <p>Director: {filteredMovie.director_name}</p>
-    <p>Writer: {filteredMovie.writers}</p>
-    <p>{filteredMovie.genre}</p>
-    <p>Posted_by: {filteredMovie.posted_by}</p>
-    <p class="rating">{filteredMovie.avg_rating}</p>
-    <button class="close-button" on:click={showMoviefilter}>✖</button>
+    {#each filteredMovie as movie}
+      <p>{movie.id}</p>
+      <img src={movie.img} alt={movie.title} />
+      <h3>{movie.name}</h3>
+      <!-- <p>Movie_id:{movie.id}</p> -->
+      <p>Director: {movie.director_name}</p>
+      <p>Writer: {movie.writers}</p>
+      <p>{movie.genre}</p>
+      <p>Posted_by: {movie.posted_by}</p>
+      <p class="rating">{movie.avg_rating}</p>
+      <button class="close-button" on:click={showMoviefilter}>✖</button>
+    {/each}
   </div>
 {/if}
+
+<!-- $: if (search){
+  filterMovieById()
+} -->
 
 <style>
   .input {
