@@ -17,6 +17,7 @@
   let Token = "";
   let search = "";
 
+  // Reset the flag when needed
   async function deletedMovie(id) {
     const token = localStorage.getItem("jwtToken");
     const response = await fetch(`http://localhost:4000/movies/${id}`, {
@@ -43,18 +44,19 @@
     console.log(Token.Role);
   });
   function handleGlobalSearch() {
-    navigate("/filteredMovie");
+    navigate(`/filteredMovie?query=${encodeURIComponent(search)}`);
   }
+  // console.log(filtersearch);
 </script>
 
 <!-- <FilterMoviebyid bind:this={filterMovieComponent} /> -->
-<FilterMoviebyid {search} />
-<div class="movie_filter">
-  <input class="input" type="text" placeholder="search " bind:value={search} />
 
-  <button class="button" on:click={handleGlobalSearch}>search</button>
+<div class="movie_filter">
+  <input class="input" type="text" placeholder="search" bind:value={search} />
 </div>
 
+<button class="button" on:click={handleGlobalSearch}>search</button>
+<!-- <FilterMoviebyid {search} /> -->
 {#if Token.Role === "admin"}
   <AdminProfile />
 {:else}
@@ -126,9 +128,8 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(239, 234, 234, 0.865);
     text-align: center;
-    position: relative;
 
-    /* position: relative; */
+    position: relative;
   }
 
   .movie-card img {
