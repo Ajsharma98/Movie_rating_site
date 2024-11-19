@@ -1,6 +1,7 @@
 <script>
   import { onMount } from "svelte";
-  import { fetchAllUsers, displayedData } from "../../../store";
+  import { displayedData } from "../../../store";
+  import { fetchAllUsers } from "../../../Functions/fetchUsers";
   import { page, totalPages } from "../../../store";
   import { faTrash } from "@fortawesome/free-solid-svg-icons";
   import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
