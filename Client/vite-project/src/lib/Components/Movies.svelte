@@ -8,7 +8,7 @@
   import AddRating from "./AddRating.svelte";
   import MainProfile from "./MainProfile.svelte";
   import AdminProfile from "./Admin/AdminProfile.svelte";
-  import { getIdFromToken } from "../../store";
+  import { getIdFromToken } from "../../Functions/fetchIdFromToken";
   import { faTrash } from "@fortawesome/free-solid-svg-icons";
   import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
   import FilterMoviebyid from "./filterMoviebyid.svelte";

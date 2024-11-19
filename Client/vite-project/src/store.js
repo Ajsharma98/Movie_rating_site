@@ -7,47 +7,6 @@ export const totalPages = writable(1);
 export const displayedData = writable([]);
 // export const page_num=writable('');
 
-
-export const fetchAllUsers = async (filter) => {
-  try {
-    const page_num = get(page);
-    const limit_val = get(limit);
-    const token = localStorage.getItem("jwtToken");
-    if (!token) {
-      console.error("No token found, unauthorized accesss");
-      return;
-    }
-    const response = await fetch(
-      `http://localhost:4000/users?page=${page_num}&limit=${limit_val}&filter=${filter}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Fetched Data:", data);
-      displayedData.set(data.Users);
-      totalPages.set(data.totalPages);
-      return {
-        users: data.Users, // Movies array
-        totalPages: data.totalPages, // Total pages for pagination
-        total: data.total, // Total number of movies
-      };
-    } else {
-      console.error(
-        "Failed to fetch data:",
-        response.status,
-        response.statusText
-      );
-    }
-  } catch (error) {
-    console.error("Fetch error:", error);
-  }
-};
-
 export const fetchAllRatings = async () => {
   try {
     const page_num = get(page);
