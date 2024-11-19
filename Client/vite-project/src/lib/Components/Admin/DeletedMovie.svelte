@@ -8,11 +8,10 @@
   let movies = [];
   let errorMessage = "";
   let filter;
+  fetchAllMovies((filter = 1));
   onMount(async () => {
     try {
       await fetchAllMovies((filter = 1));
-      //   console.log(result);
-      //   movies = result.movies;
     } catch (err) {
       errorMessage = "Failed to fetch movies";
       console.error("Error:", err);

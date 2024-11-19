@@ -46,6 +46,7 @@
   function DeletedMovies() {
     isOpen = false;
     navigate("/profile/deleted-movies");
+  
   }
 
   function AllMovies() {
