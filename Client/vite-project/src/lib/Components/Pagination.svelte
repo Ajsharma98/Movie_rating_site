@@ -1,5 +1,6 @@
 <script>
-  import { page, totalPages, fetchAllMovies } from "../../store";
+  import { page, totalPages } from "../../store";
+  import { fetchAllMovies } from "./../../Functions/fetchMovies";
 
   let inputPage = "";
   const handlePageInput = (e) => {

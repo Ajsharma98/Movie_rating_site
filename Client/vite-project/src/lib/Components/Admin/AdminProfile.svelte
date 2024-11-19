@@ -1,8 +1,6 @@
 <script>
   import { navigate } from "svelte-routing"; // For route navigation
   import profile from "../../../../profile.png";
-  import { filter } from "../../../store";
-  import { fetchAllMovies } from "../../../store";
   let isOpen = false;
   let anotherisOpen = false;
   let DropdownIs = false;

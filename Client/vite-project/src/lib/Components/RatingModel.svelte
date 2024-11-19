@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { fetchAllMovies } from "../../store";
+  import { fetchAllMovies } from "./../../Functions/fetchMovies";
   export let movieId;
 
   let Rating = {
