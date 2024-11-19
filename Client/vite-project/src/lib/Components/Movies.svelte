@@ -1,5 +1,6 @@
 <script>
-  import { displayedData, fetchAllMovies } from "../../store";
+  import { fetchAllMovies } from "./../../Functions/fetchMovies";
+  import { displayedData } from "./../../store";
   import { onMount } from "svelte";
   import Logout from "../Components/Logout.svelte";
   import Pagination from "./Pagination.svelte";
