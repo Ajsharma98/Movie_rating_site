@@ -8,6 +8,7 @@
   let movies = [];
   let errorMessage = "";
   let filter;
+  fetchAllMovies((filter = 2));
   onMount(async () => {
     try {
       await fetchAllMovies((filter = 2));

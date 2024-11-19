@@ -6,12 +6,12 @@
   let movies = [];
   let errorMessage = "";
   let filter;
-
+  fetchAllMovies((filter = 0));
   onMount(async () => {
     try {
       await fetchAllMovies((filter = 0));
       //   console.log(result);
-    //   movies = result.movies;
+      //   movies = result.movies;
     } catch (err) {
       errorMessage = "Failed to fetch movies";
       console.error("Error:", err);
@@ -25,19 +25,19 @@
   {/if}
 
   <!-- {#if movies.length > 0} -->
-    <h2>All Non-Deleted Movies</h2>
-    <div class="movie-list">
-      {#each $displayedData as movie}
-        <div class="movie-card">
-          <img src={movie.img} alt={movie.title} />
-          <h3>{movie.name}</h3>
-          <p>Director: {movie.director_name}</p>
-          <p>Writer: {movie.writers}</p>
-          <p>{movie.genre}</p>
-          <p class="rating">{movie.avg_rating}</p>
-        </div>
-      {/each}
-    </div>
+  <h2>All Non-Deleted Movies</h2>
+  <div class="movie-list">
+    {#each $displayedData as movie}
+      <div class="movie-card">
+        <img src={movie.img} alt={movie.title} />
+        <h3>{movie.name}</h3>
+        <p>Director: {movie.director_name}</p>
+        <p>Writer: {movie.writers}</p>
+        <p>{movie.genre}</p>
+        <p class="rating">{movie.avg_rating}</p>
+      </div>
+    {/each}
+  </div>
   <!-- {/if} -->
 </div>
 <Pagination />
