@@ -6,7 +6,7 @@
   let users = [];
   let errorMessage = "";
   let filter;
-
+  fetchAllUsers((filter = 2));
   onMount(async () => {
     try {
       const result = await fetchAllUsers((filter = 2));
@@ -17,8 +17,6 @@
       console.error("Error:", err);
     }
   });
-
-
 
   let inputPage = "";
   const handlePageInput = (e) => {
@@ -61,7 +59,6 @@
             <td>{user.user_id}</td>
             <td>{user.email}</td>
             <td>{user.name}</td>
-           
           </tr>
         {/each}
       </tbody>
@@ -196,5 +193,4 @@
     color: white;
     /* background-color: hsl(0, 12%, 89%); */
   }
- 
 </style>

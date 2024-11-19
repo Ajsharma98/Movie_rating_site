@@ -7,7 +7,7 @@
   let users = [];
   let errorMessage = "";
   let filter;
-
+  fetchAllUsers((filter = 0));
   onMount(async () => {
     try {
       const result = await fetchAllUsers((filter = 0));
