@@ -143,12 +143,12 @@
   }
   .delete {
     position: absolute;
-    top: 10px;
-    right: 1px;
+    top: 2px;
+    right: 0px;
     background-color: transparent;
     border: none;
     color: red;
-    font-size: 24px;
+    font-size: 17px;
     cursor: pointer;
     transition: transform 0.2s ease;
   }

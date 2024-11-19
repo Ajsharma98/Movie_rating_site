@@ -5,15 +5,10 @@
   let queryString;
   import { onMount } from "svelte";
   import { navigate } from "svelte-routing";
-  // $: console.log(filteredMovie, "filteredMovies");
   async function showMoviefilter() {
     showMovie = false;
     navigate("/movies");
   }
-
-  // $: if (search) {
-  //   filterMovieById();
-  // }
 
   onMount(async function () {
     const params = new URLSearchParams(window.location.search);
