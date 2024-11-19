@@ -13,7 +13,7 @@
   const goToPage = (newPage) => {
     if (newPage >= 1 && newPage <= $totalPages) {
       page.set(newPage);
-    //   $filter;
+      //   $filter;
       fetchAllMovies();
     } else {
       console.warn("Page number out of range:", newPage);
@@ -60,12 +60,13 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    font-size: 1px;
   }
 
   .pagination-controls button {
     margin: 0 8px;
     padding: 8px 15px;
-    font-size: 1rem;
+    font-size: 0.5rem;
     border: 2px solid transparent;
     background-color: #007bff;
     color: white;
@@ -91,8 +92,11 @@
   #pageDisplay {
     margin: 0 12px;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 12px;
     color: white;
     /* background-color: hsl(0, 12%, 89%); */
+  }
+  input {
+    font-size: 10px;
   }
 </style>
