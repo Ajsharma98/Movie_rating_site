@@ -1,5 +1,7 @@
 <script>
   import { navigate } from "svelte-routing";
+  import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+  import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
   export const logout = async () => {
     const response = await fetch("http://localhost:4000/users/logout", {
       method: "POST",
@@ -21,7 +23,9 @@
 </script>
 
 <div class="buttonContainer">
-  <button class="btn1" on:click={logout}>Log Out</button>
+  <button class="btn1" on:click={logout}
+    ><FontAwesomeIcon icon={faSignOutAlt} class="logout-icon" /></button
+  >
 </div>
 
 <style>
@@ -32,7 +36,7 @@
   }
 
   .btn1 {
-    background-color: #ff4d4d;
+    background-color: black;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -43,6 +47,6 @@
   }
 
   .btn1:hover {
-    background-color: #ff1a1a;
+    background-color: black;
   }
 </style>

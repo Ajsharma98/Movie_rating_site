@@ -13,6 +13,8 @@
   import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
   import FilterMoviebyid from "./filterMoviebyid.svelte";
   import { navigate } from "svelte-routing";
+  import { faSearch, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+
   //   import RatingDetails from "./RatingDetails.svelte";
   let errorMessage = "";
   let Token = "";
@@ -51,12 +53,40 @@
 </script>
 
 <!-- <FilterMoviebyid bind:this={filterMovieComponent} /> -->
+<header class="header">
+  <!-- Logo or Website Name -->
+  <div class="logo">
+    <a href="/">🎥 IMDb</a>
+  </div>
 
-<div class="movie_filter">
-  <input class="input" type="text" placeholder="search" bind:value={search} />
-</div>
+  <!-- Search Bar and Button -->
+  <div class="search-bar">
+    <div class="input-wrapper">
+      <FontAwesomeIcon
+        icon={faSearch}
+        class="icon"
+        style="position: absolute;
+    right: 10px;
+    color: #888;
+    font-size: 1rem;"
+      />
+      <input
+        class="input"
+        type="text"
+        placeholder="Search movies..."
+        bind:value={search}
+      />
+    </div>
+    <button class="search-button" on:click={handleGlobalSearch}>
+      Search
+    </button>
+  </div>
 
-<button class="button" on:click={handleGlobalSearch}>search</button>
+  <!-- Logout Button -->
+  <div class="logout">
+    <Logout />
+  </div>
+</header>
 <!-- <FilterMoviebyid {search} /> -->
 {#if Token.Role === "admin"}
   <AdminProfile />
@@ -94,7 +124,8 @@
   {/if}
 </body>
 <Addmovies />
-<Pagination /><Logout />
+
+<Pagination />
 
 <style>
   h3,
@@ -136,6 +167,11 @@
   .movie-card img {
     max-width: 100%;
     border-radius: 8px;
+  }
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
   }
 
   .error {
@@ -184,13 +220,6 @@
   .movie_filter {
     color: white;
   }
-  .input {
-    background-color: white;
-    position: absolute;
-    top: 10px;
-    left: 5px;
-    border-radius: 5px;
-  }
 
   .button {
     color: black;
@@ -204,5 +233,56 @@
     justify-content: center;
     align-items: center;
     border-radius: 5px;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #1c1c1c;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .logo a {
+    color: #ff5722;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px;
+    font-size: 1rem;
+    color: white;
+    margin-left: 10px;
+  }
+
+  .search-button {
+    background-color: #ff5722;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .search-button:hover {
+    background-color: #e64a19;
+  }
+
+  .logout {
+    margin-left: auto;
   }
 </style>
