@@ -10,17 +10,17 @@
   import UserDetails from "./lib/Components/UserDetails.svelte";
   import MovieDetails from "./lib/Components/MovieDetails.svelte";
   import RatingDetails from "./lib/Components/RatingDetails.svelte";
-  import MovieFilter from "./lib/Components/Admin/MovieFilter.svelte";
-  import AdminProfile from "./lib/Components/Admin/AdminProfile.svelte";
-  import AdminDetails from "./lib/Components/Admin/AdminDetails.svelte";
-  import AdminMovieDetails from "./lib/Components/Admin/AdminMovieDetails.svelte";
-  import AdminRatingDetails from "./lib/Components/Admin/AdminRatingDetails.svelte";
-  import NonDeleted from "./lib/Components/Admin/NonDeleted.svelte";
-  import DeletedMovie from "./lib/Components/Admin/DeletedMovie.svelte";
-  import AllMovies from "./lib/Components/Admin/AllMovies.svelte";
-  import NonDeletedUsers from "./lib/Components/Admin/NonDeletedUsers.svelte";
-  import DeletedUser from "./lib/Components/Admin/DeletedUser.svelte";
-  import AllUserDetails from "./lib/Components/Admin/AllUserDetails.svelte";
+  import MovieFilter from "./lib/Components/Admin/Filters/MovieFilter.svelte";
+  import AdminProfile from "./lib/Components/Admin/Admin/AdminProfile.svelte";
+  import AdminDetails from "./lib/Components/Admin/Movies/AdminDetails.svelte";
+  import AdminMovieDetails from "./lib/Components/Admin/Admin/AdminMovieDetails.svelte";
+  import AdminRatingDetails from "./lib/Components/Admin/Admin/AdminRatingDetails.svelte";
+  import NonDeleted from "./lib/Components/Admin/Movies/NonDeleted.svelte";
+  import DeletedMovie from "./lib/Components/Admin/Movies/DeletedMovie.svelte";
+  import AllMovies from "./lib/Components/Admin/Movies/AllMovies.svelte";
+  import NonDeletedUsers from "./lib/Components/Admin/Users/NonDeletedUsers.svelte";
+  import DeletedUser from "./lib/Components/Admin/Users/DeletedUser.svelte";
+  import AllUserDetails from "./lib/Components/Admin/Users/AllUserDetails.svelte";
   import FilterMoviebyid from "./lib/Components/filterMoviebyid.svelte";
 </script>
 

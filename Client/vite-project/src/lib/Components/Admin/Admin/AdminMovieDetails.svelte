@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { getIdFromToken } from "../../../Functions/fetchIdFromToken";
+  import { getIdFromToken } from "../../../../Functions/fetchIdFromToken";
 
   let movies = [];
   let errorMessage = "";

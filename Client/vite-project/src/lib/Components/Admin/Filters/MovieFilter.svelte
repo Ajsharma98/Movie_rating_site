@@ -1,5 +1,5 @@
 <script>
-  import { fetchAllMovies } from "../../../Functions/fetchMovies";
+  import { fetchAllMovies } from "../../../../Functions/fetchMovies";
   let filter = "";
   const MovieFilterNonDeleted = () => {
     filter = "0";

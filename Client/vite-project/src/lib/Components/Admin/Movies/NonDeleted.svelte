@@ -1,8 +1,8 @@
 <script>
   import { onMount } from "svelte";
-  import { fetchAllMovies } from "../../../Functions/fetchMovies"; // Assume this function is correct
-  import Pagination from "../Pagination.svelte";
-  import { displayedData } from "../../../store";
+  import { fetchAllMovies } from "../../../../Functions/fetchMovies"; // Assume this function is correct
+  import Pagination from "../../Pagination.svelte";
+  import { displayedData } from "../../../../store";
   let movies = [];
   let errorMessage = "";
   let filter;

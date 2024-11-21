@@ -1,17 +1,15 @@
 <script>
   import { onMount } from "svelte";
-  import { displayedData } from "../../../store";
-  import { fetchAllUsers } from "../../../Functions/fetchUsers";
-  import { page, totalPages } from "../../../store";
-  import { faTrash } from "@fortawesome/free-solid-svg-icons";
-  import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
+  import { displayedData } from "../../../../store";
+  import {fetchAllUsers} from "../../../../Functions/fetchUsers";
+  import { page, totalPages } from "../../../../store";
   let users = [];
   let errorMessage = "";
   let filter;
-  fetchAllUsers((filter = 0));
+  fetchAllUsers((filter = 1));
   onMount(async () => {
     try {
-      const result = await fetchAllUsers((filter = 0));
+      const result = await fetchAllUsers((filter = 1));
       //   console.log(result);
       users = result.users;
     } catch (err) {
@@ -19,6 +17,23 @@
       console.error("Error:", err);
     }
   });
+  async function restoreUser(user_id) {
+    const token = localStorage.getItem("jwtToken");
+    const response = await fetch(`http://localhost:4000/users/${user_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Include Bearer prefix for JWT
+      },
+    });
+    if (response.ok) {
+      fetchAllUsers((filter = 1));
+    } else {
+      const error = await response.json();
+      console.error("Error Restoring book:", error.message);
+    }
+  }
+
   let inputPage = "";
   const handlePageInput = (e) => {
     e.preventDefault();
@@ -28,28 +43,11 @@
     }
   };
 
-  async function deletedUser(user_id) {
-    const token = localStorage.getItem("jwtToken");
-    const response = await fetch(`http://localhost:4000/users/${user_id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // Include Bearer prefix for JWT
-      },
-    });
-    if (response.ok) {
-      fetchAllUsers();
-    } else {
-      const error = await response.json();
-      console.error("Error deleting book:", error.message);
-    }
-  }
-
   const goToPage = (newPage) => {
     if (newPage >= 1 && newPage <= $totalPages) {
       page.set(newPage);
       //   $filter;
-      fetchAllUsers((filter = 0));
+      fetchAllUsers((filter = 1));
     } else {
       console.warn("Page number out of range:", newPage);
     }
@@ -61,9 +59,8 @@
     {#if errorMessage}
       <p class="error">{errorMessage}</p>
     {/if}
-    <!-- {#if users.length > 0} -->
 
-    <h3>Non-deleted Users</h3>
+    <h3>Deleted Users</h3>
 
     <table>
       <thead>
@@ -71,7 +68,7 @@
           <th>id </th>
           <th>Email</th>
           <th>Name</th>
-          <th>Delete</th>
+          <th>Restore</th>
         </tr>
       </thead>
       <tbody>
@@ -82,11 +79,11 @@
             <td>{user.name}</td>
             <td
               ><button
-                on:click={() => deletedUser(user.user_id)}
-                class="delete"
-                aria-label="Delete"
+                on:click={() => restoreUser(user.user_id)}
+                class="Restore"
+                aria-label="Restore"
               >
-                <FontAwesomeIcon icon={faTrash} />
+                Restore User
               </button></td
             >
           </tr>
@@ -123,8 +120,6 @@
     &raquo;
   </button>
 </div>
-
-<!-- <Pagination /> -->
 
 <style>
   body {
@@ -225,13 +220,7 @@
     color: white;
     /* background-color: hsl(0, 12%, 89%); */
   }
-
-  .delete {
-    background-color: transparent;
-    border: none;
-    color: red;
-    font-size: 24px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+  .Restore {
+    background-color: green;
   }
 </style>

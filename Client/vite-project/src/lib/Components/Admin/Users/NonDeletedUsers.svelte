@@ -1,16 +1,17 @@
 <script>
   import { onMount } from "svelte";
-  import { displayedData } from "../../../store";
-  import { fetchAllUsers } from "../../../Functions/fetchUsers";
-  import { page, totalPages } from "../../../store";
-
+  import { displayedData } from "../../../../store";
+  import { fetchAllUsers } from "../../../../Functions/fetchUsers";
+  import { page, totalPages } from "../../../../store";
+  import { faTrash } from "@fortawesome/free-solid-svg-icons";
+  import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
   let users = [];
   let errorMessage = "";
   let filter;
-  fetchAllUsers((filter = 2));
+  fetchAllUsers((filter = 0));
   onMount(async () => {
     try {
-      const result = await fetchAllUsers((filter = 2));
+      const result = await fetchAllUsers((filter = 0));
       //   console.log(result);
       users = result.users;
     } catch (err) {
@@ -18,7 +19,6 @@
       console.error("Error:", err);
     }
   });
-
   let inputPage = "";
   const handlePageInput = (e) => {
     e.preventDefault();
@@ -28,11 +28,28 @@
     }
   };
 
+  async function deletedUser(user_id) {
+    const token = localStorage.getItem("jwtToken");
+    const response = await fetch(`http://localhost:4000/users/${user_id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Include Bearer prefix for JWT
+      },
+    });
+    if (response.ok) {
+      fetchAllUsers();
+    } else {
+      const error = await response.json();
+      console.error("Error deleting book:", error.message);
+    }
+  }
+
   const goToPage = (newPage) => {
     if (newPage >= 1 && newPage <= $totalPages) {
       page.set(newPage);
       //   $filter;
-      fetchAllUsers((filter = 2));
+      fetchAllUsers((filter = 0));
     } else {
       console.warn("Page number out of range:", newPage);
     }
@@ -44,7 +61,9 @@
     {#if errorMessage}
       <p class="error">{errorMessage}</p>
     {/if}
-    <h3>All Type of Users</h3>
+    <!-- {#if users.length > 0} -->
+
+    <h3>Non-deleted Users</h3>
 
     <table>
       <thead>
@@ -52,6 +71,7 @@
           <th>id </th>
           <th>Email</th>
           <th>Name</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -60,6 +80,15 @@
             <td>{user.user_id}</td>
             <td>{user.email}</td>
             <td>{user.name}</td>
+            <td
+              ><button
+                on:click={() => deletedUser(user.user_id)}
+                class="delete"
+                aria-label="Delete"
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </button></td
+            >
           </tr>
         {/each}
       </tbody>
@@ -94,6 +123,8 @@
     &raquo;
   </button>
 </div>
+
+<!-- <Pagination /> -->
 
 <style>
   body {
@@ -193,5 +224,14 @@
     font-size: 1.1rem;
     color: white;
     /* background-color: hsl(0, 12%, 89%); */
+  }
+
+  .delete {
+    background-color: transparent;
+    border: none;
+    color: red;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
   }
 </style>

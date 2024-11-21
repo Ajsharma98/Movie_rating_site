@@ -24,7 +24,7 @@
 
 <div class="buttonContainer">
   <button class="btn1" on:click={logout}
-    ><FontAwesomeIcon icon={faSignOutAlt} class="logout-icon" /></button
+    ><FontAwesomeIcon icon={faSignOutAlt} class="logout-icon" />logout</button
   >
 </div>
 

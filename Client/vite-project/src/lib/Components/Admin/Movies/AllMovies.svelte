@@ -1,22 +1,23 @@
 <script>
-  import { fetchAllMovies } from "../../../Functions/fetchMovies";
+  import { fetchAllMovies } from "../../../../Functions/fetchMovies";
   import { onMount } from "svelte";
-  import { displayedData } from "../../../store";
-  import Pagination from "../Pagination.svelte";
-  import { page, totalPages } from "../../../store";
+  import { displayedData } from "../../../../store";
+  import { page, totalPages } from "../../../../store";
 
   let movies = [];
   let errorMessage = "";
   let filter;
-  fetchAllMovies((filter = 1));
+  fetchAllMovies((filter = 2));
   onMount(async () => {
     try {
-      await fetchAllMovies((filter = 1));
+      await fetchAllMovies((filter = 2));
+      // console.log(result);
     } catch (err) {
       errorMessage = "Failed to fetch movies";
       console.error("Error:", err);
     }
   });
+
   let inputPage = "";
   const handlePageInput = (e) => {
     e.preventDefault();
@@ -43,7 +44,7 @@
   {/if}
 
   <!-- {#if movies.length > 0} -->
-  <h2>All Deleted Movies</h2>
+  <h2>All Movies</h2>
   <div class="movie-list">
     {#each $displayedData as movie}
       <div class="movie-card">
@@ -86,6 +87,8 @@
     &raquo;
   </button>
 </div>
+
+<!-- <Pagination /> -->
 
 <style>
   .profile {
