@@ -1,12 +1,14 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { fetchAllMovies } from "./../../Functions/fetchMovies";
-  export let movieId;
+  import { fetchAllMovies } from "../../../../Functions/fetchMovies";
 
-  let Rating = {
-    rating: "",
-    Review: "",
-    movie_id: "",
+  let newMovies = {
+    name: "",
+    director_name: "",
+    writers: "",
+    img: "",
+    genre: "",
+    // avg_rating: "",
   };
 
   let successMessage = "";
@@ -16,35 +18,42 @@
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     successMessage = "";
     errorMessage = "";
-    Rating.movie_id = movieId;
-    console.log("Submitting review:", Rating);
+
+    // Logging the form data before submission
+    console.log("Submitting Movie Data:", newMovies);
     const token = localStorage.getItem("jwtToken");
-    console.log(movieId);
+
     try {
-      const response = await fetch("http://localhost:4000/rating/add", {
+      const response = await fetch("http://localhost:4000/movies/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(Rating),
+        body: JSON.stringify(newMovies),
       });
 
       const result = await response.json();
 
+      // Logging the response from the server
       console.log("Server Response:", result);
 
       if (response.ok) {
-        successMessage = "Rating added successfully";
+        successMessage = "Movie added successfully";
         fetchAllMovies();
-        dispatch("success", { detail: "Rating added successfully" });
+        dispatch("success", { detail: "Movie added successfully" });
 
-        Rating = {
-          rating: "",
-          Review: "",
-          movie_id: "",
+        // Clear form data after submission
+        newMovies = {
+          name: "",
+          director_name: "",
+          writers: "",
+          img: "",
+          genre: "",
+          //   avg_rating: "",
         };
       } else {
         errorMessage = result.message || "Error while submitting data";
@@ -65,16 +74,39 @@
 <button class="close-button" type="button" on:click={closeModal}>Close</button>
 
 <form class="modal" on:submit={handleSubmit}>
-  <h2>Add Rating</h2>
-  <input type="text" placeholder="rating" bind:value={Rating.rating} required />
-  <input type="text" placeholder="Review" bind:value={Rating.Review} required />
-  <!-- <input
-    type="Number"
-    placeholder="movie_id"
-    bind:value={Rating.movie_id}
+  <h2>Add Movie</h2>
+  <input
+    type="text"
+    placeholder="Movie Name"
+    bind:value={newMovies.name}
     required
-  /> -->
-  <button class="button" on:click={handleSubmit}>Add Rating</button>
+  />
+  <input
+    type="text"
+    placeholder="Director"
+    bind:value={newMovies.director_name}
+    required
+  />
+  <input
+    type="text"
+    placeholder="Writers"
+    bind:value={newMovies.writers}
+    required
+  />
+  <input
+    type="text"
+    placeholder="Image URL"
+    bind:value={newMovies.img}
+    required
+  />
+  <input
+    type="text"
+    placeholder="Genre"
+    bind:value={newMovies.genre}
+    required
+  />
+  <button class="button" on:click={handleSubmit}>Add Movie</button>
+
   {#if successMessage}
     <p class="success-message">{successMessage}</p>
   {/if}
@@ -116,7 +148,7 @@
     border-radius: 5px;
     position: relative;
     bottom: 10px;
-    /* margin-bottom: 10px; */
+    /* right: 10px;  */
   }
 
   .button:hover {

@@ -1,6 +1,6 @@
 <script>
   import { navigate } from "svelte-routing"; // For route navigation
-  import profile from "../../../profile.png";
+  import profile from "../../../../../profile.png";
   let isOpen = false;
 
   // Toggle dropdown

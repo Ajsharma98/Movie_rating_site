@@ -1,5 +1,5 @@
 <script>
-  import RatingModel from "../Components/RatingModel.svelte"; // Import the modal component
+  import RatingModel from "./RatingModel.svelte"; // Import the modal component
   let showModal = false;
   export let movieId;
   function openModal() {

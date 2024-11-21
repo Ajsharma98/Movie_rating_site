@@ -1,15 +1,15 @@
 <script>
   import { Router, Route, navigate } from "svelte-routing";
-  import Login from "./lib/Components/Login.svelte";
-  import Register from "./lib/Components/Register.svelte";
-  import Logout from "./lib/Components/Logout.svelte";
-  import Movies from "./lib/Components/Movies.svelte";
-  import MoviesModal from "./lib/Components/MoviesModal.svelte";
-  import RatingModel from "./lib/Components/RatingModel.svelte";
-  import MainProfile from "./lib/Components/MainProfile.svelte";
-  import UserDetails from "./lib/Components/UserDetails.svelte";
-  import MovieDetails from "./lib/Components/MovieDetails.svelte";
-  import RatingDetails from "./lib/Components/RatingDetails.svelte";
+  import Login from "./lib/Components/NormalUser/HomePage/Login.svelte";
+  import Register from "./lib/Components/NormalUser/HomePage/Register.svelte";
+  import Logout from "./lib/Components/NormalUser/HomePage/Logout.svelte";
+  import Movies from "./lib/Components/NormalUser/Movies/Movies.svelte";
+  import MoviesModal from "./lib/Components/NormalUser/Movies/MoviesModal.svelte";
+  import RatingModel from "./lib/Components/Ratings/RatingModel.svelte";
+  import MainProfile from "./lib/Components/NormalUser/Movies/MainProfile.svelte";
+  import UserDetails from "./lib/Components/Ratings/UserDetails.svelte";
+  import MovieDetails from "./lib/Components/NormalUser/Movies/MovieDetails.svelte";
+  import RatingDetails from "./lib/Components/Ratings/RatingDetails.svelte";
   import MovieFilter from "./lib/Components/Admin/Filters/MovieFilter.svelte";
   import AdminProfile from "./lib/Components/Admin/Admin/AdminProfile.svelte";
   import AdminDetails from "./lib/Components/Admin/Movies/AdminDetails.svelte";
@@ -21,7 +21,7 @@
   import NonDeletedUsers from "./lib/Components/Admin/Users/NonDeletedUsers.svelte";
   import DeletedUser from "./lib/Components/Admin/Users/DeletedUser.svelte";
   import AllUserDetails from "./lib/Components/Admin/Users/AllUserDetails.svelte";
-  import FilterMoviebyid from "./lib/Components/filterMoviebyid.svelte";
+  import FilterMoviebyid from "./lib/Components/NormalUser/Movies/filterMoviebyid.svelte";
 </script>
 
 <Router>

@@ -1,7 +1,7 @@
 <script>
   import { jwtDecode } from "jwt-decode";
   import { navigate } from "svelte-routing";
-  import { page } from "../../store";
+  import { page } from "../../../../store";
 
   let email = "";
   let password = "";

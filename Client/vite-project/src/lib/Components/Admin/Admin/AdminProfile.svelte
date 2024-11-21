@@ -1,6 +1,6 @@
 <script>
   import { navigate } from "svelte-routing"; // For route navigation
-  import profile from "../../../../profile.png";
+  import profile from "../../../../../profile.png";
   let isOpen = false;
   let anotherisOpen = false;
   let DropdownIs = false;
@@ -44,7 +44,6 @@
   function DeletedMovies() {
     isOpen = false;
     navigate("/profile/deleted-movies");
-  
   }
 
   function AllMovies() {

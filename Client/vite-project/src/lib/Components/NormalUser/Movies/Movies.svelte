@@ -1,14 +1,14 @@
 <script>
-  import { fetchAllMovies } from "./../../Functions/fetchMovies";
-  import { displayedData } from "./../../store";
+  import { fetchAllMovies } from "../../../../Functions/fetchMovies";
+  import { displayedData } from "../../../../store";
   import { onMount } from "svelte";
-  import Logout from "../Components/Logout.svelte";
-  import Pagination from "./Pagination.svelte";
+  import Logout from "../HomePage/Logout.svelte";
+  import Pagination from "../../Ratings/Pagination.svelte";
   import Addmovies from "./Addmovies.svelte";
-  import AddRating from "./AddRating.svelte";
+  import AddRating from "../../Ratings/AddRating.svelte";
   import MainProfile from "./MainProfile.svelte";
-  import AdminProfile from "./Admin/Admin/AdminProfile.svelte";
-  import { getIdFromToken } from "../../Functions/fetchIdFromToken";
+  import AdminProfile from "../../Admin/Admin/AdminProfile.svelte";
+  import { getIdFromToken } from "../../../../Functions/fetchIdFromToken";
   import { faTrash } from "@fortawesome/free-solid-svg-icons";
   import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
   import FilterMoviebyid from "./filterMoviebyid.svelte";
@@ -167,7 +167,15 @@
   .movie-card img {
     max-width: 100%;
     border-radius: 8px;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
   }
+  .movie-card img:hover {
+    transform: translateY(-20px) scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  }
+
   .input-wrapper {
     position: relative;
     display: flex;

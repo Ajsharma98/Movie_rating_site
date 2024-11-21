@@ -1,8 +1,8 @@
 <script>
   import { onMount } from "svelte";
-  import { getIdFromToken } from "../../Functions/fetchIdFromToken";
+  import { getIdFromToken } from "../../../Functions/fetchIdFromToken";
 
-  let user = null;
+  let ratings = [];
   let errorMessage = "";
 
   const token = localStorage.getItem("jwtToken");
@@ -18,7 +18,7 @@
 
     try {
       const response = await fetch(
-        `http://localhost:4000/users/${Token.user_id}?include=user`,
+        `http://localhost:4000/users/${Token.user_id}?include=ratings`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -30,7 +30,7 @@
       console.log(result); // Log the result to check the API response structure
 
       if (response.ok) {
-        user = result.user || null;
+        ratings = result.ratings || [];
       } else {
         errorMessage = result.error || "Failed to fetch profile data.";
       }
@@ -45,36 +45,14 @@
   {#if errorMessage}
     <p class="error">{errorMessage}</p>
   {/if}
-  {#if user}
-    <h2>User Profile</h2>
-    <p><strong>User ID:</strong> {user.user_id}</p>
-    <p><strong>Name:</strong> {user.name}</p>
-    <p><strong>Email:</strong> {user.email}</p>
+  {#if ratings.length > 0}
+    <h3>Your Ratings</h3>
+    <ul>
+      {#each ratings as rating}
+        <li>
+          Rated movie_id: <strong>{rating.movie_id}</strong> with rating: {rating.rating}
+        </li>
+      {/each}
+    </ul>
   {/if}
 </div>
-
-<style>
-  .profile {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    max-width: 600px;
-    margin: auto;
-  }
-
-  h2 {
-    margin-bottom: 15px;
-    color: #333;
-  }
-
-  p {
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #555;
-  }
-
-  .error {
-    color: red;
-    text-align: center;
-  }
-</style>

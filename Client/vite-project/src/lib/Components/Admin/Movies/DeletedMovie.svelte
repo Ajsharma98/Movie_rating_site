@@ -10,6 +10,7 @@
   fetchAllMovies((filter = 1));
   onMount(async () => {
     try {
+      page.set(1);
       await fetchAllMovies((filter = 1));
     } catch (err) {
       errorMessage = "Failed to fetch movies";
@@ -28,8 +29,7 @@
   const goToPage = (newPage) => {
     if (newPage >= 1 && newPage <= $totalPages) {
       page.set(newPage);
-      //   $filter;
-      fetchAllMovies((filter = 2));
+      fetchAllMovies((filter = 1));
     } else {
       console.warn("Page number out of range:", newPage);
     }
