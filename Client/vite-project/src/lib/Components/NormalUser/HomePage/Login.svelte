@@ -102,7 +102,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
   }
   /* :global(*) {
     background-color: black;
