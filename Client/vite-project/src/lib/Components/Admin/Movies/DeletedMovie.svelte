@@ -3,10 +3,11 @@
   import { onMount } from "svelte";
   import { displayedData } from "../../../../store";
   import { page, totalPages } from "../../../../store";
+  import Pagination from "../../Ratings/Pagination.svelte";
 
   let movies = [];
   let errorMessage = "";
-  let filter;
+  export let filter;
   fetchAllMovies((filter = 1));
   onMount(async () => {
     try {
@@ -36,6 +37,7 @@
   };
 </script>
 
+<!-- <Pagination filter={filter}/> -->
 <div class="profile">
   {#if errorMessage}
     <p class="error">{errorMessage}</p>

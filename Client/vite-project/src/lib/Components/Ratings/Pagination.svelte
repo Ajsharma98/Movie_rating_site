@@ -1,7 +1,7 @@
 <script>
   import { page, totalPages } from "../../../store";
   import { fetchAllMovies } from "../../../Functions/fetchMovies";
-
+  import DeletedMovie from "../Admin/Movies/DeletedMovie.svelte";
   let inputPage = "";
   const handlePageInput = (e) => {
     e.preventDefault();
@@ -15,12 +15,14 @@
     if (newPage >= 1 && newPage <= $totalPages) {
       page.set(newPage);
       //   $filter;
+
       fetchAllMovies();
     } else {
       console.warn("Page number out of range:", newPage);
     }
   };
 </script>
+<!-- <DeletedMovie filter={1}/> -->
 
 <div class="pagination-controls">
   <button on:click={() => goToPage(1)} disabled={$page === 1}>&laquo </button>

@@ -2,13 +2,14 @@
   import { onMount } from "svelte";
   import { fetchAllMovies } from "../../../../Functions/fetchMovies"; // Assume this function is correct
   import Pagination from "../../Ratings/Pagination.svelte";
-  import { displayedData } from "../../../../store";
+  import { displayedData, page } from "../../../../store";
   let movies = [];
   let errorMessage = "";
   let filter;
   fetchAllMovies((filter = 0));
   onMount(async () => {
     try {
+      page.set(1);
       await fetchAllMovies((filter = 0));
       //   console.log(result);
       //   movies = result.movies;

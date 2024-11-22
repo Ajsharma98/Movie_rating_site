@@ -2,7 +2,10 @@
   import { jwtDecode } from "jwt-decode";
   import { navigate } from "svelte-routing";
   import { page } from "../../../../store";
-
+  import movie_background from "../../../../../movie-background-collage.jpg";
+  import MovieDetails from "../Movies/MovieDetails.svelte";
+  // import "bootstrap@5.0.1/dist/css/bootstrap.min.css";
+  // import "bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js";
   let email = "";
   let password = "";
   let errorMessage = "";
@@ -47,30 +50,36 @@
   };
 </script>
 
-<!-- <html>
-  <body> -->
-<div class="heading">
-  <h1>AJ Movies Rating</h1>
-</div>
-<div class="wrapper">
-  <div class="container">
-    <h2>Login</h2>
-    <input type="email" placeholder="Email" bind:value={email} />
-    <input type="password" placeholder="Password" bind:value={password} />
-    <div class="btn1Container">
-      <button class="btn1" on:click={login}>Sign in</button>
+<body>
+  <div class="login-page">
+    <div class="overlay">
+      <div class="heading">
+        <h1>AJ Movies Rating</h1>
+      </div>
+      <div class="wrapper">
+        <div class="container">
+          <h2>Login</h2>
+          <input type="email" placeholder="Email" bind:value={email} />
+          <input type="password" placeholder="Password" bind:value={password} />
+          <div class="btn1Container">
+            <button class="btn1" on:click={login}>Sign in</button>
+          </div>
+          <div class="btn2">
+            <button class="btn2" on:click={handleSignup}
+              >Create a New account</button
+            >
+          </div>
+          {#if successMessage}
+            <p class="success">{successMessage}</p>
+          {/if}
+          {#if errorMessage}
+            <p class="error">{errorMessage}</p>
+          {/if}
+        </div>
+      </div>
     </div>
-    <div class="btn2">
-      <button class="btn2" on:click={handleSignup}>Create a New account</button>
-    </div>
-    {#if successMessage}
-      <p class="success">{successMessage}</p>
-    {/if}
-    {#if errorMessage}
-      <p class="error">{errorMessage}</p>
-    {/if}
   </div>
-</div>
+</body>
 
 <!-- </body>
 </html> -->
@@ -81,9 +90,23 @@
     background-color: rgb(12, 1, 1);
     margin: 0;
   } */
-  :global(*) {
-    background-color: black;
+  body {
+    background-image: url("movie-background-collage.jpg");
+    overflow: visible;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
   }
+  /* :global(*) {
+    background-color: black;
+  } */
   .container {
     max-width: 400px;
     padding: 2rem;
@@ -95,12 +118,13 @@
     /* White background for the form */
   }
   .heading {
-    background-color: black;
+    /* background-color: black; */
     color: #04bb75;
     font-family: "Times New Roman", Times, serif;
     font-style: inherit;
     animation: colorchange 5s infinite;
   }
+
   @keyframes colorchange {
     0% {
       color: rgb(255, 0, 119);
@@ -196,5 +220,9 @@
     text-align: center;
     margin-top: 1rem;
     background-color: white;
+  }
+  img {
+    width: auto;
+    height: 1000px;
   }
 </style>

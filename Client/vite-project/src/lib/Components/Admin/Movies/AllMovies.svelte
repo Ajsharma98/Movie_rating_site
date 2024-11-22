@@ -10,6 +10,7 @@
   fetchAllMovies((filter = 2));
   onMount(async () => {
     try {
+      page.set(1);
       await fetchAllMovies((filter = 2));
       // console.log(result);
     } catch (err) {

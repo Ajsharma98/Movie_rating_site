@@ -139,7 +139,7 @@
   }
   .movie-list {
     display: grid;
-
+background-color: black;
     grid-template-columns: repeat(3, 1fr);
     /* create three equal columns  */
     gap: 15px;
@@ -172,7 +172,7 @@
       box-shadow 0.3s ease;
   }
   .movie-card img:hover {
-    transform: translateY(-20px) scale(1.1);
+    transform: translateY(-20px) scale(1.2);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
   }
 
