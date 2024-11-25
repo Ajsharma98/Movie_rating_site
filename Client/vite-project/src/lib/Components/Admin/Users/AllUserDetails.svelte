@@ -10,6 +10,7 @@
   fetchAllUsers((filter = 2));
   onMount(async () => {
     try {
+      page.set(1);
       const result = await fetchAllUsers((filter = 2));
       //   console.log(result);
       users = result.users;

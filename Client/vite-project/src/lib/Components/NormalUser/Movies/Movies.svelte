@@ -14,6 +14,8 @@
   import FilterMoviebyid from "./filterMoviebyid.svelte";
   import { navigate } from "svelte-routing";
   import { faSearch, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+  import { page } from "../../../../store";
+  import MovieFilter from "../../Admin/Filters/MovieFilter.svelte";
 
   //   import RatingDetails from "./RatingDetails.svelte";
   let errorMessage = "";
@@ -39,6 +41,7 @@
   }
 
   onMount(async () => {
+    page.set(1);
     fetchAllMovies().catch((err) => {
       errorMessage = "Failed to fetch movies";
       console.error("Error:", err);
@@ -81,7 +84,6 @@
       Search
     </button>
   </div>
-
   <!-- Logout Button -->
   <div class="logout">
     <Logout />

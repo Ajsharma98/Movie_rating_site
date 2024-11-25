@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { displayedData } from "../../../../store";
-  import {fetchAllUsers} from "../../../../Functions/fetchUsers";
+  import { fetchAllUsers } from "../../../../Functions/fetchUsers";
   import { page, totalPages } from "../../../../store";
   let users = [];
   let errorMessage = "";
@@ -9,6 +9,7 @@
   fetchAllUsers((filter = 1));
   onMount(async () => {
     try {
+      page.set(1);
       const result = await fetchAllUsers((filter = 1));
       //   console.log(result);
       users = result.users;

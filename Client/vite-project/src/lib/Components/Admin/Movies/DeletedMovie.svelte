@@ -129,8 +129,8 @@
   img {
     max-width: 100%;
     max-height: 300px;
-    width: auto;
-    height: auto;
+    width: 200px;
+    height: 300px;
   }
 
   .movie-card {
