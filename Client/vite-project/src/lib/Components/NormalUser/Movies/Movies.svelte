@@ -139,7 +139,7 @@
   }
   .movie-list {
     display: grid;
-background-color: black;
+    background-color: black;
     grid-template-columns: repeat(3, 1fr);
     /* create three equal columns  */
     gap: 15px;
@@ -150,8 +150,8 @@ background-color: black;
   img {
     max-width: 100%;
     max-height: 300px;
-    width: auto;
-    height: auto;
+    width: 200px;
+    height: 300px;
   }
 
   .movie-card {
