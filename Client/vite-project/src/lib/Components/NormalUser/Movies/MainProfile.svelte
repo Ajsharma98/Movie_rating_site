@@ -37,7 +37,7 @@
 <!-- Profile Icon and Dropdown -->
 <div class="profile-container">
   <button class="profile-icon" on:click={toggleDropdown}>
-    <img src={profile} alt="Profile" />
+    <img src={profile} alt="Profile" />Hi,Anuj
   </button>
   {#if isOpen}
     <div class="dropdown">
@@ -99,5 +99,8 @@
 
   .dropdown button:hover {
     background-color: #f0f0f0;
+  }
+  p {
+    color: white;
   }
 </style>

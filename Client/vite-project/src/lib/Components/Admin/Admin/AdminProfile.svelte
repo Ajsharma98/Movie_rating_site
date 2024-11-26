@@ -4,7 +4,9 @@
   let isOpen = false;
   let anotherisOpen = false;
   let DropdownIs = false;
-
+  let name = "";
+  import { fetchUserName } from "../../../../Functions/fetchUserDetails";
+  // let name = "";
   // function change_filter(changefilter) {
   //   filter.set(changefilter);
   //   fetchAllMovies();
@@ -64,12 +66,19 @@
     DropdownIs = false;
     navigate("/users/all-users");
   }
+
+  const UserName = async () => {
+    const result = await fetchUserName();
+    console.log(result);
+    name = result.name;
+  };
+  UserName();
 </script>
 
 <!-- Profile Icon and Dropdown -->
 <div class="profile-container">
   <button class="profile-icon" on:click={toggleDropdown}>
-    <img src={profile} alt="Profile" />
+    <img src={profile} alt="Profile" />Hi, {name}
   </button>
   {#if isOpen}
     <div class="dropdown">
@@ -114,7 +123,9 @@
     top: 10px;
     right: 10px;
     display: flex;
+    justify-content: center;
     align-items: center;
+    text-align: center;
   }
   .profile-icon {
     cursor: pointer;
@@ -123,7 +134,10 @@
     width: 65px;
     height: auto;
     background-color: black;
-    color: black;
+    color: white;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
   }
   .profile-icon img {
     width: 100%;

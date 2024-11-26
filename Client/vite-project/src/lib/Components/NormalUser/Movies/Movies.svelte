@@ -249,7 +249,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
     background-color: #1c1c1c;
     color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -274,7 +273,7 @@
     border-radius: 4px;
     width: 250px;
     font-size: 1rem;
-    color: white;
+    color: black;
     margin-left: 10px;
   }
 
