@@ -15,6 +15,7 @@
   import { navigate } from "svelte-routing";
   import { faSearch, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
   import { page } from "../../../../store";
+  import { faEye } from "@fortawesome/free-solid-svg-icons";
   import MovieFilter from "../../Admin/Filters/MovieFilter.svelte";
 
   //   import RatingDetails from "./RatingDetails.svelte";
@@ -59,7 +60,7 @@
 <header class="header">
   <!-- Logo or Website Name -->
   <div class="logo">
-    <a href="/">🎥 IMDb</a>
+    <a href="/">🎥 AMDb</a>
   </div>
 
   <!-- Search Bar and Button -->
@@ -117,7 +118,9 @@
           >
             <FontAwesomeIcon icon={faTrash} />
           </button>
-
+          <button class="eye">
+            <FontAwesomeIcon icon={faEye} />
+          </button>
           <AddRating movieId={movie.id} />
           <!-- <button class="button" on:click={openModal}>Add Rating</button> -->
         </div>
@@ -130,6 +133,17 @@
 <Pagination />
 
 <style>
+  .eye {
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    background-color: transparent;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    color: burlywood;
+  }
   h3,
   p {
     color: white;
@@ -174,7 +188,7 @@
       box-shadow 0.3s ease;
   }
   .movie-card img:hover {
-    transform: translateY(-20px) scale(1.2);
+    transform: translateY(-20px) scale(1.05);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
   }
 

@@ -54,7 +54,7 @@
   <div class="login-page">
     <div class="overlay">
       <div class="heading">
-        <h1>IMDb Rating</h1>
+        <h1>AMDb Rating</h1>
       </div>
       <div class="wrapper">
         <div class="container">

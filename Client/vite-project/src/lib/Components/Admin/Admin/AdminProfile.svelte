@@ -167,6 +167,6 @@
   }
 
   .dropdown button:hover {
-    background-color: #020202;
+    background-color: #b2a1a1;
   }
 </style>
