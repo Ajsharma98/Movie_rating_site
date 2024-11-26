@@ -131,8 +131,8 @@
     cursor: pointer;
     /* border-radius: 50%; */
     overflow: hidden;
-    width: 65px;
-    height: auto;
+    width: 55px;
+    font-size: 10px;
     background-color: black;
     color: white;
     align-items: center;
@@ -167,6 +167,6 @@
   }
 
   .dropdown button:hover {
-    background-color: #f0f0f0;
+    background-color: #020202;
   }
 </style>

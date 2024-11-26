@@ -1,7 +1,9 @@
 <script>
   import { navigate } from "svelte-routing"; // For route navigation
   import profile from "../../../../../profile.png";
+  import { fetchUserName } from "../../../../Functions/fetchUserDetails";
   let isOpen = false;
+  let name = "";
 
   // Toggle dropdown
   function toggleDropdown() {
@@ -32,12 +34,19 @@
       isOpen = false;
     }
   }
+
+  const UserName = async () => {
+    const result = await fetchUserName();
+    console.log(result);
+    name = result.name;
+  };
+  UserName();
 </script>
 
 <!-- Profile Icon and Dropdown -->
 <div class="profile-container">
   <button class="profile-icon" on:click={toggleDropdown}>
-    <img src={profile} alt="Profile" />Hi,Anuj
+    <img src={profile} alt="Profile" />Hi, {name}
   </button>
   {#if isOpen}
     <div class="dropdown">
@@ -65,9 +74,10 @@
     /* border-radius: 50%; */
     overflow: hidden;
     width: 65px;
+    font-size: 10px;
     height: auto;
     background-color: black;
-    color: black;
+    color: white;
   }
 
   .profile-icon img {
