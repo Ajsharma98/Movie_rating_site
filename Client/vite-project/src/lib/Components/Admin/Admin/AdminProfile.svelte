@@ -5,7 +5,7 @@
   let anotherisOpen = false;
   let DropdownIs = false;
   let name = "";
-  import { fetchUserName } from "../../../../Functions/fetchUserDetails";
+  import { fetchUserName } from "../../../../modules/fetchUserDetails";
   // let name = "";
   // function change_filter(changefilter) {
   //   filter.set(changefilter);

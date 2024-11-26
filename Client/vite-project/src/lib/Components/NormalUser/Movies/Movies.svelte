@@ -1,5 +1,5 @@
 <script>
-  import { fetchAllMovies } from "../../../../Functions/fetchMovies";
+  import { fetchAllMovies } from "../../../../modules/fetchMovies";
   import { displayedData } from "../../../../store";
   import { onMount } from "svelte";
   import Logout from "../HomePage/Logout.svelte";
@@ -8,7 +8,7 @@
   import AddRating from "../../Ratings/AddRating.svelte";
   import MainProfile from "./MainProfile.svelte";
   import AdminProfile from "../../Admin/Admin/AdminProfile.svelte";
-  import { getIdFromToken } from "../../../../Functions/fetchIdFromToken";
+  import { getIdFromToken } from "../../../../modules/fetchIdFromToken";
   import { faTrash } from "@fortawesome/free-solid-svg-icons";
   import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
   import FilterMoviebyid from "./filterMoviebyid.svelte";
@@ -17,7 +17,7 @@
   import { page } from "../../../../store";
   import { faEye } from "@fortawesome/free-solid-svg-icons";
   import MovieFilter from "../../Admin/Filters/MovieFilter.svelte";
-
+  import Review from "../../Review/Review.svelte";
   //   import RatingDetails from "./RatingDetails.svelte";
   let errorMessage = "";
   let Token = "";
@@ -118,9 +118,11 @@
           >
             <FontAwesomeIcon icon={faTrash} />
           </button>
-          <button class="eye">
+          <!-- <button class="eye">
+            on:click={()=>review}
             <FontAwesomeIcon icon={faEye} />
-          </button>
+          </button> -->
+          <Review movie_id={movie.id}/>
           <AddRating movieId={movie.id} />
           <!-- <button class="button" on:click={openModal}>Add Rating</button> -->
         </div>
@@ -133,17 +135,7 @@
 <Pagination />
 
 <style>
-  .eye {
-    position: absolute;
-    top: 20px;
-    left: 50px;
-    background-color: transparent;
-    border: none;
-    font-size: 17px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    color: burlywood;
-  }
+  
   h3,
   p {
     color: white;

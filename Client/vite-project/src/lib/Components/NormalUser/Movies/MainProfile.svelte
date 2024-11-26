@@ -1,7 +1,7 @@
 <script>
   import { navigate } from "svelte-routing"; // For route navigation
   import profile from "../../../../../profile.png";
-  import { fetchUserName } from "../../../../Functions/fetchUserDetails";
+  import { fetchUserName } from "../../../../modules/fetchUserDetails";
   let isOpen = false;
   let name = "";
 

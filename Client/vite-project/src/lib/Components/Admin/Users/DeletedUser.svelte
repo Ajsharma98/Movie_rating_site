@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { displayedData } from "../../../../store";
-  import { fetchAllUsers } from "../../../../Functions/fetchUsers";
+  import { fetchAllUsers } from "../../../../modules/fetchUsers";
   import { page, totalPages } from "../../../../store";
   let users = [];
   let errorMessage = "";

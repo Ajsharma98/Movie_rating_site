@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { getIdFromToken } from "../../../../Functions/fetchIdFromToken";
+  import { getIdFromToken } from "../../../../modules/fetchIdFromToken";
 
   let ratings = [];
   let errorMessage = "";

@@ -1,6 +1,6 @@
 <script>
   import { page, totalPages } from "../../../store";
-  import { fetchAllMovies } from "../../../Functions/fetchMovies";
+  import { fetchAllMovies } from "../../../modules/fetchMovies";
   import DeletedMovie from "../Admin/Movies/DeletedMovie.svelte";
   let inputPage = "";
   const handlePageInput = (e) => {

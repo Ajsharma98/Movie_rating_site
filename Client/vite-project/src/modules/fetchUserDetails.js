@@ -1,4 +1,4 @@
-import { getIdFromToken } from "../Functions/fetchIdFromToken";
+import { getIdFromToken } from "./fetchIdFromToken";
 let errorMessage = "";
 let user = "";
 const token = localStorage.getItem("jwtToken");

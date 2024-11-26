@@ -1,9 +1,9 @@
 import { get } from "svelte/store";
-import { page } from "./../store";
-import { limit } from "./../store";
-import { filter } from "./../store";
-import { displayedData } from "./../store";
-import { totalPages } from "./../store";
+import { page } from "../store";
+import { limit } from "../store";
+import { filter } from "../store";
+import { displayedData } from "../store";
+import { totalPages } from "../store";
 
 export const fetchAllMovies = async (filter) => {
   try {
