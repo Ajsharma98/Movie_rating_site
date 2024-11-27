@@ -34,7 +34,7 @@
     font-size: 17px;
     /* cursor: pointer; */
     transition: transform 0.2s ease;
-    color: burlywood;
+    color: rgb(199, 196, 11);
   }
   .modal-overlay {
     position: fixed;
