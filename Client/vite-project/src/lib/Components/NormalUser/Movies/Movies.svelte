@@ -18,7 +18,7 @@
   import { faEye } from "@fortawesome/free-solid-svg-icons";
   import MovieFilter from "../../Admin/Filters/MovieFilter.svelte";
   import Review from "../../Review/Review.svelte";
-  //   import RatingDetails from "./RatingDetails.svelte";
+
   let errorMessage = "";
   let Token = "";
   let search = "";
@@ -48,6 +48,7 @@
       console.error("Error:", err);
     });
     Token = await getIdFromToken();
+    // @ts-ignore
     console.log(Token.Role);
   });
   function handleGlobalSearch() {

@@ -22,6 +22,7 @@
   import DeletedUser from "./lib/Components/Admin/Users/DeletedUser.svelte";
   import AllUserDetails from "./lib/Components/Admin/Users/AllUserDetails.svelte";
   import FilterMoviebyid from "./lib/Components/NormalUser/Movies/filterMoviebyid.svelte";
+  import ReviewModel from "./lib/Components/Review/ReviewModel.svelte";
 </script>
 
 <Router>
@@ -47,5 +48,6 @@
     <Route path="/users/deleted-users" component={DeletedUser} />
     <Route path="/users/all-users" component={AllUserDetails} />
     <Route path="/filteredMovie" component={FilterMoviebyid} />
+    <Route path="/reviewDetails" component={ReviewModel}/>
   </div>
 </Router>

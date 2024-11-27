@@ -13,15 +13,16 @@
   function closeModal() {
     showModal = false;
   }
-  function handleSuccess(event) {
-    console.log(event.detail); // Handle success if needed
-    closeModal();
-  }
 </script>
 
 <button class="eye" on:click={openModal}>
   <FontAwesomeIcon icon={faEye} />
 </button>
+{#if showModal}
+  <div class="modal-overlay">
+    <ReviewModel {movie_id} on:close={closeModal} />
+  </div>
+{/if}
 
 <style>
   .eye {
@@ -34,5 +35,17 @@
     /* cursor: pointer; */
     transition: transform 0.2s ease;
     color: burlywood;
+  }
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
   }
 </style>

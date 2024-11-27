@@ -1,10 +1,11 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
+  export let movie_id;
+  let review = "";
   const dispatch = createEventDispatcher();
   let successMessage = "";
   let errorMessage = "";
-  const eyeClick = async (event) => {
-    event.preventDefault();
+  onMount(async () => {
     successMessage = "";
     errorMessage = "";
 
@@ -15,15 +16,42 @@
     }
 
     try {
-        const response = await fetch(
-      `http://localhost:4000/movierating/${movie_id}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const response = await fetch(
+        `http://localhost:4000/movierating/${movie_id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      review = await response.json();
+      console.log(review.Review);
+
+      if (response.ok) {
+        return {
+          review: review.Review,
+        };
       }
-    );
-    } catch (error) {}
-  };
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  });
+
+  function closeModal() {
+    dispatch("close");
+  }
 </script>
+
+<button class="close-button" type="button" on:click={closeModal}>Close</button>
+
+<div>
+  <p>{review.Review}</p>
+</div>
+
+<style>
+  p {
+    color: white;
+  }
+</style>
