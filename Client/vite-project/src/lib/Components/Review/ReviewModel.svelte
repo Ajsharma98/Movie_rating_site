@@ -2,6 +2,8 @@
   import { createEventDispatcher, onMount } from "svelte";
   export let movie_id;
   let reviews = "";
+  let result = "";
+  let result_2 = "";
   const dispatch = createEventDispatcher();
   let successMessage = "";
   let errorMessage = "";
@@ -27,8 +29,10 @@
         }
       );
       reviews = await response.json();
-      console.log(reviews);
-
+      result = reviews[0];
+      console.log(reviews[0]);
+      result_2 = reviews[0].Ratings;
+      console.log(result_2);
       if (response.ok) {
         // return {
         //   review: review.Review,
@@ -47,13 +51,14 @@
 <button class="close-button" type="button" on:click={closeModal}>Close</button>
 
 <div class="modal">
-  {#if reviews.length > 0}
+  <img src={result.img} alt={result.name} />
+  {#if result_2.length > 0}
     <div class="Reviews">
       <h3>Reviews</h3>
 
-      {#each reviews as review}
+      {#each result_2 as review}
         <p>
-          Review:{review.Review}
+          Review:{review.rating}
           Rating:{review.rating}
         </p>
       {/each}

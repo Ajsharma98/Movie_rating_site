@@ -179,12 +179,19 @@ export const getRatingById = async (req, res) => {
 export const getRatingforMovieById = async (req, res) => {
   const { movie_id } = req.params;
   try {
-    const movie = await Rating.findAll({
-      where: {
-        movie_id: movie_id,
-        rating_deleted: 0,
-      },
+    const movie = await Movie.findAll({
+      include: [
+        {
+          model: Rating,
+          where: {
+            movie_id: movie_id,
+            rating_deleted: 0,
+          },
+          required: true,
+        },
+      ],
     });
+
     if (!movie) {
       return res.status(404).json({ message: "movie rating not found" });
     }
