@@ -86,11 +86,9 @@ export const postAllRating = async (req, res) => {
       return res.status(404).json({ message: "Movie not found" });
     }
     if (movie.movie_deleted === 1) {
-      return res
-        .status(403)
-        .json({
-          message: "This is movie is deleted . Please contact support.",
-        });
+      return res.status(403).json({
+        message: "This is movie is deleted . Please contact support.",
+      });
     }
 
     const existingRating = await Rating.findOne({
@@ -131,27 +129,29 @@ export const postAllRating = async (req, res) => {
 export const deleteRatingById = async (req, res) => {
   const { Review_id } = req.params;
   const { user_id } = req.user;
-  let user_role=req.user_role;
+  let user_role = req.user_role;
   try {
     const original_user = await Rating.findByPk(Review_id);
-    if(user_role==='admin' || user_id===original_user.user_id){
-    const rating = await Rating.findByPk(Review_id);
-    if (!rating) {
-      return res.status(400).json({ message: "Rating not found" });
+    if (user_role === "admin" || user_id === original_user.user_id) {
+      const rating = await Rating.findByPk(Review_id);
+      if (!rating) {
+        return res.status(400).json({ message: "Rating not found" });
+      }
+      if (rating.rating_deleted) {
+        return res.status(400).json({ message: "rating is already deleted" });
+      }
+      await Rating.update(
+        { rating_deleted: 1 },
+        { where: { user_id: user_id } }
+      );
+      return res.status(200).json({ message: "Rating successfully deleted" });
     }
-    if(rating.rating_deleted){
-        return res.status(400).json({message:"rating is already deleted"})
-    }
-    await Rating.update({ rating_deleted: 1 }, { where: { user_id: user_id } });
-    return res.status(200).json({ message: "Rating successfully deleted" });
-  } }catch (error) {
+  } catch (error) {
     console.error(error);
-    return res
-      .status(500)
-      .json({
-        message: "An error occured while deleting the review",
-        error: error.message,
-      });
+    return res.status(500).json({
+      message: "An error occured while deleting the review",
+      error: error.message,
+    });
   }
 };
 
@@ -160,8 +160,6 @@ export const getRatingById = async (req, res) => {
   const { user_id } = req.user;
 
   try {
-   
-   
     const movie = await Rating.findOne({
       where: {
         Review_id: Review_id,
@@ -181,7 +179,7 @@ export const getRatingById = async (req, res) => {
 export const getRatingforMovieById = async (req, res) => {
   const { movie_id } = req.params;
   try {
-    const movie = await Rating.findOne({
+    const movie = await Rating.findAll({
       where: {
         movie_id: movie_id,
         rating_deleted: 0,
