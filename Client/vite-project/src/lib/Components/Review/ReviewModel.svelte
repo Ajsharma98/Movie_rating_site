@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
   import { createEventDispatcher, onMount } from "svelte";
   export let movie_id;
   let reviews = "";
@@ -31,6 +33,7 @@
       reviews = await response.json();
       result = reviews[0];
       console.log(reviews[0]);
+      // @ts-ignore
       result_2 = reviews[0].Ratings;
       console.log(result_2);
       if (response.ok) {
@@ -58,11 +61,13 @@
 
       {#each result_2 as review}
         <p>
-          Review:{review.rating}
+          Review:{review.Review}
           Rating:{review.rating}
         </p>
       {/each}
     </div>
+  {:else}
+    <p>No rating found</p>
   {/if}
 </div>
 
@@ -86,5 +91,12 @@
     border: none;
     cursor: pointer;
     margin-top: 10px;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 300px;
+    width: 200px;
+    height: 300px;
   }
 </style>

@@ -32,6 +32,7 @@ export const fetchUserName = async () => {
     }
 
     return {
+      // @ts-ignore
       name: user.name,
     };
   } catch (error) {

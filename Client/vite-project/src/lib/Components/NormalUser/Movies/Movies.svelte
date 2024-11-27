@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
   import { fetchAllMovies } from "../../../../modules/fetchMovies";
   import { displayedData } from "../../../../store";
   import { onMount } from "svelte";
@@ -47,6 +49,7 @@
       errorMessage = "Failed to fetch movies";
       console.error("Error:", err);
     });
+    // @ts-ignore
     Token = await getIdFromToken();
     // @ts-ignore
     console.log(Token.Role);
@@ -234,24 +237,7 @@
         justify-content: center;
         align-items: center;
     } */
-  .movie_filter {
-    color: white;
-  }
-
-  .button {
-    color: black;
-    background-color: white;
-    position: absolute;
-    top: 10px;
-    left: 200px;
-    height: 15px;
-    width: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-  }
-
+  
   .header {
     display: flex;
     justify-content: space-between;

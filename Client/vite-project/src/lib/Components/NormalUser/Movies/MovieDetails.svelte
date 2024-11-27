@@ -66,10 +66,7 @@
     margin: auto;
   }
 
-  h2 {
-    margin-bottom: 15px;
-    color: #333;
-  }
+ 
 
   p {
     margin-bottom: 10px;
