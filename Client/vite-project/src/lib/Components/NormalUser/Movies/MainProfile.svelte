@@ -26,14 +26,14 @@
     navigate("Rating-details");
   }
 
-  function handleClickOutside(event) {
-    if (
-      !event.target.closest(".dropdown") &&
-      !event.target.closest(".profile-button")
-    ) {
-      isOpen = false;
-    }
-  }
+  // function handleClickOutside(event) {
+  //   if (
+  //     !event.target.closest(".dropdown") &&
+  //     !event.target.closest(".profile-button")
+  //   ) {
+  //     isOpen = false;
+  //   }
+  // }
 
   const UserName = async () => {
     const result = await fetchUserName();
@@ -53,7 +53,7 @@
       <button on:click={goToUserDetails}>User Details</button>
       <button on:click={goToMoviesDetails}>Movies Posted</button>
       <button on:click={goToRatingDetails}>Ratings Posted</button>
-      <button on:click={handleClickOutside}></button>
+      <!-- <button on:click={handleClickOutside}></button> -->
     </div>
     <!-- {:else}
     <dom on:click={handleClickOutside}></dom> -->

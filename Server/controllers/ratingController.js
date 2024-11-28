@@ -178,15 +178,15 @@ export const getRatingById = async (req, res) => {
 
 export const getRatingforMovieById = async (req, res) => {
   const { movie_id } = req.params;
-  const rating = await Rating.findAll({
-    where: {
-      movie_id: movie_id,
-      rating_deleted: 0,
-    },
-  });
 
   try {
-    if (!rating==[]) {
+    const rating = await Rating.findOne({
+      where: {
+        movie_id: movie_id,
+        rating_deleted: 0,
+      },
+    });
+    if (rating != null) {
       const movie = await Movie.findAll({
         include: [
           {
@@ -199,14 +199,12 @@ export const getRatingforMovieById = async (req, res) => {
           },
         ],
       });
-
-      if (!movie) {
-        return res.status(404).json({ message: "movie rating not found" });
-      }
       return res.status(200).json(movie);
     } else {
-      return res.status(404).json({ message: "No rating found" });
-    };
+      return res
+        .status(404)
+        .json({ message: "No rating found for this movie" });
+    }
   } catch (error) {
     console.error("Error fetching rating for movie by id:", error.message);
     return res.status(500).json({ error: "Internal Server Error" });
