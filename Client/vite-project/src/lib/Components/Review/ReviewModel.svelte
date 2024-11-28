@@ -29,17 +29,18 @@
             Authorization: `Bearer ${token}`,
           },
         }
-      );
+      );  if (response.ok) {
+        
       reviews = await response.json();
       result = reviews[0];
       console.log(reviews[0]);
       // @ts-ignore
       result_2 = reviews[0].Ratings;
       console.log(result_2);
-      if (response.ok) {
-        // return {
-        //   review: review.Review,
-        // };
+    
+      }
+      else {
+        
       }
     } catch (error) {
       console.error("Fetch error:", error);
