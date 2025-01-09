@@ -46,7 +46,7 @@ Start the development server:
     
 ## Usage/Examples
 
-- Open the app in your browser at http://localhost:3000.
+- Open the app in your browser at http://localhost:5173.
 - Create an account and log in.
 - Browse the movie list, add reviews, or rate a movie.
 - Admin users can manage movie entries (add, update, delete).
