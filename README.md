@@ -55,9 +55,12 @@ Start the development server:
 
 ## Screenshots
 ### Login Page
-![Login Page](screenshots/login.png)
+![Login_page](https://github.com/user-attachments/assets/da8650eb-71d9-4590-a80f-8847da24c33b)
+
+
 ### Home Page
-![Home Page](screenshots/homepage.png)
+![Homepage](https://github.com/user-attachments/assets/87eb9733-4984-4a54-9ac2-cfc1a98e7698)
 
 ### Movie Details
-![Movie Details](screenshots/Movie-posted-page.png)
+![Movie_posted_page](https://github.com/user-attachments/assets/7b868f8e-26f1-4444-a303-0fac9c1165fc)
+
